@@ -63,13 +63,33 @@ const DUMMY_BODY = {
 };
 
 /**
+ * Decodes HTML Entities like `&amp;`
+ * @param {string} text
+ * @returns {string} the decoded text
+ */
+function decodeHTMLEntities(text) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+    return doc.documentElement.textContent;
+}
+
+/**
+ * Decodes URI characters and HTML entities back to their ascii counterparts
+ * @param {string} uri
+ * @returns {string} the decoded text
+ */
+function decodeAll(uri) {
+    return decodeHTMLEntities(decodeUri(uri))
+}
+
+/**
  * Builds a QR code URL for EUDI OpenID.
  * @param {string} client_id - The client identifier.
  * @param {string} request_uri - The request URI.
  * @returns {string} The formatted EUDI OpenID URL.
  */
 function buildQRUrl(client_id, request_uri) {
-    return `eudi-openid4vp://?${client_id}&${request_uri}`;
+    return decodeAll(`eudi-openid4vp://?${client_id}&${request_uri}`);
 }
 
 /**
