@@ -8,7 +8,7 @@ var config = null
  * Backend proxy endpoint URL.
  * @constant {string}
  */
-const BACKEND_URL = "http://localhost:8080/proxy.php";
+const BACKEND_URL = "http://localhost/php/proxy.php";
 
 /** 
  * Presentations API endpoint.
@@ -117,17 +117,22 @@ function paintQR(uri) {
  * Initializes the transaction.
  * @async
  * @function TransactionInit
- * @returns {Promise<void>} - Logs data to console or catches errors.
+ * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
  */
 async function TransactionInit() {
     try {
         const request = new Request(BACKEND_URL);
-        const response = request.post(PRESENTATIONS_ENDPOINT, JSON.stringify(DUMMY_BODY));
-        const data = await response.json();
-        console.log(data);
+        const response = await request.post(PRESENTATIONS_ENDPOINT, JSON.stringify(DUMMY_BODY));
+        return response;
     } catch (error) {
         console.error('Error:', error);
+        return null;
     }
 }
 
-const data = TransactionInit();
+async function main() {
+    const data = await TransactionInit();
+    console.log(data);  // Logs the response data.
+}
+
+main();
