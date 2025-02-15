@@ -1,4 +1,4 @@
-export class Config {
+class Config {
     constructor(config = {
         AgeOver18: false,
         HealthID: false,

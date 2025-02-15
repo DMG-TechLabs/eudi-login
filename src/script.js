@@ -8,7 +8,7 @@ var config = null
  * Backend proxy endpoint URL.
  * @constant {string}
  */
-const BACKEND_URL = "http://localhost/php/proxy.php";
+const BACKEND_URL = "http://localhost/php/redirect.php";
 
 /** 
  * Presentations API endpoint.
@@ -276,6 +276,7 @@ async function TransactionInit() {
 
 async function main() {
     const data = await TransactionInit();
+    console.log(data)
     console.log(data.client_id)
     console.log(data.request_uri)
     console.log(data.transaction_id)

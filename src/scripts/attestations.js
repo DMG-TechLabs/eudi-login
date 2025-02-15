@@ -1,7 +1,24 @@
-const ATTESTATIONS_ENDPOINT = "https://issuer.eudiw.dev/.well-known/openid-credential-issuer"
+const ATTESTATIONS_ENDPOINT = "http://localhost/php/redirect.php/issuers"
 
-const request = new Request(ATTESTATIONS_ENDPOINT)
-const response = await request.get();
+async function FetchAttestations() {
+    try{
+        const request = new Request(ATTESTATIONS_ENDPOINT)
+        const response = await request.get();
+        return response;
+    } catch(err) {
+        console.error('Error:', err);
+        return null;
+    }
+}
 
-const data = await response;
+var attestations = null;
 
+
+async function buildBody(config) {
+    const data = await FetchAttestations();
+    console.log(data);
+
+    // ...
+}
+
+buildBody(null)
