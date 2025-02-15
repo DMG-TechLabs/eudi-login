@@ -8,7 +8,12 @@ class Request {
      * @param {string} baseUrl - The base URL for API requests.
      * @param {Object} [defaultHeaders={}] - Default headers to include in requests.
      */
-    constructor(baseUrl, defaultHeaders = {}) {
+    constructor(baseUrl, defaultHeaders = {
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate, br, zstd',
+        'Content-Type': 'application/json',
+    }) {
         this.baseUrl = baseUrl;
         this.defaultHeaders = defaultHeaders;
     }
