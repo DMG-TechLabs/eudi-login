@@ -3,19 +3,19 @@ DIST=dist
 
 .PHONY: start
 start: ## Start the php server
-	docker-compose up -d --remove-orphans
+	docker compose up -d --remove-orphans
 
 .PHONY: stop
 stop: ## Stop the php server
-	docker-compose down
+	docker compose down
 
 .PHONY: rebuild
 rebuild: ## Rebuild docker image
-	docker-compose build
+	docker compose build
 	
 .PHONY: logs
 logs: ## Print logs
-	docker-compose logs -f
+	docker compose logs -f
 
 .PHONY: clean
 clean: ## Clean docker environment
