@@ -11,7 +11,7 @@ export class Config {
         PowerOfRepresentation: false,
         PseudonymDeferred: false,
         Reservation: false,
-        TaxNumber: falser
+        TaxNumber: false
     }){
         this.config = config
     }
