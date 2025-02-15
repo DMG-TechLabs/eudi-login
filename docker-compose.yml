@@ -1,5 +1,6 @@
 services:
-  alpine:
+  eu-login-alpine:
+    # image: eu-login-alpine
     build: .
     container_name: alpine_container
     stdin_open: true

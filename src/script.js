@@ -121,7 +121,7 @@ function paintQR(uri) {
  */
 async function TransactionInit() {
     try {
-        const request = new Request(BACKEND_URL)
+        const request = new Request(BACKEND_URL);
         const response = request.post(PRESENTATIONS_ENDPOINT, JSON.stringify(DUMMY_BODY));
         const data = await response.json();
         console.log(data);
