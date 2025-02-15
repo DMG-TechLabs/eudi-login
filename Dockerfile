@@ -1,6 +1,4 @@
 FROM alpine:3.21
-LABEL maintainer="erik.soderblom@gmail.com"
-LABEL description="Alpine based image with apache2 and php8."
 
 # Setup apache and php
 RUN apk --no-cache --update \
@@ -37,46 +35,3 @@ COPY docker-entrypoint.sh /
 HEALTHCHECK CMD wget -q --no-cache --spider localhost
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
-# # FROM php:8.2-apache
-# # EXPOSE 8080
-# #
-# #
-# # FROM alpine:latest
-# # RUN apk update && apk add --no-cache bash curl
-# # CMD ["/bin/bash"]
-#
-# FROM alpine:latest
-#
-# # Install PHP, FPM, and required extensions
-# RUN apk update && apk upgrade
-# RUN export phpverx=$(alpinever=$(cat /etc/alpine-release|cut -d '.' -f1);[ $alpinever -ge 9 ] && echo  7|| echo 5)
-# RUN apk add apache2 php$phpverx-apache2
-# # RUN 
-# #
-# #
-# #
-# # RUN apk add --no-cache \
-# #     php \
-# #     php-fpm \
-# #     php-cli \
-# #     php-mysqli \
-# #     php-json \
-# #     php-opcache \
-# #     php-mbstring \
-# #     php-xml \
-# #     php-session \
-# #     php-tokenizer
-#
-# # Create a PHP-FPM configuration (optional)
-# # RUN mkdir -p /run/php
-#
-# # Set working directory
-# # WORKDIR /var/www/html
-# COPY ./src /var/www/localhost/htdocs
-# # Expose PHP-FPM port
-# EXPOSE 80
-#
-# # Start PHP-FPM
-# # CMD ["php8-fpm", "-F"]
-# CMD ["rc-service", "apache2", "start"]
