@@ -1,7 +1,6 @@
 /**
  * Standardized HTTP Request class for handling API requests.
  */
-// export 
 class Request {
     /**
      * Creates a new Request instance.
