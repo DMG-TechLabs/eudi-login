@@ -48,10 +48,6 @@ body {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#back {
-    display: none;
-}
-
 #confirm-to-share-data {
     display: none;
     position: absolute;
@@ -63,10 +59,11 @@ body {
 #documents {
     position: absolute;
     top: 25%;
-    left: 40%;
-    right: 40%;
+    left: 30%;
+    right: 30%;
     display: none;
-    justify-content: center;
+    flex-wrap: wrap;
+    
 }
 
 .document-box {
@@ -75,6 +72,17 @@ body {
     border-radius: 10px;
     padding: 2%;
     margin: 1%;
+    flex: 1 1 calc(100% / 6 - 10px);
+}
+
+.document-box:nth-child(n+7) {
+    flex: 1 1 calc(100% / 5 - 10px);
+}
+
+.document {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 #continue-btn {
@@ -128,4 +136,42 @@ body {
     font-size: 20px;
     margin-bottom: 15px;
     color: #333;
+}
+
+#back-btn {
+    display: none;
+    position: absolute;
+    top: 72%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+}
+
+#back {
+    display: block;
+}
+
+#back {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    background: #cfd3dc;
+    /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
+
+#back:hover {
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Active (clicked) effect */
+#back:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }

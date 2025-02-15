@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
 <script src="scripts/config.js"></script>
 <script src="scripts/request.js"></script>
@@ -15,10 +16,6 @@
     <div id="login-btn">
         <button id="login" onclick="showConfirmationForSharingData()">Login with EU Login</button>
     </div>
-    
-    <div id="back-btn">
-        <button id="back" onclick="back()">Back</button>
-    </div>
 
     <span id="confirm-to-share-data">
         <h2>By continuing, you accept to share the following data</h2>
@@ -26,7 +23,19 @@
 
     <div id="documents">
         <div class="document-box">
-            <span class="document"><h3>PID</h3></span>
+            <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
+        </div>
+        <div class="document-box">
+            <span class="document"><i class="fas fa-ban"></i><h3>18+</h3></span>
+        </div>
+        <div class="document-box">
+            <span class="document"><h3>Age Over 18</h3></span>
+        </div>
+        <div class="document-box">
+            <span class="document"><h3>Age Over 18</h3></span>
+        </div>
+        <div class="document-box">
+            <span class="document"><h3>Age Over 18</h3></span>
         </div>
         <div class="document-box">
             <span class="document"><h3>Age Over 18</h3></span>
@@ -34,7 +43,7 @@
     </div>
 
     <div id="continue-btn">
-        <button id="continue" onclick="showQRCode()">Continue</button>
+        <button id="continue" onclick="generateQRCode()">Continue</button>
     </div>
 
     <div id="qr-container">
@@ -42,16 +51,11 @@
         <div id="qrcode"></div>
     </div>
 
-    <script type="text/javascript">
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: "eudi-openid4vp://?client_id=verifier-backend.eudiw.dev&request_uri=https://verifier-backend.eudiw.dev/wallet/request.jwt/zYXidEnKo-kh68zb3rvfAYsN3cTsb9jMpv8Xh0kx8AxEqLU4w0Kmjt_y04OQpXQkdPnAybWV_qjf0ZCYz6l05w",
-            width: 300,
-            height: 300,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.L
-        });
+    <div id="back-btn">
+        <button id="back" onclick="back()">Back</button>
+    </div>
 
+    <script type="text/javascript">
         function showConfirmationForSharingData() {
             document.getElementById("login").style.display = "none";
             document.getElementById("confirm-to-share-data").style.display = "block";
@@ -59,18 +63,18 @@
             document.getElementById("continue-btn").style.display = "block";
         }
 
-        function showQRCode() {
+        function generateQRCode() {
             document.getElementById("confirm-to-share-data").style.display = "none"
             document.getElementById("documents").style.display = "none"
             document.getElementById("continue-btn").style.display = "none"
             document.getElementById("qr-container").style.display = "block";
-            document.getElementById("back").style.display = "block";
+            document.getElementById("back-btn").style.display = "block";
         }
 
         function back() {
             document.getElementById("login").style.display = "block"
             document.getElementById("qr-container").style.display = "none";
-            document.getElementById("back").style.display = "none";
+            document.getElementById("back-btn").style.display = "none";
         }
 
     </script>
