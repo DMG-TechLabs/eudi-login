@@ -1,0 +1,8 @@
+services:
+  alpine:
+    build: .
+    container_name: alpine_container
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
