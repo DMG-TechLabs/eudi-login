@@ -1,3 +1,9 @@
+/**
+ * Global config initialized by the user
+ * @var {Config}
+ */
+var config = null
+
 /** 
  * Backend proxy endpoint URL.
  * @constant {string}
@@ -83,13 +89,28 @@ function decodeAll(uri) {
 }
 
 /**
- * Builds a QR code URL for EUDI OpenID.
+ * Builds a QR code URI for EUDI OpenID.
  * @param {string} client_id - The client identifier.
  * @param {string} request_uri - The request URI.
  * @returns {string} The formatted EUDI OpenID URL.
  */
-function buildQRUrl(client_id, request_uri) {
+function buildQRUri(client_id, request_uri) {
     return decodeAll(`eudi-openid4vp://?${client_id}&${request_uri}`);
+}
+
+/**
+ * Paints the QR code in the HTML
+ * @param {string} uri - The QR code uri
+ */
+function paintQR(uri) {
+    const qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: uri,
+        width: 256,
+        height: 256,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.L
+    });
 }
 
 /**
@@ -101,12 +122,7 @@ function buildQRUrl(client_id, request_uri) {
 async function TransactionInit() {
     try {
         const request = new Request(BACKEND_URL)
-        const response = request.post(PRESENTATIONS_ENDPOINT, JSON.stringify(DUMMY_BODY), {
-                'Accept': 'application/json, text/plain, */*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'Accept-Encoding': 'gzip, deflate, br, zstd',
-                'Content-Type': 'application/json',
-        });
+        const response = request.post(PRESENTATIONS_ENDPOINT, JSON.stringify(DUMMY_BODY));
         const data = await response.json();
         console.log(data);
     } catch (error) {
@@ -114,4 +130,4 @@ async function TransactionInit() {
     }
 }
 
-TransactionInit();
+const data = TransactionInit();
