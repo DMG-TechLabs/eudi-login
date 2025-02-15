@@ -263,10 +263,10 @@ function paintQR(uri) {
  * @function TransactionInit
  * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
  */
-async function TransactionInit() {
+async function TransactionInit(transactionBody) {
     try {
         const request = new Request(BACKEND_URL);
-        const response = await request.post(PRESENTATIONS_ENDPOINT, DUMMY_BODY);
+        const response = await request.post(PRESENTATIONS_ENDPOINT, transactionBody);
         return response;
     } catch (error) {
         console.error('Error:', error);
@@ -275,16 +275,8 @@ async function TransactionInit() {
 }
 
 async function main() {
-    const data = await TransactionInit();
-    console.log(data)
-    console.log(data.client_id)
-    console.log(data.request_uri)
-    console.log(data.transaction_id)
-    console.log(data.presentation_id)
-    const uri = buildQRUri(data.client_id, data.request_uri);
-    paintQR(uri);
     await getAttestations(new Config({
-        AgeOver18: true,
+        AgeOver18: false,
         HealthID: false,
         IBAN: false,
         Loyalty: false,
@@ -298,27 +290,17 @@ async function main() {
         TaxNumber: false
     }))
 
-    console.log(addScopes)
-
-    generateRequest()
+    const data = await TransactionInit(generateRequest());
+    // console.log(data)
+    // console.log(data.client_id)
+    // console.log(data.request_uri)
+    // console.log(data.transaction_id)
+    // console.log(data.presentation_id)
+    const uri = buildQRUri(data.client_id, data.request_uri);
+    paintQR(uri);
+   
 
 }
 
 main();
 
-// await getAttestations(new Config({
-//     AgeOver18: true,
-//     HealthID: true,
-//     IBAN: true,
-//     Loyalty: true,
-//     mDL: true,
-//     MSISDN: true,
-//     PhotoId: true,
-//     PID: true,
-//     PowerOfRepresentation: true,
-//     PseudonymDeferred: true,
-//     Reservation: true,
-//     TaxNumber: true
-// }))
-
-// generateRequest()
