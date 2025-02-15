@@ -11,9 +11,6 @@ async function FetchAttestations() {
     }
 }
 
-var attestations = null;
-
-
 async function buildBody(config) {
     const data = await FetchAttestations();
     console.log(data);
