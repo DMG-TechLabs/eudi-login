@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -12,7 +11,112 @@ body {
     background-color: #f4f4f4;
 }
 
-.qr-container {
+#login-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+}
+
+#login {
+    display: block;
+}
+
+#login {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #032e8a, #3c70df);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
+
+#login:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Active (clicked) effect */
+#login:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#back {
+    display: none;
+}
+
+#confirm-to-share-data {
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#documents {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    right: 40%;
+    display: none;
+    justify-content: center;
+}
+
+.document-box {
+    font-size: 20px;
+    border: 3px solid;
+    border-radius: 10px;
+    padding: 2%;
+    margin: 1%;
+}
+
+#continue-btn {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+}
+
+#continue {
+    display: block;
+}
+
+#continue {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    background: #cfd3dc;
+    /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
+
+#continue:hover {
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Active (clicked) effect */
+#continue:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#qr-container {
+    display: none;
     background: white;
     padding: 20px;
     border-radius: 15px;
@@ -20,7 +124,7 @@ body {
     text-align: center;
 }
 
-.qr-container h2 {
+#qr-container h2 {
     font-size: 20px;
     margin-bottom: 15px;
     color: #333;

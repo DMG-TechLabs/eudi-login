@@ -6,14 +6,39 @@
     <title>EUDI Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<script src="scripts/request.js"></script>
 <script src="script.js"></script>
 <script src="extern/qrcode.js"></script>
 <body>
-    <div class="qr-container">
+    <div id="login-btn">
+        <button id="login" onclick="showConfirmationForSharingData()">Login with EU Login</button>
+    </div>
+    
+    <div id="back-btn">
+        <button id="back" onclick="back()">Back</button>
+    </div>
+
+    <span id="confirm-to-share-data">
+        <h2>By continuing, you accept to share the following data</h2>
+    </span>
+
+    <div id="documents">
+        <div class="document-box">
+            <span class="document"><h3>PID</h3></span>
+        </div>
+        <div class="document-box">
+            <span class="document"><h3>Age Over 18</h3></span>
+        </div>
+    </div>
+
+    <div id="continue-btn">
+        <button id="continue" onclick="showQRCode()">Continue</button>
+    </div>
+
+    <div id="qr-container">
         <h2>Scan This QR Code</h2>
         <div id="qrcode"></div>
     </div>
+
     <script type="text/javascript">
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: "eudi-openid4vp://?client_id=verifier-backend.eudiw.dev&request_uri=https://verifier-backend.eudiw.dev/wallet/request.jwt/zYXidEnKo-kh68zb3rvfAYsN3cTsb9jMpv8Xh0kx8AxEqLU4w0Kmjt_y04OQpXQkdPnAybWV_qjf0ZCYz6l05w",
@@ -23,6 +48,28 @@
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.L
         });
+
+        function showConfirmationForSharingData() {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("confirm-to-share-data").style.display = "block";
+            document.getElementById("documents").style.display = "flex";
+            document.getElementById("continue-btn").style.display = "block";
+        }
+
+        function showQRCode() {
+            document.getElementById("confirm-to-share-data").style.display = "none"
+            document.getElementById("documents").style.display = "none"
+            document.getElementById("continue-btn").style.display = "none"
+            document.getElementById("qr-container").style.display = "block";
+            document.getElementById("back").style.display = "block";
+        }
+
+        function back() {
+            document.getElementById("login").style.display = "block"
+            document.getElementById("qr-container").style.display = "none";
+            document.getElementById("back").style.display = "none";
+        }
+
     </script>
 </body>
 </html>
