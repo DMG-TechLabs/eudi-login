@@ -93,12 +93,12 @@ function buildQRUrl(client_id, request_uri) {
 }
 
 /**
- * Fetches data from the backend proxy.
+ * Initializes the transaction.
  * @async
- * @function fetchData
+ * @function TransactionInit
  * @returns {Promise<void>} - Logs data to console or catches errors.
  */
-async function fetchData() {
+async function TransactionInit() {
     try {
         const request = new Request(BACKEND_URL)
         
@@ -115,4 +115,4 @@ async function fetchData() {
     }
 }
 
-fetchData();
+TransactionInit();
