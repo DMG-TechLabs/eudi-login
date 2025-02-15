@@ -285,3 +285,20 @@ async function main() {
 }
 
 main();
+
+getAttestations(new Config({
+    AgeOver18: true,
+    HealthID: true,
+    IBAN: true,
+    Loyalty: true,
+    mDL: true,
+    MSISDN: true,
+    PhotoId: true,
+    PID: true,
+    PowerOfRepresentation: true,
+    PseudonymDeferred: true,
+    Reservation: true,
+    TaxNumber: true
+}))
+
+generateRequest()
