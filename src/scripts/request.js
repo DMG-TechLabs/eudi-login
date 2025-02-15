@@ -1,7 +1,8 @@
 /**
  * Standardized HTTP Request class for handling API requests.
  */
-export class Request {
+// export 
+class Request {
     /**
      * Creates a new Request instance.
      * @param {string} baseUrl - The base URL for API requests.
