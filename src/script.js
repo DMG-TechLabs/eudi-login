@@ -276,6 +276,7 @@ async function TransactionInit() {
 
 async function main() {
     const data = await TransactionInit();
+    console.log(data)
     console.log(data.client_id)
     console.log(data.request_uri)
     console.log(data.transaction_id)

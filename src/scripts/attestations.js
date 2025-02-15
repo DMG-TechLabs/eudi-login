@@ -6,17 +6,19 @@ async function FetchAttestations() {
         const response = await request.get();
         return response;
     } catch(err) {
-        console.error(err);
+        console.error('Error:', err);
+        return null;
     }
 }
 
 var attestations = null;
 
-async function loadAttestations() {
-    attestations = await FetchAttestations();
+
+async function buildBody(config) {
+    const data = await FetchAttestations();
+    console.log(data);
+
+    // ...
 }
 
-loadAttestations();
-
-
-
+buildBody(null)
