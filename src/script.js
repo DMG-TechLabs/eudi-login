@@ -1,50 +1,287 @@
-const BACKEND_ENDPOINT = "https://verifier_backend.dev.eudiw.dev"
-const PRESENTATIONS_ENDPOINT = "ui/presentations"
+/**
+ * Global config initialized by the user
+ * @var {Config}
+ */
+var config = null
 
-const express = require('express');
-const request = require('request');
-const app = express();
+/** 
+ * Backend proxy endpoint URL.
+ * @constant {string}
+ */
+const BACKEND_URL = "http://localhost/php/proxy.php";
 
-app.use('/backend', (req, res) => {
-  const url = BACKEND_ENDPOINT + req.url;
-  req.pipe(request({ url, headers: { origin: null } })).pipe(res);
-});
+/** 
+ * Presentations API endpoint.
+ * @constant {string}
+ */
+const PRESENTATIONS_ENDPOINT = "ui/presentations";
 
-app.listen(3000, () => console.log('Proxy server running on port 3000'));
+const DUMMY_BODY = {
+    "type": "vp_token",
+    "presentation_definition": {
+        "id": "cf11c081-4337-47f7-8771-57305ce6b3a4",
+        "input_descriptors": [
+            {
+                "id": "eu.europa.ec.eudi.pid.1",
+                "name": "Person Identification Data (PID)",
+                "purpose": "",
+                "format": {
+                    "mso_mdoc": {
+                        "alg": [
+                            "ES256",
+                            "ES384",
+                            "ES512"
+                        ]
+                    }
+                },
+                "constraints": {
+                    "fields": [
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['family_name']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['given_name']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['birth_date']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['age_over_18']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['age_in_years']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['age_birth_year']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['family_name_birth']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['given_name_birth']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['birth_place']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['birth_country']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['birth_state']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['birth_city']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_address']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_country']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_state']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_city']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_postal_code']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_street']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['resident_house_number']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['gender']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['nationality']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['issuance_date']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['expiry_date']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['issuing_authority']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['document_number']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['administrative_number']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['issuing_country']"
+                            ],
+                            "intent_to_retain": false
+                        },
+                        {
+                            "path": [
+                                "$['eu.europa.ec.eudi.pid.1']['issuing_jurisdiction']"
+                            ],
+                            "intent_to_retain": false
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "nonce": "8117cc1f-57f3-4b69-8cb3-94507c32a2cd"
+};
 
-
-const DUMMY_BODY = {"type":"vp_token","presentation_definition":{"id":"853c7aa0-d6f9-451a-b97b-1d54d78f2ea3","input_descriptors":[{"id":"eu.europa.ec.eudi.pid.1","name":"Person Identification Data (PID)","purpose":"","format":{"mso_mdoc":{"alg":["ES256","ES384","ES512"]}},"constraints":{"fields":[{"path":["$['eu.europa.ec.eudi.pid.1']['family_name']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['given_name']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['birth_date']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['age_over_18']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['age_in_years']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['age_birth_year']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['family_name_birth']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['given_name_birth']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['birth_place']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['birth_country']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['birth_state']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['birth_city']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_address']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_country']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_state']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_city']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_postal_code']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_street']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['resident_house_number']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['gender']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['nationality']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['issuance_date']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['expiry_date']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['issuing_authority']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['document_number']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['administrative_number']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['issuing_country']"],"intent_to_retain":false},{"path":["$['eu.europa.ec.eudi.pid.1']['issuing_jurisdiction']"],"intent_to_retain":false}]}}]},"nonce":"717d5d1b-281c-4dee-aab4-044848c419aa"}
-
-function buildQRUrl(client_id, request_uri) {
-    return `/backend/?${client_id}&${request_uri}`
+/**
+ * Decodes HTML Entities like `&amp;`
+ * @param {string} text
+ * @returns {string} the decoded text
+ */
+function decodeHTMLEntities(text) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+    return doc.documentElement.textContent;
 }
 
-async function fetchData() {
+/**
+ * Decodes URI characters and HTML entities back to their ascii counterparts
+ * @param {string} uri
+ * @returns {string} the decoded text
+ */
+function decodeAll(uri) {
+    return decodeHTMLEntities(decodeURIComponent(uri))
+}
+
+/**
+ * Builds a QR code URI for EUDI OpenID.
+ * @param {string} client_id - The client identifier.
+ * @param {string} request_uri - The request URI.
+ * @returns {string} The formatted EUDI OpenID URL.
+ */
+function buildQRUri(client_id, request_uri) {
+    return decodeAll(`eudi-openid4vp://?client_id=${client_id}&request_uri=${request_uri}`);
+}
+
+/**
+ * Paints the QR code in the HTML
+ * @param {string} uri - The QR code uri
+ */
+function paintQR(uri) {
+    new QRCode(document.getElementById("qrcode"), {
+        text: uri,
+        width: 256,
+        height: 256,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.L
+    });
+}
+
+/**
+ * Initializes the transaction.
+ * @async
+ * @function TransactionInit
+ * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
+ */
+async function TransactionInit() {
     try {
-        const response = await fetch(`/backend/${PRESENTATIONS_ENDPOINT}` , {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Accept-Language': 'en-US,en;q=0.5',
-                'Accept-Encoding': 'gzip, deflate, br, zstd',
-                'Content-Type': 'application/json',
-                'Connection': 'keep-alive',
-                'Sec-Fetch-Dest': 'empty',
-                'Sec-Fetch-Mode': 'cors',
-                'Sec-Fetch-Site': 'same-origin',
-                'Priority': 'u=0',
-                'Cookie': '_hello_world_key=SFMyNTY.g3QAAAABbQAAAAtfY3NyZl90b2tlbm0AAAAYR1NQX2JHYWxCWkRPbTRzMGNJdHkxc1NP.FFuJVDk47DZes8vxl0ai6oVf2qOKJsTpSqC75bupcrE; request_logger=SFMyNTY.g2gDbQAAAARoRDk1bgYAKxqNVZMBYgABUYA.sYtbw_-pNm0h6qzSuHvVtKPFXogSgVrwhHLL7uvf3Mw'
-            },
-            body: JSON.stringify(
-                DUMMY_BODY     
-            )
-        });
-        const data = await response.json();
-        console.log(data);
+        const request = new Request(BACKEND_URL);
+        const response = await request.post(PRESENTATIONS_ENDPOINT, DUMMY_BODY);
+        return response;
     } catch (error) {
         console.error('Error:', error);
+        return null;
     }
 }
 
-fetchData();
+async function main() {
+    const data = await TransactionInit();
+    console.log(data.client_id)
+    console.log(data.request_uri)
+    console.log(data.transaction_id)
+    console.log(data.presentation_id)
+    const uri = buildQRUri(data.client_id, data.request_uri);
+    paintQR(uri);
+}
 
+main();

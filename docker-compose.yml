@@ -1,8 +1,19 @@
 services:
-  alpine:
+  eu-login-alpine:
+    # image: eu-login-alpine
     build: .
     container_name: alpine_container
     stdin_open: true
     tty: true
     restart: unless-stopped
-
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./src:/htdocs
+    environment:
+      #- HTTP_SERVER_NAME=www.example.xyz
+      #- HTTPS_SERVER_NAME=www.example.xyz
+      #- SERVER_ADMIN=admin@example.xyz
+      - TZ=Europe/Athens
+      - PHP_MEMORY_LIMIT=512M
