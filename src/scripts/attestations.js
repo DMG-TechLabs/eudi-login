@@ -34,16 +34,11 @@ class Attestation {
 }
 
 addScopes = []
-// var sup 
 async function getAttestations(config){
     attestationsFinal = []
     availableAttestations = await FetchAttestations()
     supportedAt = availableAttestations.credential_configurations_supported
-    // sup = supported
-    console.log(supportedAt)
-    // Object.entries(supportedAt).forEach(([key, supportedAt]) => {
-        // claims = supportedAttestation.claims
-        // console.log(claims)
+    // console.log(supportedAt)
 
     for (let key in supportedAt) {
         if (supportedAt.hasOwnProperty(key) && key != "eu.europa.ec.eudi.pid_jwt_vc_json") {
@@ -79,40 +74,38 @@ async function getAttestations(config){
 
     // console.log("attestationsFinal")
     // console.log(attestationsFinal)
-    console.log(config)
+    // console.log(config)
 
     for (const attestation of attestationsFinal) {
         // console.log(attestation.scope)
-        // addScopes.push(attestation)
-        console.log("PID", config)
-        if ((attestation.scope == "eu.europa.ec.eudi.pid.1") && config.PID == true) {
+        // console.log("PID", config.settings.PID)
+        if ((attestation.scope == "eu.europa.ec.eudi.pid.1") && config.settings.PID == true) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "org.iso.18013.5.1.mDL" && config.mDL) {
+        }else if (attestation.scope == "org.iso.18013.5.1.mDL" && config.settings.mDL) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.iban.1" && config.IBAN) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.iban.1" && config.settings.IBAN) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.loyalty.1" && config.Loyalty) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.loyalty.1" && config.settings.Loyalty) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "org.iso.23220.photoid.1" && config.PhotoId) {
+        }else if (attestation.scope == "org.iso.23220.photoid.1" && config.settings.PhotoId) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.1" && config.AgeOver18) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.1" && config.settings.AgeOver18) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.hiid.1" && config.HealthID) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.hiid.1" && config.settings.HealthID) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "org.iso.18013.5.1.reservation" && config.Reservation) {
+        }else if (attestation.scope == "org.iso.18013.5.1.reservation" && config.settings.Reservation) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.tax.1" && config.TaxNumber) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.tax.1" && config.settings.TaxNumber) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.por.1" && config.PowerOfRepresentation) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.por.1" && config.settings.PowerOfRepresentation) {
             addScopes.push(attestation)
-        }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint" && config.PseudonymDeferred) {
+        }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint" && config.settings.PseudonymDeferred) {
             addScopes.push(attestation)
         }
     }
 
     // console.log(addScopes)
     return addScopes
-    //
 }
 
 function generateRequest() {

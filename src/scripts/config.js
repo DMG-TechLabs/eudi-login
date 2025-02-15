@@ -13,6 +13,6 @@ class Config {
         Reservation: false,
         TaxNumber: false
     }){
-        this.config = config
+        this.settings = config
     }
 }
