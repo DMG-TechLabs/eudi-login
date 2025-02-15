@@ -283,6 +283,42 @@ async function main() {
     console.log(data.presentation_id)
     const uri = buildQRUri(data.client_id, data.request_uri);
     paintQR(uri);
+    await getAttestations(new Config({
+        AgeOver18: true,
+        HealthID: false,
+        IBAN: false,
+        Loyalty: false,
+        mDL: false,
+        MSISDN: false,
+        PhotoId: false,
+        PID: true,
+        PowerOfRepresentation: false,
+        PseudonymDeferred: false,
+        Reservation: false,
+        TaxNumber: false
+    }))
+
+    console.log(addScopes)
+
+    generateRequest()
+
 }
 
 main();
+
+// await getAttestations(new Config({
+//     AgeOver18: true,
+//     HealthID: true,
+//     IBAN: true,
+//     Loyalty: true,
+//     mDL: true,
+//     MSISDN: true,
+//     PhotoId: true,
+//     PID: true,
+//     PowerOfRepresentation: true,
+//     PseudonymDeferred: true,
+//     Reservation: true,
+//     TaxNumber: true
+// }))
+
+// generateRequest()
