@@ -8,7 +8,7 @@ var config = null
  * Backend proxy endpoint URL.
  * @constant {string}
  */
-const BACKEND_URL = "http://localhost/php/proxy.php";
+const BACKEND_URL = "http://localhost/php/redirect.php";
 
 /** 
  * Presentations API endpoint.
