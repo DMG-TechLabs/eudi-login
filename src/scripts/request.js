@@ -56,7 +56,7 @@ class Request {
      * @param {Object} [headers={}] - Additional headers.
      * @returns {Promise<Object>} - The JSON response.
      */
-    get(endpoint, headers = {}) {
+    get(endpoint = "", headers = {}) {
         return this.send(endpoint, 'GET', null, headers);
     }
 
@@ -67,7 +67,7 @@ class Request {
      * @param {Object} [headers={}] - Additional headers.
      * @returns {Promise<Object>} - The JSON response.
      */
-    post(endpoint, body, headers = {}) {
+    post(endpoint = "", body = {}, headers = {}) {
         return this.send(endpoint, 'POST', body, headers);
     }
 
@@ -78,7 +78,7 @@ class Request {
      * @param {Object} [headers={}] - Additional headers.
      * @returns {Promise<Object>} - The JSON response.
      */
-    put(endpoint, body, headers = {}) {
+    put(endpoint = "", body, headers = {}) {
         return this.send(endpoint, 'PUT', body, headers);
     }
 
@@ -88,7 +88,7 @@ class Request {
      * @param {Object} [headers={}] - Additional headers.
      * @returns {Promise<Object>} - The JSON response.
      */
-    delete(endpoint, headers = {}) {
+    delete(endpoint = "", headers = {}) {
         return this.send(endpoint, 'DELETE', null, headers);
     }
 }

@@ -279,6 +279,7 @@ async function main() {
     console.log(data.client_id)
     console.log(data.request_uri)
     console.log(data.transaction_id)
+    console.log(data.presentation_id)
     const uri = buildQRUri(data.client_id, data.request_uri);
     paintQR(uri);
 }
