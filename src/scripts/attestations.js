@@ -1,11 +1,13 @@
-const ATTESTATIONS_ENDPOINT = "https://issuer.eudiw.dev/.well-known/openid-credential-issuer"
+const ATTESTATIONS_ENDPOINT = "http://localhost/php/redirect.php/issuers"
 
 async function FetchAttestations() {
-    const request = new Request(ATTESTATIONS_ENDPOINT)
-    const response = await request.get();
-    const data = await response;
-
-    return data;
+    try{
+        const request = new Request(ATTESTATIONS_ENDPOINT)
+        const response = await request.get();
+        return response;
+    } catch(err) {
+        console.error(err);
+    }
 }
 
 const requestTemplate = {
@@ -16,9 +18,18 @@ const requestTemplate = {
             
         ]
 
-    },
-    "nonce": ""
+    }
 }
+
+var attestations = null;
+
+async function loadAttestations() {
+    attestations = await FetchAttestations();
+}
+
+loadAttestations();
+
+
 
 
 class Attestation {
@@ -53,9 +64,9 @@ class Attestation {
 
 addScopes = []
 
-function getAttestations(config){
+async function getAttestations(config){
     attestationsFinal = []
-    availableAttestations = FetchAttestations()
+    availableAttestations = await loadAttestations()
     supported = availableAttestations.credential_configurations_supported
     for (const supportedAttestation of supported) {
         claims = supportedAttestation.claims
@@ -97,8 +108,6 @@ function getAttestations(config){
         addScopes.push(attestation)
     }
     }
-
-
 
 }
 
