@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#qrcode-box {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 5px 2px 5px 2px;
+}
+
+#scan-indocator , h3 {
+    text-align: center;
+}
+
+#qrcode {
+    display: flex;
+    justify-content: center;
+    padding-left: 20%;
+    padding-right: 20%;
+}
