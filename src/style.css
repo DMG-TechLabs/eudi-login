@@ -58,7 +58,7 @@ body {
 
 #documents {
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 30%;
     right: 30%;
     display: none;
@@ -88,7 +88,7 @@ body {
 #continue-btn {
     display: none;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translateY(-50%);
     transform: translateX(-50%);
