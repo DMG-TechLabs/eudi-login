@@ -2,7 +2,7 @@
  * Backend proxy endpoint URL.
  * @constant {string}
  */
-const BACKEND_ENDPOINT = "http://localhost:8080/proxy.php";
+const BACKEND_URL = "http://localhost:8080/proxy.php";
 
 /** 
  * Presentations API endpoint.
@@ -80,17 +80,13 @@ function buildQRUrl(client_id, request_uri) {
  */
 async function fetchData() {
     try {
-        const response = await fetch(`${BACKEND_ENDPOINT}/${PRESENTATIONS_ENDPOINT}`, {
-            method: 'POST',
-            headers: {
+        const request = new Request(BACKEND_URL)
+        const response = request.post(PRESENTATIONS_ENDPOINT, JSON.stringify(DUMMY_BODY), {
                 'Accept': 'application/json, text/plain, */*',
                 'Accept-Language': 'en-US,en;q=0.5',
                 'Accept-Encoding': 'gzip, deflate, br, zstd',
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(DUMMY_BODY)
         });
-
         const data = await response.json();
         console.log(data);
     } catch (error) {
