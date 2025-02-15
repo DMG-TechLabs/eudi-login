@@ -1,9 +1,3 @@
-/**
- * Global config initialized by the user
- * @var {Config}
- */
-var config = null
-
 /** 
  * Backend proxy endpoint URL.
  * @constant {string}
