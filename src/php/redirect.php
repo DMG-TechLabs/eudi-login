@@ -8,8 +8,8 @@ $BACKEND_URL = "https://verifier-backend.eudiw.dev";
 
 // Define the Proxy
 $proxy = new Proxy();
-$proxy->set(new Record("/ui/presentations", $BACKEND_URL, true));
-$proxy->set(new Record("/issuers", "https://issuer.eudiw.dev/.well-known/openid-credential-issuer"));
+$proxy->set(new Record("/ui", $BACKEND_URL, true, true));
+$proxy->set(new Record("/issuers", "https://issuer.eudiw.dev/.well-known/openid-credential-issuer", false));
 
 // Allow CORS
 header("Access-Control-Allow-Origin: *");
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $path = str_replace("/php/redirect.php", "", $_SERVER['REQUEST_URI']);
-$target = $proxy->get($path)->remote;
+$target = $proxy->get($path);
 if ($target === null) {
     echo json_encode(["error" => "Proxy Error: No records found for '" . $path . "'"]); 
     exit;
