@@ -10,7 +10,7 @@
  *   .then(data => console.log("Received data:", data))
  *   .catch(error => console.error("Polling failed:", error));
  */
-function poll(url) {
+export function poll(url) {
     let attempts = 0;
     const maxAttempts = 60;
     let stopPolling = false;

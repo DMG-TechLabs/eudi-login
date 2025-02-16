@@ -1,7 +1,7 @@
 /**
  * Standardized HTTP Request class for handling API requests.
  */
-class Request {
+export class Request {
     /**
      * Creates a new Request instance.
      * @constructor

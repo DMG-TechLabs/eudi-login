@@ -1,3 +1,5 @@
+import { Request } from "./request.mjs";
+
 /**
  * Endpoint for fetching attestations.
  * @constant {string}
@@ -27,7 +29,7 @@ class Attestation {
 /**
  * Represents the configuration of the requested attestations.
  */
-class Config {
+export class Config {
     /**
     * @typedef {Object} ConfigOptions
     * @property {boolean} [AgeOver18=false] - Whether the user is over 18.
