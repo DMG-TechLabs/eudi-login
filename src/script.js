@@ -92,7 +92,7 @@ async function TransactionInit(transactionBody) {
     }
 }
 
-async function main() {
+export async function main() {
     const config = new Config({
         AgeOver18: true,
         HealthID: false,
@@ -118,8 +118,7 @@ async function main() {
     const response = await poll(pollingUrl)
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
-    
+
 }
 
-main();
-
+window.main = main;
