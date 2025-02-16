@@ -7,7 +7,7 @@ export class MdocDecoder {
         console.log("Buffer: ", buffer);
         const decodedData = this.decodeCborData(buffer);
         console.log("Mdoc decoded Data: ", decodedData);
-        
+
         if (!decodedData || !decodedData.get("documents")) {
             console.log("Rejected")
             return Promise.reject("Invalid attestation data");
@@ -33,17 +33,15 @@ export class MdocDecoder {
 
         // console.log("Namespaces: ", namespaces)
         // Object.keys(namespaces).forEach(it => {
-        
-        namespaces.forEach((namespace, it) => { 
+
+        namespaces.forEach((namespace, it) => {
             // console.log("Namespace: ", namespace);
             // console.log("Namespace it: ", it);
             // console.log("Namespace it: ", namespaces[it]);
             // const namespace = namespaces[it];
             namespace.forEach(element => {
-                // console.log("Element: ", element);
                 const decodedElement = this.decodeCborData(element.value);
-                
-                // console.log("Decoded Element: ", decodedElement);
+
                 attributes.push({
                     key: `${it}:${decodedElement.get("elementIdentifier")}`,
                     value: decodedElement.get("elementValue")

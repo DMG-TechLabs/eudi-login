@@ -11,7 +11,7 @@ export async function mapVpTokenToAttestations(responce, nonce) {
         decodings = Object.entries(formatsPerPath).map(async entry =>{
             return await mapAttestation(entry[0], entry[1], vpToken, nonce);
         });
-    // } 
+    // }
   // else {
   //       let dcqlQuery = concludedTransaction.presentationQuery;
   //       let vpToken = concludedTransaction.walletResponse.vp_token;
