@@ -1,4 +1,7 @@
-export class Decoder {
+import { Decoder } from "../extern/decode.js";
+
+export class MdocDecoder {
+
     decode(attestation, _nonce) {
         const buffer = this.decodeBase64OrHex(attestation);
         console.log("Buffer: ", buffer);
@@ -27,6 +30,7 @@ export class Decoder {
             const namespace = namespaces[it];
             namespace.forEach(element => {
                 const decodedElement = this.decodeCborData(element);
+                console.log("Decoded Element:", decodedElement);
                 attributes.push({
                     key: `${it}:${decodedElement}`,
                     value: decodedElement
@@ -48,16 +52,15 @@ export class Decoder {
         if (base64Regex.test(input)) {
             const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
             const byteArray = new Uint8Array(atob(base64).split("").map(c => c.charCodeAt(0)));
-            return byteArray.buffer;
+            return byteArray
         }
         const byteArray = new Uint8Array(input.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
-        return byteArray.buffer;
+        return byteArray
     }
 
     decodeCborData(data) {
         try {
-            const buffer = data instanceof ArrayBuffer ? data : data.buffer;
-            return CBOR.decode(buffer);
+            return new Decoder().mapDecode(data);
         } catch (error) {
             console.error("Failed to decode CBOR:", error);
             return null;
