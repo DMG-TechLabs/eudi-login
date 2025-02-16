@@ -4,52 +4,193 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
+<script type="module" src="./extern/qrcode.js"></script>
+<script type="module" src="./script.js"></script>
+<style>
+    #confirm-to-share-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 100px;
+        padding: 20px;
+    }
 
-<script src="extern/qrcode.js"></script>
-<!-- <script type="module" src="server.js"></script> -->
-<script type="module" src="script.js"></script>
-<!-- <script type="module" src="server.js"></script> -->
+    #indicator {
+        margin-bottom: 30px;
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
+    }
+
+    #documents {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .document-box {
+        font-size: 20px;
+        border: 3px solid;
+        border-radius: 10px;
+        padding: 2%;
+        margin: 1%;
+        flex: 1 1 calc(100% / 6 - 10px);
+    }
+
+    .document-box:nth-child(n+7) {
+        flex: 1 1 calc(100% / 5 - 10px);
+    }
+
+    .document {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 20%;
+    }
+
+    .button {
+        margin-left: 20px;
+    }
+
+    #cancel {
+        display: block;
+    }
+
+    #cancel {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        background: #cfd3dc;
+        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #cancel:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #cancel:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #continue {
+        display: block;
+    }
+
+    #continue {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: #cfd3dc;
+        background: linear-gradient(45deg, #032e8a, #3c70df);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #continue:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #continue:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #eudi-icon {
+        align-items: center;
+        width: 800px;
+        height: 400px;
+    }
+</style>
 <body>
-    <div id="qrcode"></div>
+    <div id="container">
+        <img id="eudi-icon" src="./assets/ic-logo.svg">
+        <div id="confirm-to-share-data">
+            <span id="indicator">
+                <h2>By continuing, you accept to share the following data</h2>
+            </span>
 
-    <!-- <script> -->
-    <!-- main(); -->
-    <!-- console.log("test") -->
-    <!-- // document.addEventListener("DOMContentLoaded", () => { -->
-    <!-- console.log("DOM fully loaded and ready."); -->
-    <!---->
-    <!-- window.addEventListener("message", async function(event) { -->
-    <!--     console.log("Received message from:", event.origin); -->
-    <!---->
-    <!--     // Extract the received data -->
-    <!--     const { site, data } = event.data; -->
-    <!--     console.log("User's Site:", site); -->
-    <!--     console.log("Received Data:", data); -->
-    <!---->
-    <!--     if (site !== event.origin) { -->
-    <!--         console.error("Invalid site:", site); -->
-    <!--         return; -->
-    <!--     } -->
-    <!---->
-    <!--     // const config = new Config(data); -->
-    <!--     // config.init(); -->
-    <!--     // -->
-    <!--     // const transaction = await TransactionInit(config.request); -->
-    <!--     // const uri = buildQRUri(transaction.client_id, transaction.request_uri); -->
-    <!--     // paintQR(uri); -->
-    <!--     // -->
-    <!--     // const pollingUrl = buildPollingUrl(transaction.transaction_id); -->
-    <!--     // const response = await poll(pollingUrl); -->
-    <!--     const decoded = await run(data); -->
-    <!---->
-    <!--     window.opener.postMessage(decoded, site); -->
-    <!--     window.close(); -->
-    <!-- }, false); -->
-    <!-- // }); -->
-    <!-- </script> -->
+            <div id="documents"></div>
 
-    </body>
+            <div class="buttons">
+                <div class="button">
+                    <button id="cancel" onclick="back()">Cancel</button>
+                </div>
+
+                <div class="button">
+                    <button id="continue" onclick="generateQRCode()">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function back() {
+            <!----TODO---->
+        }
+
+        function generateQRCode() {
+            window.location.href = "./qrcode/index.html";
+        }
+
+        const config = JSON.parse(localStorage.getItem('config'));
+        console.log(config);
+        function showDivs(config) {
+            const container = document.getElementById("documents");
+            container.innerHTML = "";
+
+            const fieldNames = {
+                AgeOver18: "Age Over 18",
+                HealthID: "Health ID",
+                IBAN: "Bank Account (IBAN)",
+                Loyalty: "Loyalty Card",
+                mDL: "Mobile Driver's License",
+                MSISDN: "Phone Number",
+                PhotoId: "Photo ID",
+                PID: "Personal ID",
+                PowerOfRepresentation: "Power of Representation",
+                PseudonymDeferred: "Pseudonym Deferred",
+                Reservation: "Reservation",
+                TaxNumber: "Tax Number"
+            };
+
+            Object.entries(config).forEach(([key, value]) => {
+                if (value == true) {
+                    let div = document.createElement("div");
+                    div.className = "document-box";
+                    div.textContent = `${fieldNames[key]}`;
+                    div.style.display = "block";
+                    container.appendChild(div);
+                }
+            });
+        }
+
+        showDivs(config);
+
+    </script>
+</body>
 </html>

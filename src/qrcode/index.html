@@ -7,11 +7,6 @@
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
-<script src="../modules/config.mjs"></script>
-<script src="../modules/decoder.mjs"></script>
-<script src="../modules/request.mjs"></script>
-<script src="../modules/polling.mjs"></script>
-<script src="../extern/cbor.js"></script>
 <script src="../extern/qrcode.js"></script>
 <script type="module" src="../script.js"></script>
 <style>
@@ -30,7 +25,7 @@
     }
     .loader::after,
     .loader::before {
-        content: '';  
+        content: '';
         box-sizing: border-box;
         position: absolute;
         width: 24px;
@@ -55,13 +50,13 @@
         100% {
             transform: rotate(360deg);
         }
-    } 
+    }
     @keyframes animloader {
         50% {
             transform: scale(1) translate(-50%, -50%);
         }
     }
-    
+
     #qr-container {
         display: none;
         position: absolute;
@@ -127,7 +122,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         align-items: center;
-        width: 700px; 
+        width: 700px;
         height: 300px;
     }
 </style>
