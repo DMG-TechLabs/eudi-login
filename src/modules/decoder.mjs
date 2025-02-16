@@ -31,7 +31,7 @@ export class MdocDecoder {
             const namespace = namespaces[it];
             namespace.forEach(element => {
                 const decodedElement = this.decodeCborData(element);
-                
+
                 attributes.push({
                     key: `${it}:${decodedElement}`,
                     value: decodedElement
