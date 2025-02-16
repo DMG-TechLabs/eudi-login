@@ -95,7 +95,7 @@ async function TransactionInit(transactionBody) {
 export async function main() {
     const config = new Config({
         AgeOver18: true,
-        HealthID: true,
+        HealthID: false,
         IBAN: false,
         Loyalty: true,
         mDL: false,
@@ -137,7 +137,7 @@ async function run(conf) {
     return decoded
 }
 
-// main();
+main();
 document.addEventListener("DOMContentLoaded", () => {
 
 window.addEventListener("message", async function(event) {
