@@ -23,6 +23,7 @@ export class MdocDecoder {
     }
 
     extractAttestationSingle(document) {
+        console.log("Document: ", document);
         const namespaces = document.issuerSigned.nameSpaces;
         const attributes = [];
 
@@ -30,7 +31,7 @@ export class MdocDecoder {
             const namespace = namespaces[it];
             namespace.forEach(element => {
                 const decodedElement = this.decodeCborData(element);
-                console.log("Decoded Element:", decodedElement);
+                
                 attributes.push({
                     key: `${it}:${decodedElement}`,
                     value: decodedElement
