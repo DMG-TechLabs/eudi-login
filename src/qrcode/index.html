@@ -78,44 +78,6 @@
         color: #333;
     }
 
-    #back-btn {
-        display: none;
-        position: absolute;
-        top: 80%;
-        left: 50%;
-        transform: translateY(-50%);
-        transform: translateX(-50%);
-    }
-
-    #back {
-        display: block;
-    }
-
-    #back {
-        padding: 12px 24px;
-        font-size: 18px;
-        font-weight: bold;
-        color: black;
-        background: #cfd3dc;
-        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
-        transition: all 0.3s ease-in-out;
-        letter-spacing: 1px;
-    }
-
-    #back:hover {
-        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Active (clicked) effect */
-    #back:active {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
     #eudi-icon {
         position: absolute;
         top: 17%;
@@ -134,19 +96,10 @@
         <div id="qrcode"></div>
     </div>
 
-    <div id="back-btn">
-        <button id="back" onclick="back()">Back</button>
-    </div>
-
     <script type="text/javascript">
-        function back() {
-            window.location.href = "../../demo/index.html";
-        }
-
-        setTimeout(() => {
+         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("qr-container").style.display = "block";
-            document.getElementById("back-btn").style.display = "block";
         }, 1500);
 
         async function start(){
@@ -159,7 +112,6 @@
         start()
 
         </script>
-<!-- <script type="module" src="../script.js"></script> -->
 
 </body>
 </html>

@@ -72,6 +72,19 @@ export class Config {
     }
 
     /**
+     * Validates whether the response contains all the necessary attestations
+     * @function validate
+     * @param {Array} decoded
+     * @returns boolean
+     */
+    validate(decoded) {
+        const count = Object.values(this.settings).filter(value => value === true).length;
+        const expected = decoded[0].attestations.length
+
+        return count == expected;
+    }
+
+    /**
      * Initializes the configuration by fetching attestations and generating a request.
      * @function init
      */

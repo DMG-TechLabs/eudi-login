@@ -20,6 +20,7 @@
 
     #indicator {
         margin-bottom: 30px;
+        color: #2f2f2f;
     }
 
     #container {
@@ -138,7 +139,7 @@
 
             <div class="buttons">
                 <div class="button">
-                    <button id="cancel" onclick="back()">Cancel</button>
+                    <button id="cancel" onclick="cancel()">Cancel</button>
                 </div>
 
                 <div class="button">
@@ -150,7 +151,7 @@
 
     <script type="text/javascript">
 
-        function back() {
+        function cancel() {
             <!----TODO---->
         }
 
@@ -176,7 +177,6 @@
 
 
         const config = JSON.parse(localStorage.getItem('config'));
-        console.log(config);
 
         showDivs(config);
 
