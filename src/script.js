@@ -1,3 +1,8 @@
+import { Config } from './modules/config.mjs' 
+import { Decoder } from './modules/decoder.mjs'
+import { poll } from './modules/polling.mjs';
+import { Request } from './modules/request.mjs';
+
 /** 
  * Backend proxy endpoint URL.
  * @constant {string}
