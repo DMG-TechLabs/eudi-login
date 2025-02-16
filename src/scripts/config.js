@@ -29,6 +29,12 @@ class Config {
     ){
         this.settings = config;
         this.scopes = [];
+        this.request = null;
+    }
+
+    async init() {
+        await this.getAttestations();
+        this.request = this.generateRequest();
     }
 
     async fetchAttestations() {

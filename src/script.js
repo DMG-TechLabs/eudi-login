@@ -96,17 +96,15 @@ async function main() {
         Reservation: false,
         TaxNumber: false
     })
-    await config.getAttestations();
-    console.log(config.scopes);
+    await config.init();
 
-    const requestBody = config.generateRequest();
-    const transaction = await TransactionInit(requestBody);
+    const transaction = await TransactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     paintQR(uri);
 
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
     const response = await poll(pollingUrl)
-    console.log(response.vp_token);
+    console.log(response);
 }
 
 main();
