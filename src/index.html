@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
-<script type="module" src="../extern/qrcode.js"></script>
-<script type="module" src="../script.js"></script>
+<script type="module" src="./extern/qrcode.js"></script>
+<script type="module" src="./script.js"></script>
 <style>
     #confirm-to-share-data {
         display: flex;
@@ -128,53 +128,13 @@
 </style>
 <body>
     <div id="container">
-        <img id="eudi-icon" src="../assets/ic-logo.svg">
+        <img id="eudi-icon" src="./assets/ic-logo.svg">
         <div id="confirm-to-share-data">
             <span id="indicator">
                 <h2>By continuing, you accept to share the following data</h2>
             </span>
 
-            <div id="documents">
-                <!--<div class="document-box">
-                    <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
-                </div>
-                <div class="document-box">
-                    <span class="document"><h3>mDL</h3></span>
-                </div>
-                <div class="document-box">
-                    <span class="document"><h3>IBAN</h3></span>
-                </div>
-                <div class="document-box">
-                    <span class="document"><h3>Loyalty</h3></span>
-                </div>
-                <div class="document-box">
-                    <span class="document"><h3>Photo ID</h3></span>
-                </div>
-
-                <div class="document-box">
-                    <span class="document"><i class="fas fa-ban"></i><h3>Age over 18</h3></span>
-                </div>
-
-                <div class="document-box">
-                    <span class="document"><h3>Health ID</h3></span>
-                </div>
-
-                <div class="document-box">
-                    <span class="document"><h3>Reservation</h3></span>
-                </div>
-
-                <div class="document-box">
-                    <span class="document"><h3>Tax Number</h3></span>
-                </div>
-
-                <div class="document-box">
-                    <span class="document"><h3>Power Of Representation</h3></span>
-                </div>
-
-                <div class="document-box">
-                    <span class="document"><h3>Pseudonym Deferred</h3></span>
-                </div>-->
-            </div>
+            <div id="documents"></div>
             
             <div class="buttons">
                 <div class="button">
@@ -203,9 +163,8 @@
         console.log(config);
         function showDivs(config) {
             const container = document.getElementById("documents");
-            container.innerHTML = ""; // Clear existing divs
+            container.innerHTML = "";
 
-            // Map of field names to user-friendly labels
             const fieldNames = {
                 AgeOver18: "Age Over 18",
                 HealthID: "Health ID",
