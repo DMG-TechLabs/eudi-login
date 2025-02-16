@@ -194,6 +194,9 @@ window.addEventListener("message", async function(event) {
             return;
         }
         localStorage.setItem('site', site);
+        localStorage.setItem('config', JSON.stringify(data));
+
+        showDivs(data);
         // const config = new Config(data);
         // config.init();
         //
@@ -203,9 +206,9 @@ window.addEventListener("message", async function(event) {
         //
         // const pollingUrl = buildPollingUrl(transaction.transaction_id);
         // const response = await poll(pollingUrl);
-        const decoded = await run(data);
-        console.log(decoded)
-        window.opener.postMessage(decoded, site);
+        // const decoded = await run(data);
+        // console.log(decoded)
+        // window.opener.postMessage(decoded, site);
         // window.close();
     }, false);
 });
