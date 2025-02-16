@@ -14,8 +14,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-left: 100px;
+        position: absolute;
+        left: 55%;
+        background: white;
         padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        margin-left: 100px;
+        width: 500px;
     }
 
     #indicator {
@@ -55,8 +62,7 @@
     .buttons {
         display: flex;
         justify-content: center;
-        position: absolute;
-        bottom: 20%;
+        margin-top: 30px;
     }
 
     .button {
@@ -122,29 +128,31 @@
     }
 
     #eudi-icon {
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translate(-50%, -50%);
         align-items: center;
         width: 800px;
         height: 400px;
     }
 </style>
 <body>
-    <div id="container">
-        <img id="eudi-icon" src="./assets/ic-logo.svg">
-        <div id="confirm-to-share-data">
-            <span id="indicator">
-                <h2>By continuing, you accept to share the following data</h2>
-            </span>
+    <img id="eudi-icon" src="./assets/ic-logo.svg">
+    <div id="confirm-to-share-data">
+        <span id="indicator">
+            <h2>By continuing, you accept to share the following data</h2>
+        </span>
 
-            <div id="documents"></div>
+        <div id="documents"></div>
 
-            <div class="buttons">
-                <div class="button">
-                    <button id="cancel" onclick="cancel()">Cancel</button>
-                </div>
+        <div class="buttons">
+            <div class="button">
+                <button id="cancel" onclick="cancel()">Cancel</button>
+            </div>
 
-                <div class="button">
-                    <button id="continue" onclick="generateQRCode()">Continue</button>
-                </div>
+            <div class="button">
+                <button id="continue" onclick="generateQRCode()">Continue</button>
             </div>
         </div>
     </div>
