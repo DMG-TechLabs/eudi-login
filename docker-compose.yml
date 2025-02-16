@@ -1,3 +1,7 @@
+networks:
+  auth_network:
+  demo_network:
+
 services:
   eu-login-alpine:
     build: .
@@ -16,7 +20,8 @@ services:
       #- SERVER_ADMIN=admin@example.xyz
       - TZ=Europe/Athens
       - PHP_MEMORY_LIMIT=512M
-
+    networks:
+      - auth_network
 
   eu-login-demo_app:
     build: .
@@ -37,4 +42,6 @@ services:
       #- SERVER_ADMIN=admin@example.xyz
       - TZ=Europe/Athens
       - PHP_MEMORY_LIMIT=512M
+    networks:
+      - demo_network
 
