@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
-<script src="extern/qrcode.js"></script>
-<script type="module" src="script.js"></script>
+<script type="module" src="../extern/qrcode.js"></script>
+<script type="module" src="../script.js"></script>
 <style>
     #confirm-to-share-data {
         display: flex;
@@ -18,6 +18,10 @@
         padding: 20px;
     }
 
+    #indicator {
+        margin-bottom: 30px;
+    }
+
     #container {
         display: flex;
         justify-content: center;
@@ -25,10 +29,6 @@
 
     #documents {
         display: flex;
-        /*position: absolute;
-        top: 20%;
-        left: 30%;
-        right: 30%;*/
         flex-wrap: wrap;
     }
 
@@ -51,8 +51,44 @@
         gap: 8px;
     }
 
-    #continue-btn {
-        margin-top: 20px;
+    .buttons {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 20%;
+    }
+
+    .button {
+        margin-left: 20px;
+    }
+
+    #cancel {
+        display: block;
+    }
+
+    #cancel {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        background: #cfd3dc;
+        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #cancel:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #cancel:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     #continue {
@@ -63,11 +99,11 @@
         padding: 12px 24px;
         font-size: 18px;
         font-weight: bold;
-        color: black;
+        color: white;
         background: #cfd3dc;
-        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        background: linear-gradient(45deg, #032e8a, #3c70df);
         border: none;
-        border-radius: 8px;
+        border-radius: 5px;
         cursor: pointer;
         /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
         transition: all 0.3s ease-in-out;
@@ -84,77 +120,22 @@
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    #qr-container {
-        display: none;
-        background: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-    }
-
-    #qr-container h2 {
-        font-size: 20px;
-        margin-bottom: 15px;
-        color: #333;
-    }
-
-    #back-btn {
-        display: none;
-        position: absolute;
-        top: 72%;
-        left: 50%;
-        transform: translateY(-50%);
-        transform: translateX(-50%);
-    }
-
-    #back {
-        display: block;
-    }
-
-    #back {
-        padding: 12px 24px;
-        font-size: 18px;
-        font-weight: bold;
-        color: black;
-        background: #cfd3dc;
-        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
-        transition: all 0.3s ease-in-out;
-        letter-spacing: 1px;
-    }
-
-    #back:hover {
-        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Active (clicked) effect */
-    #back:active {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
     #eudi-icon {
         align-items: center;
         width: 800px;
         height: 400px;
     }
 </style>
-
 <body>
-
     <div id="container">
-        <img id="eudi-icon" src="./assets/ic-logo.svg">
+        <img id="eudi-icon" src="../assets/ic-logo.svg">
         <div id="confirm-to-share-data">
             <span id="indicator">
                 <h2>By continuing, you accept to share the following data</h2>
             </span>
 
             <div id="documents">
-                <div class="document-box">
+                <!--<div class="document-box">
                     <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
                 </div>
                 <div class="document-box">
@@ -192,39 +173,34 @@
 
                 <div class="document-box">
                     <span class="document"><h3>Pseudonym Deferred</h3></span>
-                </div>
+                </div>-->
             </div>
-
-            <div id="continue-btn">
-                <button id="continue" onclick="generateQRCode()">Continue</button>
+            
+            <div class="buttons">
+                <div class="button">
+                    <button id="cancel" onclick="back()">Cancel</button>
+                </div>
+    
+                <div class="button">
+                    <button id="continue" onclick="generateQRCode()">Continue</button>
+                </div>
             </div>
         </div>
 
 
     </div>
 
-    <div id="qr-container">
-        <h2>Scan This QR Code</h2>
-        <div id="qrcode"></div>
-    </div>
-
-    <div id="back-btn">
-        <button id="back" onclick="back()">Back</button>
-    </div>
-
     <script type="text/javascript">
-        function generateQRCode() {
-            document.getElementById("confirm-to-share-data").style.display = "none"
-            document.getElementById("documents").style.display = "none"
-            document.getElementById("continue-btn").style.display = "none"
-            document.getElementById("qr-container").style.display = "block";
-            document.getElementById("back-btn").style.display = "block";
-        }
-
         function back() {
-            window.location.href = "./login.html";
+            window.location.href = "../../demo/login/index.html";
         }
 
+        function generateQRCode() {
+            window.location.href = "../qrcode/index.html";
+        }
+
+        const config = JSON.parse(localStorage.getItem('config'));
+        console.log(config);
         function showDivs(config) {
             const container = document.getElementById("documents");
             container.innerHTML = ""; // Clear existing divs
@@ -248,7 +224,7 @@
             Object.entries(config).forEach(([key, value]) => {
                 if (value == true) {
                     let div = document.createElement("div");
-                    div.className = "field";
+                    div.className = "document-box";
                     div.textContent = `${fieldNames[key]}`;
                     div.style.display = "block";
                     container.appendChild(div);

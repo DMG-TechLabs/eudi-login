@@ -94,13 +94,13 @@ async function TransactionInit(transactionBody) {
 
 async function main() {
     const config = new Config({
-        AgeOver18: false,
+        AgeOver18: true,
         HealthID: false,
         IBAN: false,
-        Loyalty: false,
+        Loyalty: true,
         mDL: false,
         MSISDN: false,
-        PhotoId: false,
+        PhotoId: true,
         PID: true,
         PowerOfRepresentation: false,
         PseudonymDeferred: false,
@@ -117,6 +117,8 @@ async function main() {
     const response = await poll(pollingUrl)
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
+    
+    localStorage.setItem('config', JSON.stringify(config.settings));
 }
 
 main();

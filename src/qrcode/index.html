@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUDI Login</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
+</head>
+<script src="../modules/config.mjs"></script>
+<script src="../modules/decoder.mjs"></script>
+<script src="../modules/request.mjs"></script>
+<script src="../modules/polling.mjs"></script>
+<script src="../extern/cbor.js"></script>
+<script src="../extern/qrcode.js"></script>
+<script type="module" src="../script.js"></script>
+<style>
+    .loader {
+        width: 48px;
+        height: 48px;
+        display: block;
+        margin:15px auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #FFF;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+    .loader::after,
+    .loader::before {
+        content: '';  
+        box-sizing: border-box;
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        left: 50%;
+        transform: scale(0.5) translate(0, 0);
+        background-color: #e9f66a;
+        border-radius: 50%;
+        animation: animloader 1s infinite ease-in-out;
+    }
+
+    .loader::before {
+        background-color: #1238ea;
+        transform: scale(0.5) translate(-48px, -48px);
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    } 
+    @keyframes animloader {
+        50% {
+            transform: scale(1) translate(-50%, -50%);
+        }
+    }
+    
+    #qr-container {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        margin-top: 50px;
+        align-items: center;
+    }
+
+    #qr-container h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    #back-btn {
+        display: none;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-50%);
+    }
+
+    #back {
+        display: block;
+    }
+
+    #back {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        background: #cfd3dc;
+        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #back:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #back:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #eudi-icon {
+        position: absolute;
+        top: 17%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        align-items: center;
+        width: 700px; 
+        height: 300px;
+    }
+</style>
+<body>
+    <span class="loader" id="loader"></span>
+    <img id="eudi-icon" src="../assets/ic-logo.svg">
+    <div id="qr-container">
+        <h2>Scan This QR Code<br>with your EUDI Wallet</h2>
+        <div id="qrcode"></div>
+    </div>
+
+    <div id="back-btn">
+        <button id="back" onclick="back()">Back</button>
+    </div>
+
+    <script type="text/javascript">
+        function back() {
+            window.location.href = "../../demo/index.html";
+        }
+
+        setTimeout(() => {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("qr-container").style.display = "block";
+            document.getElementById("back-btn").style.display = "block";
+        }, 1500);
+    </script>
+</body>
+</html>

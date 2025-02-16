@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../src/style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
+    <script src="eudi-login.js"></script>
 </head>
 <style>
     .login-btns {
@@ -33,7 +34,7 @@
         color: white;
         background: linear-gradient(45deg, #032e8a, #3c70df);
         border: none;
-        border-radius: 8px;
+        border-radius: 5px;
         cursor: pointer;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease-in-out;
@@ -63,7 +64,7 @@
         color: black;
         /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
         border: none;
-        border-radius: 8px;
+        border-radius: 5px;
         border-color: black;
         cursor: pointer;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -85,7 +86,7 @@
 <body>
     <div class="login-btns">
         <div class="login-btn">
-            <button id="eudi-login" onclick="navigateToConfirmation()">Login with EU Login</button>
+                <button id="eudi-login" onclick="login({AgeOver18: false, HealthID: false, IBAN: false, Loyalty: false, mDL: false, MSISDN: false, PhotoId: false, PID: true, PowerOfRepresentation: false, PseudonymDeferred: false, Reservation: false, TaxNumber: false})">Login with EU Login</button>
         </div>
 
         <div class="login-btn">
@@ -95,7 +96,8 @@
 
     <script type="text/javascript">
         function navigateToConfirmation() {
-            window.location.href = "./confirmation.html";
+            window.location.href = "../../src/shared-data/index.html";
         }
     </script>
 </body>
+</html>

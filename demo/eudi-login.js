@@ -13,7 +13,7 @@ config_t = {
     TaxNumber: false
 }
 
-const AUTH_URL = "https://your-auth-portal.com";
+const AUTH_URL = "http://localhost:80/";
 
 function login(config) {
     const authWindow = window.open(AUTH_URL, "_blank");
