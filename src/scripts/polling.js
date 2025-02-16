@@ -1,6 +1,7 @@
 /**
  * Polls a given URL at 2-second intervals until a response is received or the maximum attempts are reached.
  *
+ * @function poll
  * @param {string} url - The URL to poll for a response.
  * @returns {Promise<any>} A promise that resolves with the response data if successful, or rejects if max attempts are reached.
  *

@@ -4,6 +4,7 @@
 class Request {
     /**
      * Creates a new Request instance.
+     * @constructor
      * @param {string} baseUrl - The base URL for API requests.
      * @param {Object} [defaultHeaders={}] - Default headers to include in requests.
      */
@@ -19,6 +20,7 @@ class Request {
 
     /**
      * Makes an HTTP request.
+     * @function send
      * @param {string} endpoint - The API endpoint (relative to base URL).
      * @param {string} method - The HTTP method (GET, POST, PUT, DELETE, etc.).
      * @param {Object} [body=null] - The request body for POST/PUT requests.
@@ -51,6 +53,7 @@ class Request {
 
     /**
      * Makes a GET request.
+     * @function get
      * @param {string} endpoint - The API endpoint.
      * @param {Object} [headers={}] - Additional headers.
      * @returns {Promise<Object>} - The JSON response.
@@ -61,6 +64,7 @@ class Request {
 
     /**
      * Makes a POST request.
+     * @function post
      * @param {string} endpoint - The API endpoint.
      * @param {Object} body - The request body.
      * @param {Object} [headers={}] - Additional headers.
@@ -72,6 +76,7 @@ class Request {
 
     /**
      * Makes a PUT request.
+     * @function put
      * @param {string} endpoint - The API endpoint.
      * @param {Object} body - The request body.
      * @param {Object} [headers={}] - Additional headers.
@@ -83,6 +88,7 @@ class Request {
 
     /**
      * Makes a DELETE request.
+     * @function delete
      * @param {string} endpoint - The API endpoint.
      * @param {Object} [headers={}] - Additional headers.
      * @returns {Promise<Object>} - The JSON response.
