@@ -109,7 +109,7 @@ async function main() {
     })
     await config.init();
     localStorage.setItem('config', JSON.stringify(config.settings));
-
+    
     const transaction = await TransactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     paintQR(uri);
