@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
-<script src="scripts/config.js"></script>
-<script src="scripts/request.js"></script>
-<script src="scripts/polling.js"></script>
-<script src="extern/qrcode.js"></script>
-<script src="script.js"></script>
+<script src="../../src/modules/config.mjs"></script>
+<script src="../../src/modules/request.js"></script>
+<script src="../../src/modules/polling.js"></script>
+<script src="../../src/extern/qrcode.js"></script>
+<script src="../../src/script.js"></script>
 <style>
     .loader {
         width: 48px;
@@ -131,7 +131,7 @@
 </style>
 <body>
     <span class="loader" id="loader"></span>
-    <img id="eudi-icon" src="./assets/ic-logo.svg">
+    <img id="eudi-icon" src="../assets/ic-logo.svg">
     <div id="qr-container">
         <h2>Scan This QR Code<br>with your EUDI Wallet</h2>
         <div id="qrcode"></div>
@@ -143,7 +143,7 @@
 
     <script type="text/javascript">
         function back() {
-            window.location.href = "./login.html";
+            window.location.href = "../login/index.html";
         }
 
         setTimeout(() => {
