@@ -173,7 +173,6 @@ export async function start(){
 }
 
 
-// main();
 document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("message", async function(event) {
@@ -192,19 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('config', JSON.stringify(data));
 
         showDivs(data);
-        // const config = new Config(data);
-        // config.init();
-        //
-        // const transaction = await TransactionInit(config.request);
-        // const uri = buildQRUri(transaction.client_id, transaction.request_uri);
-        // paintQR(uri);
-        //
-        // const pollingUrl = buildPollingUrl(transaction.transaction_id);
-        // const response = await poll(pollingUrl);
-        // const decoded = await run(data);
-        // console.log(decoded)
-        // window.opener.postMessage(decoded, site);
-        // window.close();
     }, false);
 });
 
