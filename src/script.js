@@ -92,7 +92,7 @@ async function TransactionInit(transactionBody) {
     }
 }
 
-async function main() {
+export async function main() {
     const config = new Config({
         AgeOver18: true,
         HealthID: true,
@@ -120,5 +120,4 @@ async function main() {
     console.log(decoded)
 }
 
-main();
-
+window.main = main;
