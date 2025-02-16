@@ -51,9 +51,44 @@
         gap: 8px;
     }
 
-    #continue-btn {
+    .buttons {
+        display: flex;
+        justify-content: center;
         position: absolute;
         bottom: 20%;
+    }
+
+    .button {
+        margin-left: 20px;
+    }
+
+    #cancel {
+        display: block;
+    }
+
+    #cancel {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        background: #cfd3dc;
+        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #cancel:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #cancel:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     #continue {
@@ -64,9 +99,9 @@
         padding: 12px 24px;
         font-size: 18px;
         font-weight: bold;
-        color: black;
+        color: white;
         background: #cfd3dc;
-        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        background: linear-gradient(45deg, #032e8a, #3c70df);
         border: none;
         border-radius: 8px;
         cursor: pointer;
@@ -141,8 +176,14 @@
                 </div>-->
             </div>
             
-            <div id="continue-btn">
-                <button id="continue" onclick="generateQRCode()">Continue</button>
+            <div class="buttons">
+                <div class="button">
+                    <button id="cancel" onclick="back()">Cancel</button>
+                </div>
+    
+                <div class="button">
+                    <button id="continue" onclick="generateQRCode()">Continue</button>
+                </div>
             </div>
         </div>
     
@@ -150,6 +191,10 @@
     </div>
 
     <script type="text/javascript">
+        function back() {
+            window.location.href = "./login.html";
+        }
+
         function generateQRCode() {
             window.location.href = "./qrcode.html";
         }
@@ -177,7 +222,7 @@
             Object.entries(config).forEach(([key, value]) => {
                 if (value == true) { 
                     let div = document.createElement("div");
-                    div.className = "field";
+                    div.className = "document-box";
                     div.textContent = `${fieldNames[key]}`;
                     div.style.display = "block";
                     container.appendChild(div);
