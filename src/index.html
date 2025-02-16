@@ -139,7 +139,7 @@
 
             <div class="buttons">
                 <div class="button">
-                    <button id="cancel" onclick="back()">Cancel</button>
+                    <button id="cancel" onclick="cancel()">Cancel</button>
                 </div>
 
                 <div class="button">
@@ -151,7 +151,7 @@
 
     <script type="text/javascript">
 
-        function back() {
+        function cancel() {
             <!----TODO---->
         }
 
@@ -160,7 +160,7 @@
         }
 
         const config = JSON.parse(localStorage.getItem('config'));
-        console.log(config);
+
         function showDivs(config) {
             const container = document.getElementById("documents");
             container.innerHTML = "";
