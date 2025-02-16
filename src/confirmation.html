@@ -14,18 +14,24 @@
 <script src="script.js"></script>
 <style>
     #confirm-to-share-data {
-        position: absolute;
-        top: 10%;
-        left: 50%;
-        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 100px;
+        padding: 20px;
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
     }
 
     #documents {
         display: flex;
-        position: absolute;
+        /*position: absolute;
         top: 20%;
         left: 30%;
-        right: 30%;
+        right: 30%;*/
         flex-wrap: wrap;
     }
 
@@ -49,12 +55,7 @@
     }
 
     #continue-btn {
-        display: none;
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translateY(-50%);
-        transform: translateX(-50%);
+        margin-top: 20px;
     }
 
     #continue {
@@ -138,57 +139,70 @@
         transform: scale(0.95);
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
+
+    #eudi-icon {
+        width: 900px; 
+        height: 400px;
+    }
 </style>
 
 <body>
-    <span id="confirm-to-share-data">
-        <h2>By continuing, you accept to share the following data</h2>
-    </span>
+    
+    <div id="container">
+        <img id="eudi-icon" src="./assets/ic-logo.svg">
+        <div id="confirm-to-share-data">
+            <span id="indicator">
+                <h2>By continuing, you accept to share the following data</h2>
+            </span>
+        
+            <div id="documents">
+                <div class="document-box">
+                    <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>mDL</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>IBAN</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>Loyalty</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>Photo ID</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><i class="fas fa-ban"></i><h3>Age over 18</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Health ID</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Reservation</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Tax Number</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Power Of Representation</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Pseudonym Deferred</h3></span>
+                </div>
+            </div>
+            
+            <div id="continue-btn">
+                <button id="continue" onclick="generateQRCode()">Continue</button>
+            </div>
+        </div>
+    
 
-    <div id="documents">
-        <div class="document-box">
-            <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
-        </div>
-        <div class="document-box">
-            <span class="document"><h3>mDL</h3></span>
-        </div>
-        <div class="document-box">
-            <span class="document"><h3>IBAN</h3></span>
-        </div>
-        <div class="document-box">
-            <span class="document"><h3>Loyalty</h3></span>
-        </div>
-        <div class="document-box">
-            <span class="document"><h3>Photo ID</h3></span>
-        </div>
-
-        <div class="document-box">
-            <span class="document"><i class="fas fa-ban"></i><h3>Age over 18</h3></span>
-        </div>
-
-        <div class="document-box">
-            <span class="document"><h3>Health ID</h3></span>
-        </div>
-
-        <div class="document-box">
-            <span class="document"><h3>Reservation</h3></span>
-        </div>
-
-        <div class="document-box">
-            <span class="document"><h3>Tax Number</h3></span>
-        </div>
-
-        <div class="document-box">
-            <span class="document"><h3>Power Of Representation</h3></span>
-        </div>
-
-        <div class="document-box">
-            <span class="document"><h3>Pseudonym Deferred</h3></span>
-        </div>
-    </div>
-
-    <div id="continue-btn">
-        <button id="continue" onclick="generateQRCode()">Continue</button>
     </div>
 
     <div id="qr-container">
@@ -201,15 +215,6 @@
     </div>
 
     <script type="text/javascript">
-        import { getAttestations } from './script.js';
-
-        function showConfirmationForSharingData() {
-            document.getElementById("login").style.display = "none";
-            document.getElementById("confirm-to-share-data").style.display = "block";
-            document.getElementById("documents").style.display = "flex";
-            document.getElementById("continue-btn").style.display = "block";
-        }
-
         function generateQRCode() {
             document.getElementById("confirm-to-share-data").style.display = "none"
             document.getElementById("documents").style.display = "none"
@@ -219,9 +224,7 @@
         }
 
         function back() {
-            document.getElementById("login").style.display = "block"
-            document.getElementById("qr-container").style.display = "none";
-            document.getElementById("back-btn").style.display = "none";
+            window.location.href = "./login.html";
         }
 
         function showDivs(config) {
