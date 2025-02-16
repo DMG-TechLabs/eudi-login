@@ -15,7 +15,7 @@ config_t = {
 
 const AUTH_URL = "http://localhost";
 
-function login(config) {
+function login(config, target) {
     // const authWindow = window.open(AUTH_URL, "_blank");
     //
     // authWindow.onload = () => {
@@ -37,14 +37,14 @@ function login(config) {
         console.log("Received Data:", event.data);
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
-        authWindow.close();
+        // authWindow.close();
     }, { once: true });
 
 
     const authWindow = window.open(AUTH_URL, "_blank");
 
     const messageData = {
-        site: window.location.origin,
+        site: target,
         data: config
     };
 

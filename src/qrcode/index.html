@@ -97,7 +97,7 @@
     </div>
 
     <script type="text/javascript">
-         setTimeout(() => {
+        setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("qr-container").style.display = "block";
         }, 1500);
@@ -105,9 +105,18 @@
         async function start(){
             const site = localStorage.getItem('site');
             const data = JSON.parse(localStorage.getItem('config'));
-            const decoded = await run(data);
-            console.log(decoded)
-            window.opener.postMessage(decoded, site);
+            const result = await run(data);
+            console.log(result)
+
+            const validData = result.conf.validate(result.data);
+            if(validData){
+                window.opener.postMessage(result.data, site);
+                window.close();
+            }
+            else{
+                window.opener.postMessage("Missing attestations", site);
+                window.alert("Not all requied files available. Please try again.")
+            }
         }
         document.addEventListener("DOMContentLoaded", () => {
             start()

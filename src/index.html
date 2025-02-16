@@ -167,26 +167,28 @@
             window.location.href = "./qrcode/index.html";
         }
 
-
-    localStorage.setItem('config', JSON.stringify({
-        AgeOver18: false,
-        HealthID: false,
-        IBAN: false,
-        Loyalty: false,
-        mDL: false,
-        MSISDN: false,
-        PhotoId: false,
-        PID: false,
-        PowerOfRepresentation: false,
-        PseudonymDeferred: false,
-        Reservation: false,
-        TaxNumber: false
-    } ));
-
-
         const config = JSON.parse(localStorage.getItem('config'));
+        if (config != null) {
+            showDivs(config);
+        }else{
+            const startConfig = {
+                AgeOver18: false,
+                HealthID: false,
+                IBAN: false,
+                Loyalty: false,
+                mDL: false,
+                MSISDN: false,
+                PhotoId: false,
+                PID: false,
+                PowerOfRepresentation: false,
+                PseudonymDeferred: false,
+                Reservation: false,
+                TaxNumber: false
+            }
 
-        showDivs(config);
+            localStorage.setItem('config', JSON.stringify(startConfig));
+            showDivs(startConfig);
+        }
 
     </script>
 </body>

@@ -96,7 +96,6 @@ async function TransactionInit(transactionBody) {
 
 export function showDivs(config) {
             const container = document.getElementById("documents");
-    if (container) {
         container.innerHTML = "";
 
             const fieldNames = {
@@ -107,7 +106,7 @@ export function showDivs(config) {
                 mDL: "Mobile Driver's License",
                 MSISDN: "Phone Number",
                 PhotoId: "Photo ID",
-                PID: "Personal ID",
+             PID: "Personal ID",
                 PowerOfRepresentation: "Power of Representation",
                 PseudonymDeferred: "Pseudonym Deferred",
                 Reservation: "Reservation",
@@ -123,7 +122,6 @@ export function showDivs(config) {
                     container.appendChild(div);
                 }
             });
-    }
 }
 
 
@@ -160,7 +158,7 @@ export async function main() {
 }
 
 export async function run(conf) {
-    showDivs(conf);
+    // showDivs(conf);
     const config = new Config(conf)
     if(config.countActive() == 0) return null;
     await config.init();
@@ -176,7 +174,7 @@ export async function run(conf) {
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
 
-    return decoded
+    return {data: decoded, conf: config}
 }
 
 // main();
