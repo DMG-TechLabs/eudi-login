@@ -162,6 +162,7 @@ export async function main() {
 export async function run(conf) {
     showDivs(conf);
     const config = new Config(conf)
+    if(config.countActive() == 0) return null;
     await config.init();
     localStorage.setItem('config', JSON.stringify(config.settings));
 

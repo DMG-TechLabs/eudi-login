@@ -71,6 +71,10 @@ export class Config {
         this.request = null;
     }
 
+    countActive() {
+        return Object.values(this.settings).filter(value => value === true).length;
+    }
+
     /**
      * Validates whether the response contains all the necessary attestations
      * @function validate
@@ -78,7 +82,7 @@ export class Config {
      * @returns boolean
      */
     validate(decoded) {
-        const count = Object.values(this.settings).filter(value => value === true).length;
+        const count = this.countActive();
         const expected = decoded[0].attestations.length
 
         return count == expected;
