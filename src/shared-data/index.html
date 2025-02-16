@@ -74,7 +74,7 @@
         background: #cfd3dc;
         /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
         border: none;
-        border-radius: 8px;
+        border-radius: 5px;
         cursor: pointer;
         /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
         transition: all 0.3s ease-in-out;
@@ -103,7 +103,7 @@
         background: #cfd3dc;
         background: linear-gradient(45deg, #032e8a, #3c70df);
         border: none;
-        border-radius: 8px;
+        border-radius: 5px;
         cursor: pointer;
         /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
         transition: all 0.3s ease-in-out;
@@ -199,7 +199,9 @@
             window.location.href = "../qrcode/index.html";
         }
 
-        /*function showDivs(config) {
+        const config = JSON.parse(localStorage.getItem('config'));
+        console.log(config);
+        function showDivs(config) {
             const container = document.getElementById("documents");
             container.innerHTML = ""; // Clear existing divs
 
@@ -230,7 +232,7 @@
             });
         }
 
-        showDivs(config);*/
+        showDivs(config);
 
     </script>
 </body>
