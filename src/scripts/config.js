@@ -115,11 +115,11 @@ class Config {
         request.presentation_definition.id = crypto.randomUUID()
         request.nonce = crypto.randomUUID()
         let i = 0
-        for (const attestation in this.scopes) {
+        for (const attestation of this.scopes) {
             const fields = []
-            for (const claim in attestation.claims) {
+            for (const claim of attestation.claims) {
                 fields.push({
-                    "path": ["$['"+attestation.scope+"']['"+attestation.claims[claim]+"']"],
+                    "path": ["$['"+attestation.scope+"']['"+claim+"']"],
                     "intent_to_retain": false
                 })
             }
