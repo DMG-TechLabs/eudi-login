@@ -40,6 +40,11 @@ function buildQRUri(client_id, request_uri) {
     return decodeAll(`eudi-openid4vp://?client_id=${client_id}&request_uri=${request_uri}`);
 }
 
+/**
+ * Builds the request URL, used when polling
+ * @param {string} transaction_id - The transaction identifier.
+ * @returns {string} The endpoint.
+ */
 function buildPollingUrl(transaction_id) {
     return `${PROXY}/${PRESENTATIONS_ENDPOINT}/${transaction_id}`
 }
