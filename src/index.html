@@ -158,37 +158,25 @@
             window.location.href = "./qrcode/index.html";
         }
 
+
+    localStorage.setItem('config', JSON.stringify({
+        AgeOver18: false,
+        HealthID: false,
+        IBAN: false,
+        Loyalty: false,
+        mDL: false,
+        MSISDN: false,
+        PhotoId: false,
+        PID: false,
+        PowerOfRepresentation: false,
+        PseudonymDeferred: false,
+        Reservation: false,
+        TaxNumber: false
+    } ));
+
+
         const config = JSON.parse(localStorage.getItem('config'));
         console.log(config);
-        function showDivs(config) {
-            const container = document.getElementById("documents");
-            container.innerHTML = "";
-
-            const fieldNames = {
-                AgeOver18: "Age Over 18",
-                HealthID: "Health ID",
-                IBAN: "Bank Account (IBAN)",
-                Loyalty: "Loyalty Card",
-                mDL: "Mobile Driver's License",
-                MSISDN: "Phone Number",
-                PhotoId: "Photo ID",
-                PID: "Personal ID",
-                PowerOfRepresentation: "Power of Representation",
-                PseudonymDeferred: "Pseudonym Deferred",
-                Reservation: "Reservation",
-                TaxNumber: "Tax Number"
-            };
-
-            Object.entries(config).forEach(([key, value]) => {
-                if (value == true) {
-                    let div = document.createElement("div");
-                    div.className = "document-box";
-                    div.textContent = `${fieldNames[key]}`;
-                    div.style.display = "block";
-                    container.appendChild(div);
-                }
-            });
-        }
 
         showDivs(config);
 

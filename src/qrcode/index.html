@@ -148,7 +148,17 @@
             document.getElementById("qr-container").style.display = "block";
             document.getElementById("back-btn").style.display = "block";
         }, 1500);
-    </script>
+
+        async function start(){
+            const site = localStorage.getItem('site');
+            const data = JSON.parse(localStorage.getItem('config'));
+            const decoded = await run(data);
+            console.log(decoded)
+            window.opener.postMessage(decoded, site);
+        }
+        start()
+
+        </script>
 <!-- <script type="module" src="../script.js"></script> -->
 
 </body>

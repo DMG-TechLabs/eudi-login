@@ -92,8 +92,42 @@ async function TransactionInit(transactionBody) {
     }
 }
 
+
+export function showDivs(config) {
+            const container = document.getElementById("documents");
+    if (container) {
+        container.innerHTML = "";
+
+            const fieldNames = {
+                AgeOver18: "Age Over 18",
+                HealthID: "Health ID",
+                IBAN: "Bank Account (IBAN)",
+                Loyalty: "Loyalty Card",
+                mDL: "Mobile Driver's License",
+                MSISDN: "Phone Number",
+                PhotoId: "Photo ID",
+                PID: "Personal ID",
+                PowerOfRepresentation: "Power of Representation",
+                PseudonymDeferred: "Pseudonym Deferred",
+                Reservation: "Reservation",
+                TaxNumber: "Tax Number"
+            };
+
+            Object.entries(config).forEach(([key, value]) => {
+                if (value == true) {
+                    let div = document.createElement("div");
+                    div.className = "document-box";
+                    div.textContent = `${fieldNames[key]}`;
+                    div.style.display = "block";
+                    container.appendChild(div);
+                }
+            });
+    }
+}
+
+
 export async function main() {
-    const config = new Config({
+    const config = {
         AgeOver18: true,
         HealthID: false,
         IBAN: false,
@@ -106,23 +140,27 @@ export async function main() {
         PseudonymDeferred: false,
         Reservation: false,
         TaxNumber: true
-    })
-    await config.init();
-    localStorage.setItem('config', JSON.stringify(config.settings));
-
-    const transaction = await TransactionInit(config.request);
-    const uri = buildQRUri(transaction.client_id, transaction.request_uri);
-    paintQR(uri);
-
-    const pollingUrl = buildPollingUrl(transaction.transaction_id);
-    const response = await poll(pollingUrl)
-    const decoded = await new MdocDecoder().run(response)
+    }
+    // await config.init();
+    // localStorage.setItem('config', JSON.stringify(config.settings));
+    //
+    // const transaction = await TransactionInit(config.request);
+    // const uri = buildQRUri(transaction.client_id, transaction.request_uri);
+    // paintQR(uri);
+    //
+    // const pollingUrl = buildPollingUrl(transaction.transaction_id);
+    // const response = await poll(pollingUrl)
+    // const decoded = await new MdocDecoder().run(response)
+    const decoded = await run(config);
     console.log(decoded)
 }
 
-async function run(conf) {
+export async function run(conf) {
+    showDivs(conf);
     const config = new Config(conf)
     await config.init();
+    localStorage.setItem('config', JSON.stringify(config.settings));
+
 
     const transaction = await TransactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
@@ -133,11 +171,10 @@ async function run(conf) {
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
 
-    localStorage.setItem('config', JSON.stringify(config.settings));
     return decoded
 }
 
-main();
+// main();
 document.addEventListener("DOMContentLoaded", () => {
 
 window.addEventListener("message", async function(event) {
@@ -152,7 +189,7 @@ window.addEventListener("message", async function(event) {
             console.error("Invalid site:", site);
             return;
         }
-
+        localStorage.setItem('site', site);
         // const config = new Config(data);
         // config.init();
         //
@@ -170,3 +207,5 @@ window.addEventListener("message", async function(event) {
 });
 
 window.main = main;
+window.run = run;
+window.showDivs = showDivs;
