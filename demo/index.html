@@ -88,7 +88,7 @@
 <body>
     <div class="login-btns">
         <div class="login-btn">
-                <button id="eudi-login" onclick="login({AgeOver18: true, HealthID: false, IBAN: false, Loyalty: false, mDL: true, MSISDN: false, PhotoId: false, PID: true, PowerOfRepresentation: false, PseudonymDeferred: false, Reservation: false, TaxNumber: false}, window.location.origin)">Login with EUDI Wallet</button>
+                <button id="eudi-login" onclick="login()">Login with EUDI Wallet</button>
         </div>
 
         <div class="login-btn">
@@ -97,8 +97,22 @@
     </div>
 
     <script type="text/javascript">
-        function navigateToConfirmation() {
-            window.location.href = "../src/index.html";
+        function login() {
+            const config = {
+                AgeOver18: true,
+                HealthID: false,
+                IBAN: false,
+                Loyalty: false,
+                mDL: true,
+                MSISDN: false,
+                PhotoId: false,
+                PID: true,
+                PowerOfRepresentation: false,
+                PseudonymDeferred: false,
+                Reservation: false,
+                TaxNumber: false
+            };
+            EUDILogin(config);
         }
     </script>
 </body>
