@@ -1,5 +1,6 @@
 const AUTH_URL = "http://localhost";
 
+
 function EUDILogin(config, target = window.location.origin) {
     window.addEventListener("message", function(event) {
         if (event.origin !== AUTH_URL) return; // Security check

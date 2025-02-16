@@ -149,10 +149,10 @@ window.addEventListener("message", async function(event) {
         console.log("User's Site:", site);
         console.log("Received Data:", data);
 
-        if (site !== event.origin) {
-            console.error("Invalid site:", site);
-            return;
-        }
+        // if (site !== event.origin) {
+        //     console.error("Invalid site:", site);
+        //     return;
+        // }
         localStorage.setItem('site', site);
         localStorage.setItem('config', JSON.stringify(data));
 

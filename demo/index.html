@@ -88,7 +88,7 @@
 <body>
     <div class="login-btns">
         <div class="login-btn">
-                <button id="eudi-login" onclick="login()">Login with EUDI Wallet</button>
+            <button id="eudi-login" onclick="login()">Login with EUDI Wallet</button>
         </div>
 
         <div class="login-btn">
@@ -97,13 +97,14 @@
     </div>
 
     <script type="text/javascript">
+        const redirect = `${window.location.origin}/dashboard.html`;
         function login() {
             const config = {
                 AgeOver18: true,
                 HealthID: false,
                 IBAN: false,
                 Loyalty: false,
-                mDL: true,
+                mDL: false,
                 MSISDN: false,
                 PhotoId: false,
                 PID: true,
@@ -112,7 +113,7 @@
                 Reservation: false,
                 TaxNumber: false
             };
-            EUDILogin(config);
+            EUDILogin(config, redirect);
         }
     </script>
 </body>

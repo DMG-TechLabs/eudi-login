@@ -24,7 +24,7 @@
         box-sizing: border-box;
         animation: rotation 1s linear infinite;
     }
-    
+
     .loader::after,
     .loader::before {
         content: '';
@@ -191,7 +191,7 @@
         <span id="indicator">
             <h2>By continuing, you accept to share the following data</h2>
         </span>
-        
+
         <div id="documents">
             <span class="loader" id="loader"></span>
         </div>
@@ -221,28 +221,34 @@
             window.location.href = "./qrcode/index.html";
         }
 
-        const config = JSON.parse(localStorage.getItem('config'));
-        if (config != null) {
-            showDivs(config);
-        }else{
-            const startConfig = {
-                AgeOver18: false,
-                HealthID: false,
-                IBAN: false,
-                Loyalty: false,
-                mDL: false,
-                MSISDN: false,
-                PhotoId: false,
-                PID: false,
-                PowerOfRepresentation: false,
-                PseudonymDeferred: false,
-                Reservation: false,
-                TaxNumber: false
+        document.addEventListener("DOMContentLoaded", () => {
+            const config = JSON.parse(localStorage.getItem('config'));
+            console.log(config)
+            if (config != null) {
+                console.log("config is not null")
+                showDivs(config);
+            }else{
+                console.log("config is null")
+                const startConfig = {
+                    AgeOver18: false,
+                    HealthID: false,
+                    IBAN: false,
+                    Loyalty: false,
+                    mDL: false,
+                    MSISDN: false,
+                    PhotoId: false,
+                    PID: false,
+                    PowerOfRepresentation: false,
+                    PseudonymDeferred: false,
+                    Reservation: false,
+                    TaxNumber: false
+                }
+
+                localStorage.setItem('config', JSON.stringify(startConfig));
+                showDivs(startConfig);
             }
 
-            localStorage.setItem('config', JSON.stringify(startConfig));
-            showDivs(startConfig);
-        }
+        });
 
     </script>
 </body>
