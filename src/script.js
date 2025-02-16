@@ -96,6 +96,8 @@ async function main() {
         Reservation: false,
         TaxNumber: false
     })
+    await config.getAttestations();
+    console.log(config.scopes);
 
     const requestBody = config.generateRequest();
     const transaction = await TransactionInit(requestBody);

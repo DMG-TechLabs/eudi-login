@@ -27,8 +27,8 @@ class Config {
         TaxNumber: false
         }
     ){
-        this.settings = config
-        this.scopes = this.getAttestations()
+        this.settings = config;
+        this.scopes = [];
     }
 
     async fetchAttestations() {
@@ -42,45 +42,67 @@ class Config {
         }
     }
 
-    async getAttestations() {
-        const availableAttestations = await fetchAttestations();
-        const supportedAt = availableAttestations.credential_configurations_supported;
+    async getAttestations(){
+        const attestationsFinal = []
+        const availableAttestations = await this.fetchAttestations()
+        const supportedAt = availableAttestations.credential_configurations_supported
 
-        const attestationsFinal = Object.keys(supportedAt)
-            .filter(key => key !== "eu.europa.ec.eudi.pid_jwt_vc_json")
-            .map(key => {
-                const { scope, claims } = supportedAt[key];
-                return new Attestation({
+        for (const key in supportedAt) {
+            if (supportedAt.hasOwnProperty(key) && key != "eu.europa.ec.eudi.pid_jwt_vc_json") {
+                var at = new Attestation({
                     localName: "",
-                    scope,
-                    claims: Object.keys(claims).flatMap(claimKey => Object.keys(claims[claimKey]))
-                });
-            });
+                    scope: "", 
+                    claims: []
+                })
+                at.scope = supportedAt[key].scope
+                const atClaims = []
+                const claims = supportedAt[key].claims;
+                for (const claimsKey in claims) {
+                    if (claims.hasOwnProperty(claimsKey)) {
+                        const claimsValue = supportedAt[key].claims[claimsKey]
+                        for (const claimsValueKey in claimsValue) {
+                            if (claimsValue.hasOwnProperty(claimsValueKey)) {
+                                atClaims.push(claimsValueKey)
+                            }
+                        }
+                    }
+                }
+                at.claims = atClaims
 
-        // Map settings to scopes for cleaner filtering
-        const settingsMap = {
-            "eu.europa.ec.eudi.pid.1": this.settings.PID,
-            "org.iso.18013.5.1.mDL": this.settings.mDL,
-            "eu.europa.ec.eudi.iban.1": this.settings.IBAN,
-            "eu.europa.ec.eudi.loyalty.1": this.settings.Loyalty,
-            "org.iso.23220.photoid.1": this.settings.PhotoId,
-            "eu.europa.ec.eudi.pseudonym.age_over_18.1": this.settings.AgeOver18,
-            "eu.europa.ec.eudi.hiid.1": this.settings.HealthID,
-            "org.iso.18013.5.1.reservation": this.settings.Reservation,
-            "eu.europa.ec.eudi.tax.1": this.settings.TaxNumber,
-            "eu.europa.ec.eudi.por.1": this.settings.PowerOfRepresentation,
-            "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint": this.settings.PseudonymDeferred
-        };
+                attestationsFinal.push(at)
+            }
+        }
 
-        const addScopes = attestationsFinal.filter(at => settingsMap[at.scope]);
-
-        this.scopes.push(...addScopes);
-        return addScopes;
+        for (const attestation of attestationsFinal) {
+            if ((attestation.scope == "eu.europa.ec.eudi.pid.1") && this.settings.PID) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "org.iso.18013.5.1.mDL" && this.settings.mDL) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.iban.1" && this.settings.IBAN) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.loyalty.1" && this.settings.Loyalty) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "org.iso.23220.photoid.1" && this.settings.PhotoId) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.1" && this.settings.AgeOver18) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.hiid.1" && this.settings.HealthID) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "org.iso.18013.5.1.reservation" && this.settings.Reservation) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.tax.1" && this.settings.TaxNumber) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.por.1" && this.settings.PowerOfRepresentation) {
+                this.scopes.push(attestation)
+            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint" && this.settings.PseudonymDeferred) {
+                this.scopes.push(attestation)
+            }
+        }
     }
 
 
     generateRequest() {
-        request = {
+        const request = {
             "type": "vp_token",
             "presentation_definition": {
                 "id": "",
@@ -92,12 +114,12 @@ class Config {
 
         request.presentation_definition.id = crypto.randomUUID()
         request.nonce = crypto.randomUUID()
-        i = 0
-        for (const attestation of this.scopes) {
-            filds = []
-            for (const claim of attestation.claims) {
-                filds.push({
-                    "path": ["$['"+attestation.scope+"']['"+claim+"']"],
+        let i = 0
+        for (const attestation in this.scopes) {
+            const fields = []
+            for (const claim in attestation.claims) {
+                fields.push({
+                    "path": ["$['"+attestation.scope+"']['"+attestation.claims[claim]+"']"],
                     "intent_to_retain": false
                 })
             }
@@ -118,7 +140,7 @@ class Config {
                 }
             })
 
-            request.presentation_definition.input_descriptors[i].constraints.fields = filds
+            request.presentation_definition.input_descriptors[i].constraints.fields = fields
             i++
         }
 
