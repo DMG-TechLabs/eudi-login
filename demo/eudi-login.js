@@ -7,13 +7,16 @@ function EUDILogin(config, target = window.location.origin) {
         console.log("User Data:", event.data);
         // authWindow.close();
         this.localStorage.setItem("user_data", JSON.stringify(event.data));
+        if (target == window.location.origin) return;
+        window.location.href = target;
+
     }, { once: true });
 
 
     const authWindow = window.open(AUTH_URL, "_blank");
 
     const messageData = {
-        site: target,
+        site: window.location.origin,
         data: config
     };
 
