@@ -6,6 +6,7 @@ import { Decoder } from "../extern/decode.js";
 export class MdocDecoder {
     /**
      * Runs the attestation decoding process.
+     * @function run
      * @param {any} attestation - The attestation data.
      * @param {string} [nonce=""] - Optional nonce for verification.
      * @returns {Promise<any>} - A promise resolving to the decoded attestation data.
@@ -16,6 +17,7 @@ export class MdocDecoder {
 
     /**
      * Decodes an attestation.
+     * @function decode
      * @param {string} attestation - Base64 or hex-encoded attestation data.
      * @param {string} _nonce - Nonce for verification.
      * @returns {Promise<object>} - A promise resolving to the decoded attestation object.
@@ -41,6 +43,7 @@ export class MdocDecoder {
 
     /**
      * Extracts a single attestation from a document.
+     * @function extractAttestationSingle
      * @param {Map} document - The document containing the attestation.
      * @returns {object} - The extracted attestation.
      */
@@ -69,6 +72,7 @@ export class MdocDecoder {
 
     /**
      * Decodes a base64 or hex string into a Uint8Array.
+     * @function decodeBase64OrHex
      * @param {string} input - The encoded string.
      * @returns {Uint8Array} - The decoded byte array.
      */
@@ -83,6 +87,7 @@ export class MdocDecoder {
 
     /**
      * Decodes CBOR data using an external decoder.
+     * @function decodeCborData
      * @param {Uint8Array} data - The CBOR-encoded data.
      * @returns {Map|null} - The decoded data or null if an error occurs.
      */
@@ -96,6 +101,7 @@ export class MdocDecoder {
 
     /**
      * Maps VP token response to attestation objects.
+     * @function mapVpTokenToAttestations
      * @param {any} response - The VP token response.
      * @param {string} nonce - Nonce for verification.
      * @returns {Promise<object[]>} - A promise resolving to an array of decoded attestations.
@@ -137,6 +143,7 @@ export class MdocDecoder {
 
     /**
      * Decodes an attestation.
+     * @function decodeAttestation
      * @param {string} attestation - The attestation data.
      * @param {string} format - Attestation format.
      * @param {string} nonce - Nonce for verification.
@@ -154,6 +161,7 @@ export class MdocDecoder {
 
     /**
      * Deducts VP token item formats from descriptor maps.
+     * @function deductVpTokenItemsFormats
      * @param {Array} descriptorMaps - Array of descriptor maps.
      * @returns {object} - A map of paths to formats.
      */
@@ -171,6 +179,7 @@ export class MdocDecoder {
 
     /**
      * Locates an attestation in the VP token using JSONPath.
+     * @function locateInVpToken
      * @param {string} path - JSONPath expression.
      * @param {any} vpToken - The VP token.
      * @returns {any} - The located attestation or null.

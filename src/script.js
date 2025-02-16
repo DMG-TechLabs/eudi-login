@@ -64,6 +64,7 @@ function buildPollingUrl(transaction_id) {
  * @param {string} uri - The QR code uri
  */
 function paintQR(uri) {
+    if(uri == null || uri == undefined || uri == "") return;
     new QRCode(document.getElementById("qrcode"), {
         text: uri,
         width: 256,
@@ -118,6 +119,9 @@ export async function main() {
     const response = await poll(pollingUrl)
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
+
+    const success = config.validate(decoded);
+    console.log(success);
 }
 
 async function run(conf) {
