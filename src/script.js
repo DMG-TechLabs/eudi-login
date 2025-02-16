@@ -95,16 +95,16 @@ async function TransactionInit(transactionBody) {
 export async function main() {
     const config = new Config({
         AgeOver18: true,
-        HealthID: false,
-        IBAN: false,
+        HealthID: true,
+        IBAN: true,
         Loyalty: true,
-        mDL: false,
+        mDL: true,
         MSISDN: false,
         PhotoId: true,
         PID: true,
-        PowerOfRepresentation: false,
-        PseudonymDeferred: false,
-        Reservation: false,
+        PowerOfRepresentation: true,
+        PseudonymDeferred: true,
+        Reservation: true,
         TaxNumber: true
     })
     await config.init();
