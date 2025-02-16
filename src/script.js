@@ -94,37 +94,6 @@ async function TransactionInit(transactionBody) {
 }
 
 
-export function showDivs(config) {
-            const container = document.getElementById("documents");
-        container.innerHTML = "";
-
-            const fieldNames = {
-                AgeOver18: "Age Over 18",
-                HealthID: "Health ID",
-                IBAN: "Bank Account (IBAN)",
-                Loyalty: "Loyalty Card",
-                mDL: "Mobile Driver's License",
-                MSISDN: "Phone Number",
-                PhotoId: "Photo ID",
-             PID: "Personal ID",
-                PowerOfRepresentation: "Power of Representation",
-                PseudonymDeferred: "Pseudonym Deferred",
-                Reservation: "Reservation",
-                TaxNumber: "Tax Number"
-            };
-
-            Object.entries(config).forEach(([key, value]) => {
-                if (value == true) {
-                    let div = document.createElement("div");
-                    div.className = "document-box";
-                    div.textContent = `${fieldNames[key]}`;
-                    div.style.display = "block";
-                    container.appendChild(div);
-                }
-            });
-}
-
-
 export async function main() {
     const config = {
         AgeOver18: true,
@@ -140,22 +109,14 @@ export async function main() {
         Reservation: true,
         TaxNumber: true
     }
-    // await config.init();
-    // localStorage.setItem('config', JSON.stringify(config.settings));
-    //
-    // const transaction = await TransactionInit(config.request);
-    // const uri = buildQRUri(transaction.client_id, transaction.request_uri);
-    // paintQR(uri);
-    //
-    // const pollingUrl = buildPollingUrl(transaction.transaction_id);
-    // const response = await poll(pollingUrl)
-    // const decoded = await new MdocDecoder().run(response)
+
     const decoded = await run(config);
     console.log(decoded)
 
     const success = config.validate(decoded);
     console.log(success);
 }
+
 
 export async function run(conf) {
     // showDivs(conf);
@@ -214,4 +175,3 @@ window.addEventListener("message", async function(event) {
 
 window.main = main;
 window.run = run;
-window.showDivs = showDivs;

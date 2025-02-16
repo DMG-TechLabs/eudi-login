@@ -33,11 +33,10 @@ function login(config, target) {
     // };
     //
     window.addEventListener("message", function(event) {
-        console.log("Received message from:", event.origin);
-        console.log("Received Data:", event.data);
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
         // authWindow.close();
+        this.localStorage.setItem("user_data", JSON.stringify(event.data));
     }, { once: true });
 
 
@@ -54,14 +53,6 @@ function login(config, target) {
         }
     };
 
-    // authWindow.onload = () => {
-    //     console.log("authWindow.onload")
-    //     sendMessage();
-    // }
-    //
-    // console.log(authWindow)
-
-    // // Retry sending every 500ms until the window is loaded
     const interval = setInterval(() => {
         if (authWindow && !authWindow.closed) {
             sendMessage();
