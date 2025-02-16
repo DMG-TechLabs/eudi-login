@@ -269,7 +269,7 @@ async function TransactionInit(transactionBody) {
 }
 
 async function main() {
-    await getAttestations(new Config({
+    config = new Config({
         AgeOver18: false,
         HealthID: false,
         IBAN: false,
@@ -282,14 +282,9 @@ async function main() {
         PseudonymDeferred: false,
         Reservation: false,
         TaxNumber: false
-    }))
+    })
 
-    const data = await TransactionInit(generateRequest());
-    // console.log(data)
-    // console.log(data.client_id)
-    // console.log(data.request_uri)
-    // console.log(data.transaction_id)
-    // console.log(data.presentation_id)
+    const data = await TransactionInit(config.generateRequest());
     const uri = buildQRUri(data.client_id, data.request_uri);
     paintQR(uri);
    
