@@ -111,6 +111,8 @@ async function main() {
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
     const response = await poll(pollingUrl)
     console.log(response);
+    const decoded = new Decoder().decode(response.vp_token[0]);
+    console.log(decoded);
 }
 
 main();

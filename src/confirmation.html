@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUDI Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
+</head>
+<script src="scripts/config.js"></script>
+<script src="scripts/request.js"></script>
+<script src="scripts/polling.js"></script>
+<script src="extern/qrcode.js"></script>
+<script src="script.js"></script>
+<style>
+    #confirm-to-share-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 100px;
+        padding: 20px;
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
+    }
+
+    #documents {
+        display: flex;
+        /*position: absolute;
+        top: 20%;
+        left: 30%;
+        right: 30%;*/
+        flex-wrap: wrap;
+    }
+
+    .document-box {
+        font-size: 20px;
+        border: 3px solid;
+        border-radius: 10px;
+        padding: 2%;
+        margin: 1%;
+        flex: 1 1 calc(100% / 6 - 10px);
+    }
+
+    .document-box:nth-child(n+7) {
+        flex: 1 1 calc(100% / 5 - 10px);
+    }
+
+    .document {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #continue-btn {
+        margin-top: 20px;
+    }
+
+    #continue {
+        display: block;
+    }
+
+    #continue {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        background: #cfd3dc;
+        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #continue:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #continue:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #qr-container {
+        display: none;
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    #qr-container h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    #back-btn {
+        display: none;
+        position: absolute;
+        top: 72%;
+        left: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-50%);
+    }
+
+    #back {
+        display: block;
+    }
+
+    #back {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        background: #cfd3dc;
+        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+        transition: all 0.3s ease-in-out;
+        letter-spacing: 1px;
+    }
+
+    #back:hover {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Active (clicked) effect */
+    #back:active {
+        transform: scale(0.95);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #eudi-icon {
+        align-items: center;
+        width: 800px; 
+        height: 400px;
+    }
+</style>
+
+<body>
+    
+    <div id="container">
+        <img id="eudi-icon" src="./assets/ic-logo.svg">
+        <div id="confirm-to-share-data">
+            <span id="indicator">
+                <h2>By continuing, you accept to share the following data</h2>
+            </span>
+        
+            <div id="documents">
+                <div class="document-box">
+                    <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>mDL</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>IBAN</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>Loyalty</h3></span>
+                </div>
+                <div class="document-box">
+                    <span class="document"><h3>Photo ID</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><i class="fas fa-ban"></i><h3>Age over 18</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Health ID</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Reservation</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Tax Number</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Power Of Representation</h3></span>
+                </div>
+        
+                <div class="document-box">
+                    <span class="document"><h3>Pseudonym Deferred</h3></span>
+                </div>
+            </div>
+            
+            <div id="continue-btn">
+                <button id="continue" onclick="generateQRCode()">Continue</button>
+            </div>
+        </div>
+    
+
+    </div>
+
+    <div id="qr-container">
+        <h2>Scan This QR Code</h2>
+        <div id="qrcode"></div>
+    </div>
+
+    <div id="back-btn">
+        <button id="back" onclick="back()">Back</button>
+    </div>
+
+    <script type="text/javascript">
+        function generateQRCode() {
+            document.getElementById("confirm-to-share-data").style.display = "none"
+            document.getElementById("documents").style.display = "none"
+            document.getElementById("continue-btn").style.display = "none"
+            document.getElementById("qr-container").style.display = "block";
+            document.getElementById("back-btn").style.display = "block";
+        }
+
+        function back() {
+            window.location.href = "./login.html";
+        }
+
+        function showDivs(config) {
+            const container = document.getElementById("documents");
+            container.innerHTML = ""; // Clear existing divs
+
+            // Map of field names to user-friendly labels
+            const fieldNames = {
+                AgeOver18: "Age Over 18",
+                HealthID: "Health ID",
+                IBAN: "Bank Account (IBAN)",
+                Loyalty: "Loyalty Card",
+                mDL: "Mobile Driver's License",
+                MSISDN: "Phone Number",
+                PhotoId: "Photo ID",
+                PID: "Personal ID",
+                PowerOfRepresentation: "Power of Representation",
+                PseudonymDeferred: "Pseudonym Deferred",
+                Reservation: "Reservation",
+                TaxNumber: "Tax Number"
+            };
+
+            Object.entries(config).forEach(([key, value]) => {
+                if (value == true) { 
+                    let div = document.createElement("div");
+                    div.className = "field";
+                    div.textContent = `${fieldNames[key]}`;
+                    div.style.display = "block";
+                    container.appendChild(div);
+                }
+            });
+        }
+
+        showDivs(config);
+
+    </script>
+</body>
+</html>
