@@ -1,22 +1,7 @@
-config_t = {
-    AgeOver18: false,
-    HealthID: false,
-    IBAN: false,
-    Loyalty: false,
-    mDL: false,
-    MSISDN: false,
-    PhotoId: false,
-    PID: false,
-    PowerOfRepresentation: false,
-    PseudonymDeferred: false,
-    Reservation: false,
-    TaxNumber: false
-}
-
 const AUTH_URL = "http://localhost";
 
-function login(config, target) {
 
+function EUDILogin(config, target = window.location.origin) {
     window.addEventListener("message", function(event) {
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
