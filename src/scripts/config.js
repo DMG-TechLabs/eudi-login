@@ -61,6 +61,8 @@ class Config {
                     claims: []
                 })
                 at.scope = supportedAt[key].scope
+
+                at.localName = supportedAt[key].display[0].name
                 const atClaims = []
                 const claims = supportedAt[key].claims;
                 for (const claimsKey in claims) {
