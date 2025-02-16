@@ -58,3 +58,7 @@ function EUDILogin(config, target = window.location.origin) {
     setTimeout(() => clearInterval(interval), 1000);
 }
 
+function EUDILoadData(){
+    return JSON.parse(sessionStorage.getItem("user_data"));
+}
+
