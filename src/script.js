@@ -12,6 +12,7 @@ const PRESENTATIONS_ENDPOINT = "ui/presentations";
 
 /**
  * Decodes HTML Entities like `&amp;`
+ * @function decodeHTMLEntities
  * @param {string} text
  * @returns {string} the decoded text
  */
@@ -23,6 +24,7 @@ function decodeHTMLEntities(text) {
 
 /**
  * Decodes URI characters and HTML entities back to their ascii counterparts
+ * @function decodeAll
  * @param {string} uri
  * @returns {string} the decoded text
  */
@@ -32,6 +34,7 @@ function decodeAll(uri) {
 
 /**
  * Builds a QR code URI for EUDI OpenID.
+ * @function buildQRUri
  * @param {string} client_id - The client identifier.
  * @param {string} request_uri - The request URI.
  * @returns {string} The formatted EUDI OpenID URL.
@@ -42,6 +45,7 @@ function buildQRUri(client_id, request_uri) {
 
 /**
  * Builds the request URL, used when polling
+ * @function buildPollingUrl
  * @param {string} transaction_id - The transaction identifier.
  * @returns {string} The endpoint.
  */
@@ -51,6 +55,7 @@ function buildPollingUrl(transaction_id) {
 
 /**
  * Paints the QR code in the HTML
+ * @function paintQR
  * @param {string} uri - The QR code uri
  */
 function paintQR(uri) {
@@ -68,6 +73,7 @@ function paintQR(uri) {
  * Initializes the transaction.
  * @async
  * @function TransactionInit
+ * @param {json} transactionBody 
  * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
  */
 async function TransactionInit(transactionBody) {
@@ -96,15 +102,15 @@ async function main() {
         Reservation: false,
         TaxNumber: false
     })
+    await config.init();
 
-    const requestBody = config.generateRequest();
-    const transaction = await TransactionInit(requestBody);
+    const transaction = await TransactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     paintQR(uri);
 
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
     const response = await poll(pollingUrl)
-    console.log(response.vp_token);
+    console.log(response);
 }
 
 main();
