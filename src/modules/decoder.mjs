@@ -1,5 +1,5 @@
 export class Decoder {
-    decode(attestation, nonce) {
+    decode(attestation, _nonce) {
         const buffer = this.decodeBase64OrHex(attestation);
         console.log("Buffer: ", buffer);
         const decodedData = this.decodeCborData(buffer);
@@ -26,10 +26,9 @@ export class Decoder {
         Object.keys(namespaces).forEach(it => {
             const namespace = namespaces[it];
             namespace.forEach(element => {
-                const decoder = new TextDecoder('utf-8');
-                const decodedElement = decoder.decode(element) 
+                const decodedElement = this.decodeCborData(element);
                 attributes.push({
-                    key: `${it}:${decodedElement.elementIdentifier}`,
+                    key: `${it}:${decodedElement}`,
                     value: decodedElement
                 });
             });
@@ -57,7 +56,8 @@ export class Decoder {
 
     decodeCborData(data) {
         try {
-            return CBOR.decode(data)
+            const buffer = data instanceof ArrayBuffer ? data : data.buffer;
+            return CBOR.decode(buffer);
         } catch (error) {
             console.error("Failed to decode CBOR:", error);
             return null;
