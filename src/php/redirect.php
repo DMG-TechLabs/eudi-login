@@ -13,7 +13,17 @@ $proxy->set(new Record("/issuers", "https://issuer.eudiw.dev/.well-known/openid-
 $proxy->set(new Record("/utilities", $BACKEND_URL, true, true));
 
 // Allow CORS
-header("Access-Control-Allow-Origin: *");
+$allowed_origins = [
+    $BACKEND_URL,
+    "https://issuer.eudiw.dev/.well-known/openid-credential-issuer"
+];
+
+if (isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
+    header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+} else {
+    header("Access-Control-Allow-Origin: " . $BACKEND_URL); // Default fallback
+}
+// header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
@@ -66,17 +76,30 @@ $response = curl_exec($ch);
 // Handle errors
 if ($response === false) {
     http_response_code(500);
-    header("Content-Type: application/json"); // Ensure JSON response
+    header("Content-Type: application/json"); // Always return JSON for errors
     echo json_encode(["error" => "cURL Error: " . htmlspecialchars(curl_error($ch), ENT_QUOTES, 'UTF-8')]);
 } else {
-    // Sanitize the output and ensure it's JSON
-    header("Content-Type: application/json");
+    // Get the content type from the backend response
+    $content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 
-    json_decode($response);
-    if (json_last_error() === JSON_ERROR_NONE) {
-        echo $response;
+    // Set the same content type in the response
+    if ($content_type) {
+        header("Content-Type: " . $content_type);
     } else {
-        echo json_encode(["error" => "Invalid JSON response from server"]);
+        header("Content-Type: application/octet-stream"); // Fallback for unknown types
+    }
+
+    // If the response is JSON, validate it before echoing
+    if (stripos($content_type, "application/json") !== false) {
+        json_decode($response);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            echo $response; // Valid JSON
+        } else {
+            echo json_encode(["error" => "Invalid JSON response from server"]);
+        }
+    } else {
+        // If the response is not JSON, escape it to prevent XSS risks
+        echo htmlspecialchars($response, ENT_QUOTES, 'UTF-8');
     }
 }
 
