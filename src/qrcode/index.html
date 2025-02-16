@@ -109,7 +109,10 @@
             console.log(decoded)
             window.opener.postMessage(decoded, site);
         }
-        start()
+        document.addEventListener("DOMContentLoaded", () => {
+            start()
+        });
+        // start()
 
         </script>
 
