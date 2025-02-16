@@ -7,20 +7,15 @@ export class MdocDecoder {
 
     decode(attestation, _nonce) {
         const buffer = this.decodeBase64OrHex(attestation);
-        console.log("Buffer: ", buffer);
         const decodedData = this.decodeCborData(buffer);
-        console.log("Mdoc decoded Data: ", decodedData);
 
         if (!decodedData || !decodedData.get("documents")) {
-            console.log("Rejected")
             return Promise.reject("Invalid attestation data");
         }
 
         if (decodedData.get("documents").length === 1) {
-            console.log("document length 1")
             return Promise.resolve(this.extractAttestationSingle(decodedData.get("documents")[0]));
         } else {
-            console.log("document length > 1")
             const attestations = decodedData.get("documents").map(doc => this.extractAttestationSingle(doc));
             return Promise.resolve({
                 kind: "enveloped",
@@ -30,18 +25,10 @@ export class MdocDecoder {
     }
 
     extractAttestationSingle(document) {
-        console.log("Document: ", document);
         const namespaces = document.get("issuerSigned").get("nameSpaces");
         const attributes = [];
 
-        // console.log("Namespaces: ", namespaces)
-        // Object.keys(namespaces).forEach(it => {
-
         namespaces.forEach((namespace, it) => {
-            // console.log("Namespace: ", namespace);
-            // console.log("Namespace it: ", it);
-            // console.log("Namespace it: ", namespaces[it]);
-            // const namespace = namespaces[it];
             namespace.forEach(element => {
                 const decodedElement = this.decodeCborData(element.value);
 
@@ -76,7 +63,6 @@ export class MdocDecoder {
         try {
             return new Decoder().mapDecode(data);
         } catch (error) {
-            console.error("Failed to decode CBOR:", error);
             return null;
         }
     }
@@ -87,7 +73,6 @@ export class MdocDecoder {
         const presentationSubmission = responce.presentation_submission;
         const vpToken = responce.vp_token;
         const formatsPerPath = this.deductVpTokenItemsFormats(presentationSubmission.descriptor_map);
-        console.log(formatsPerPath)
         decodings = Object.entries(formatsPerPath).map(async entry =>{
             return await this.mapAttestation(entry[0], entry[1], vpToken, nonce);
         });
@@ -98,7 +83,6 @@ export class MdocDecoder {
     async mapAttestation(path, format, vpToken, nonce) {
         const sharedAttestation = this.locateInVpToken(path, vpToken);
         if (!sharedAttestation) {
-            console.log(`Could not match path ${path} to vp_token array`);
             return Promise.resolve({
                 kind: "error",
                 format: format,
@@ -111,7 +95,6 @@ export class MdocDecoder {
 
     async decodeAttestation(attestation, format, nonce) {
         return await this.decode(attestation, nonce).catch(error => {
-            console.error(`Error decoding document in ${format}: ${error.message}`);
             return {
                 kind: "error",
                 format: format,
