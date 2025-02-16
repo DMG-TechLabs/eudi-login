@@ -26,10 +26,11 @@ export class Decoder {
         Object.keys(namespaces).forEach(it => {
             const namespace = namespaces[it];
             namespace.forEach(element => {
-                const decodedElement = this.decodeCborData(element.value);
+                const decoder = new TextDecoder('utf-8');
+                const decodedElement = decoder.decode(element) 
                 attributes.push({
                     key: `${it}:${decodedElement.elementIdentifier}`,
-                    value: this.elementAsString(decodedElement.elementValue)
+                    value: decodedElement
                 });
             });
         });
@@ -61,9 +62,5 @@ export class Decoder {
             console.error("Failed to decode CBOR:", error);
             return null;
         }
-    }
-
-    elementAsString(element) {
-        return element.toString();
     }
 }
