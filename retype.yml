@@ -1,8 +1,8 @@
-input: .
+input: ./docs
 output: .retype
 url: # Add your website address here
 branding:
-  title: Project Name
+  title: eudi-login
   label: Docs
 links:
 - text: Getting Started

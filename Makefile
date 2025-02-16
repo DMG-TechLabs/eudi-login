@@ -12,7 +12,7 @@ stop: ## Stop the php server
 .PHONY: rebuild
 rebuild: ## Rebuild docker image
 	docker compose build
-	
+
 .PHONY: logs
 logs: ## Print logs
 	docker compose logs -f
@@ -29,6 +29,10 @@ dist: ## Create a distribution directory
 .PHONY: distclean
 distclean: ## Clean the distribution
 	rm -rf $(DIST)
+
+.PHONY: docs
+docs: ## Generate the documentation site
+	retype build docs
 
 .PHONY: help
 help: ## Show this help message
