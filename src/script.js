@@ -93,7 +93,12 @@ async function TransactionInit(transactionBody) {
     }
 }
 
-
+/**
+ * Main function to initialize and validate the authentication process (ONLY FOR DEVELOPMENT).
+ * @async
+ * @function main
+ * @returns {Promise<void>}
+ */
 export async function main() {
     const config = {
         AgeOver18: true,
@@ -117,9 +122,14 @@ export async function main() {
     console.log(success);
 }
 
-
+/**
+ * Runs the authentication process based on the provided configuration.
+ * @async
+ * @function run
+ * @param {ConfigOptions} conf - The configuration settings.
+ * @returns {Promise<{data: Object, conf: Config} | null>} The decoded data and configuration, or null if no attestations are active.
+ */
 export async function run(conf) {
-    // showDivs(conf);
     const config = new Config(conf)
     if(config.countActive() == 0) return null;
     await config.init();
@@ -138,10 +148,35 @@ export async function run(conf) {
     return {data: decoded, conf: config}
 }
 
+/**
+ * Starts the authentication process by retrieving stored configuration and validating data.
+ * @async
+ * @function start
+ * @returns {Promise<void>}
+ */
+export async function start(){
+    const site = localStorage.getItem('site');
+    const data = JSON.parse(localStorage.getItem('config'));
+    const result = await run(data);
+    console.log(result)
+
+    const validData = result.conf.validate(result.data);
+    if(validData){
+        console.log(site)
+        window.opener.postMessage(result.data, site);
+        window.close();
+    }
+    else{
+        window.opener.postMessage("Missing attestations", site);
+        window.alert("Not all requied files available. Please try again.")
+    }
+}
+
+
 // main();
 document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("message", async function(event) {
+    window.addEventListener("message", async function(event) {
         console.log("Received message from:", event.origin);
 
         // Extract the received data
@@ -175,3 +210,4 @@ window.addEventListener("message", async function(event) {
 
 window.main = main;
 window.run = run;
+window.start = start;
