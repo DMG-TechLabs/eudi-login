@@ -117,7 +117,6 @@ async function main() {
     const response = await poll(pollingUrl)
     console.log(response);
     const decoded = await new Decoder().decode(response.vp_token[0]);
-    console.log(decoded)
 }
 
 main();

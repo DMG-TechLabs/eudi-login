@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
-<script src="../../src/modules/config.mjs"></script>
-<script src="../../src/modules/request.mjs"></script>
-<script src="../../src/modules/polling.mjs"></script>
-<script src="../../src/extern/qrcode.js"></script>
-<script src="../../src/script.js"></script>
+<script src="../modules/config.mjs"></script>
+<script src="../modules/decoder.mjs"></script>
+<script src="../modules/request.mjs"></script>
+<script src="../modules/polling.mjs"></script>
+<script src="../extern/cbor.js"></script>
+<script src="../extern/qrcode.js"></script>
+<script type="module" src="../script.js"></script>
 <style>
     .loader {
         width: 48px;
@@ -143,7 +145,7 @@
 
     <script type="text/javascript">
         function back() {
-            window.location.href = "../login/index.html";
+            window.location.href = "../../demo/login/index.html";
         }
 
         setTimeout(() => {
