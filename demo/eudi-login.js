@@ -16,22 +16,7 @@ config_t = {
 const AUTH_URL = "http://localhost";
 
 function login(config, target) {
-    // const authWindow = window.open(AUTH_URL, "_blank");
-    //
-    // authWindow.onload = () => {
-    //     timeout = setTimeout(function() {
-    //         console.log("timeout")
-    //         authWindow.postMessage({
-    //             site: window.location.origin,
-    //             data: config
-    //         }, AUTH_URL);
-    //     }, 1000);
-    //     // authWindow.postMessage({
-    //     //     site: window.location.origin,
-    //     //     data: config
-    //     // }, AUTH_URL);
-    // };
-    //
+
     window.addEventListener("message", function(event) {
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
