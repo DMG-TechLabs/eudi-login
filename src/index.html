@@ -11,6 +11,54 @@
 <script type="module" src="./script.js"></script>
 <script type="module" src="./modules/ui.mjs"></script>
 <style>
+    .loader {
+        width: 48px;
+        height: 48px;
+        display: block;
+        margin:15px auto;
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        color: #FFF;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+    
+    .loader::after,
+    .loader::before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        left: 50%;
+        transform: scale(0.5) translate(0, 0);
+        background-color: #e9f66a;
+        border-radius: 50%;
+        animation: animloader 1s infinite ease-in-out;
+    }
+
+    .loader::before {
+        background-color: #1238ea;
+        transform: scale(0.5) translate(-48px, -48px);
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes animloader {
+        50% {
+            transform: scale(1) translate(-50%, -50%);
+        }
+    }
+
     #confirm-to-share-data {
         display: flex;
         flex-direction: column;
@@ -24,6 +72,7 @@
         text-align: center;
         margin-left: 100px;
         width: 500px;
+        height: 500px;
     }
 
     #indicator {
@@ -63,7 +112,8 @@
     .buttons {
         display: flex;
         justify-content: center;
-        margin-top: 30px;
+        position: absolute;
+        bottom: 10%;
     }
 
     .button {
@@ -144,8 +194,10 @@
         <span id="indicator">
             <h2>By continuing, you accept to share the following data</h2>
         </span>
-
-        <div id="documents"></div>
+        
+        <div id="documents">
+            <span class="loader" id="loader"></span>
+        </div>
 
         <div class="buttons">
             <div class="button">
@@ -159,6 +211,10 @@
     </div>
 
     <script type="text/javascript">
+        setTimeout(() => {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("documents").style.display = "flex";
+        }, 1500);
 
         function cancel() {
             <!----TODO---->
