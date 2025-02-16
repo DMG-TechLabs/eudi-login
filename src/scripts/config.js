@@ -1,6 +1,20 @@
+/**
+ * Endpoint for fetching attestations.
+ * @constant {string}
+ */
 const ATTESTATIONS_ENDPOINT = "http://localhost/php/redirect.php/issuers"
 
+/**
+ * Represents an attestation.
+ */
 class Attestation {
+    /**
+     * Creates an Attestation instance.
+     * @param {Object} [data]
+     * @param {string} [data.localName] - The local name of the attestation.
+     * @param {string} [data.scope] - The scope of the attestation.
+     * @param {string[]} [data.claims] - The claims associated with the attestation.
+     */
     constructor(data = {
         localName: "",
         scope: "",
@@ -10,8 +24,31 @@ class Attestation {
     }
 }
 
-
+/**
+ * Represents the configuration of the requested attestations.
+ */
 class Config {
+    /**
+    * @typedef {Object} ConfigOptions
+    * @property {boolean} [AgeOver18=false] - Whether the user is over 18.
+    * @property {boolean} [HealthID=false] - Whether to include Health ID attestation.
+    * @property {boolean} [IBAN=false] - Whether to include IBAN attestation.
+    * @property {boolean} [Loyalty=false] - Whether to include Loyalty attestation.
+    * @property {boolean} [mDL=false] - Whether to include mobile Driver’s License (mDL) attestation.
+    * @property {boolean} [MSISDN=false] - Whether to include MSISDN (phone number) attestation.
+    * @property {boolean} [PhotoId=false] - Whether to include Photo ID attestation.
+    * @property {boolean} [PID=false] - Whether to include Personal ID (PID) attestation.
+    * @property {boolean} [PowerOfRepresentation=false] - Whether to include Power of Representation attestation.
+    * @property {boolean} [PseudonymDeferred=false] - Whether to include Pseudonym Deferred attestation.
+    * @property {boolean} [Reservation=false] - Whether to include Reservation attestation.
+    * @property {boolean} [TaxNumber=false] - Whether to include Tax Number attestation.
+    */
+
+    /**
+     * Creates a Config instance.
+     * @constructor
+     * @param {Object} [config] - Configuration settings.
+     */
     constructor(config = {
         AgeOver18: false,
         HealthID: false,
@@ -32,11 +69,20 @@ class Config {
         this.request = null;
     }
 
+    /**
+     * Initializes the configuration by fetching attestations and generating a request.
+     * @function init
+     */
     async init() {
         await this.getAttestations();
         this.request = this.generateRequest();
     }
-
+    
+    /**
+     * Fetches available attestations from the endpoint.
+     * @function fetchAttestations
+     * @returns {Promise<Object|null>} The fetched attestations or null in case of error.
+     */
     async fetchAttestations() {
         try{
             const request = new Request(ATTESTATIONS_ENDPOINT)
@@ -48,6 +94,10 @@ class Config {
         }
     }
 
+    /**
+     * Retrieves and processes available attestations based on the configuration settings.
+     * @function getAttestations
+     */
     async getAttestations(){
         const attestationsFinal = []
         const availableAttestations = await this.fetchAttestations()
@@ -108,7 +158,11 @@ class Config {
         }
     }
 
-
+    /**
+     * Generates a request based on the configured attestations.
+     * @function generateRequest
+     * @returns {JSON} The generated request.
+     */
     generateRequest() {
         const request = {
             "type": "vp_token",
