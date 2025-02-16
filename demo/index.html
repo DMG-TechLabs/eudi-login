@@ -86,17 +86,17 @@
 <body>
     <div class="login-btns">
         <div class="login-btn">
-                <button id="eudi-login" onclick="login({AgeOver18: false, HealthID: false, IBAN: false, Loyalty: false, mDL: false, MSISDN: false, PhotoId: false, PID: true, PowerOfRepresentation: false, PseudonymDeferred: false, Reservation: false, TaxNumber: false})">Login with EU Login</button>
+            <button id="eudi-login" onclick="navigateToConfirmation()">Login with EU Login</button>
         </div>
 
         <div class="login-btn">
-            <button id="google-login" onclick="showConfirmationForSharingData()">Login with Google</button>
+            <button id="google-login">Login with Google</button>
         </div>
     </div>
 
     <script type="text/javascript">
         function navigateToConfirmation() {
-            window.location.href = "../../src/shared-data/index.html";
+            window.location.href = "../src/shared-data/index.html";
         }
     </script>
 </body>

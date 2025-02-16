@@ -108,6 +108,7 @@ async function main() {
         TaxNumber: false
     })
     await config.init();
+    localStorage.setItem('config', JSON.stringify(config.settings));
 
     const transaction = await TransactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
@@ -118,7 +119,6 @@ async function main() {
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
     
-    localStorage.setItem('config', JSON.stringify(config.settings));
 }
 
 main();
