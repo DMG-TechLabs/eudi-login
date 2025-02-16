@@ -1,6 +1,6 @@
 # eudi-login
 docker build -t alpine-apache-php:latest .
-sudo docker run --detach \                                                                        ─╯
+sudo docker run --detach \
     --name alpine-apache-php \
     --publish 80:80 \
     --publish 443:443 \
