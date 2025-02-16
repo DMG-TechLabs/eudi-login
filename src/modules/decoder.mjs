@@ -1,4 +1,4 @@
-class Decoder {
+export class Decoder {
     decode(attestation, nonce) {
         const buffer = this.decodeBase64OrHex(attestation);
         console.log("Buffer: ", buffer);
