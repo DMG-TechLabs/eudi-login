@@ -71,6 +71,12 @@ export class Config {
         this.request = null;
     }
 
+    /**
+     * Validates whether the response contains all the necessary attestations
+     * @function validate
+     * @param {Array} decoded
+     * @returns boolean
+     */
     validate(decoded) {
         const count = Object.values(this.settings).filter(value => value === true).length;
         const expected = decoded[0].attestations.length
