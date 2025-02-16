@@ -26,7 +26,7 @@ function EUDILogin(config, target = window.location.origin) {
     window.addEventListener("message", function(event) {
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
-        this.localStorage.setItem("user_data", JSON.stringify(event.data));
+        this.sessionStorage.setItem("user_data", JSON.stringify(event.data));
         if (target == window.location.origin) return;
         window.location.href = target;
 
