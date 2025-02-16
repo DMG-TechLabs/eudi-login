@@ -93,7 +93,7 @@ class Config {
         request.presentation_definition.id = crypto.randomUUID()
         request.nonce = crypto.randomUUID()
         i = 0
-        for (const attestation of addScopes) {
+        for (const attestation of this.scopes) {
             filds = []
             for (const claim of attestation.claims) {
                 filds.push({
