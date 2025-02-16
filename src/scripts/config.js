@@ -31,7 +31,7 @@ class Config {
         this.scopes = this.getAttestations()
     }
 
-    async FetchAttestations() {
+    async fetchAttestations() {
         try{
             const request = new Request(ATTESTATIONS_ENDPOINT)
             const response = await request.get();
@@ -42,67 +42,40 @@ class Config {
         }
     }
 
-    async getAttestations(){
-        attestationsFinal = []
-        availableAttestations = await FetchAttestations()
-        supportedAt = availableAttestations.credential_configurations_supported
+    async getAttestations() {
+        const availableAttestations = await FetchAttestations();
+        const supportedAt = availableAttestations.credential_configurations_supported;
 
-        for (let key in supportedAt) {
-            if (supportedAt.hasOwnProperty(key) && key != "eu.europa.ec.eudi.pid_jwt_vc_json") {
-                var at = new Attestation({
+        const attestationsFinal = Object.keys(supportedAt)
+            .filter(key => key !== "eu.europa.ec.eudi.pid_jwt_vc_json")
+            .map(key => {
+                const { scope, claims } = supportedAt[key];
+                return new Attestation({
                     localName: "",
-                    scope: "", 
-                    claims: []
-                })
-                at.scope = supportedAt[key].scope
-                var atClaims = []
-                const claims = supportedAt[key].claims;
-                for (let claimsKey in claims) {
-                    if (claims.hasOwnProperty(claimsKey)) {
-                        claimsValue = supportedAt[key].claims[claimsKey]
-                        for (let claimsValueKey in claimsValue) {
-                            if (claimsValue.hasOwnProperty(claimsValueKey)) {
-                                atClaims.push(claimsValueKey)
-                            }
-                        }
-                    }
-                }
-                at.claims = atClaims
+                    scope,
+                    claims: Object.keys(claims).flatMap(claimKey => Object.keys(claims[claimKey]))
+                });
+            });
 
-                attestationsFinal.push(at)
-                // console.log(at.scope)
-            }
-            // console.log("--------------------------------------")
-        }
+        // Map settings to scopes for cleaner filtering
+        const settingsMap = {
+            "eu.europa.ec.eudi.pid.1": this.settings.PID,
+            "org.iso.18013.5.1.mDL": this.settings.mDL,
+            "eu.europa.ec.eudi.iban.1": this.settings.IBAN,
+            "eu.europa.ec.eudi.loyalty.1": this.settings.Loyalty,
+            "org.iso.23220.photoid.1": this.settings.PhotoId,
+            "eu.europa.ec.eudi.pseudonym.age_over_18.1": this.settings.AgeOver18,
+            "eu.europa.ec.eudi.hiid.1": this.settings.HealthID,
+            "org.iso.18013.5.1.reservation": this.settings.Reservation,
+            "eu.europa.ec.eudi.tax.1": this.settings.TaxNumber,
+            "eu.europa.ec.eudi.por.1": this.settings.PowerOfRepresentation,
+            "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint": this.settings.PseudonymDeferred
+        };
 
-        for (const attestation of attestationsFinal) {
-            if ((attestation.scope == "eu.europa.ec.eudi.pid.1") && this.settings.PID == true) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "org.iso.18013.5.1.mDL" && this.settings.mDL) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.iban.1" && this.settings.IBAN) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.loyalty.1" && this.settings.Loyalty) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "org.iso.23220.photoid.1" && this.settings.PhotoId) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.1" && this.settings.AgeOver18) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.hiid.1" && this.settings.HealthID) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "org.iso.18013.5.1.reservation" && this.settings.Reservation) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.tax.1" && this.settings.TaxNumber) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.por.1" && this.settings.PowerOfRepresentation) {
-                this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint" && this.settings.PseudonymDeferred) {
-                this.scopes.push(attestation)
-            }
-        }
+        const addScopes = attestationsFinal.filter(at => settingsMap[at.scope]);
 
-        // console.log(addScopes)
-        return addScopes
+        this.scopes.push(...addScopes);
+        return addScopes;
     }
 
 
@@ -114,14 +87,12 @@ class Config {
                 "input_descriptors": [
                     
                 ]
-
             }
         }
 
         request.presentation_definition.id = crypto.randomUUID()
         request.nonce = crypto.randomUUID()
         i = 0
-        console.log(addScopes)
         for (const attestation of addScopes) {
             filds = []
             for (const claim of attestation.claims) {
@@ -151,12 +122,7 @@ class Config {
             i++
         }
 
-        // console.log(JSON.stringify(request))
-
         return request
     }
-
-
-
 }
 
