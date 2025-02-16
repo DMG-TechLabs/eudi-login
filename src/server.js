@@ -24,7 +24,8 @@ window.addEventListener("message", async function(event) {
 
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
     const response = await poll(pollingUrl)
-    const decoded = await mapVpTokenToAttestations(response, "")
+    const decoded = await new MdocDecoder().run(response)
+
 
     window.opener.postMessage(decoded, site);
 

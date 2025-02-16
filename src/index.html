@@ -9,10 +9,47 @@
 </head>
 
 <script src="extern/qrcode.js"></script>
-<script type="module" src="server.js"></script>
+<!-- <script type="module" src="server.js"></script> -->
 <script type="module" src="script.js"></script>
-
+<!-- <script type="module" src="server.js"></script> -->
 <body>
     <div id="qrcode"></div>
-</body>
+
+    <!-- <script> -->
+    <!-- main(); -->
+    <!-- console.log("test") -->
+    <!-- // document.addEventListener("DOMContentLoaded", () => { -->
+    <!-- console.log("DOM fully loaded and ready."); -->
+    <!---->
+    <!-- window.addEventListener("message", async function(event) { -->
+    <!--     console.log("Received message from:", event.origin); -->
+    <!---->
+    <!--     // Extract the received data -->
+    <!--     const { site, data } = event.data; -->
+    <!--     console.log("User's Site:", site); -->
+    <!--     console.log("Received Data:", data); -->
+    <!---->
+    <!--     if (site !== event.origin) { -->
+    <!--         console.error("Invalid site:", site); -->
+    <!--         return; -->
+    <!--     } -->
+    <!---->
+    <!--     // const config = new Config(data); -->
+    <!--     // config.init(); -->
+    <!--     // -->
+    <!--     // const transaction = await TransactionInit(config.request); -->
+    <!--     // const uri = buildQRUri(transaction.client_id, transaction.request_uri); -->
+    <!--     // paintQR(uri); -->
+    <!--     // -->
+    <!--     // const pollingUrl = buildPollingUrl(transaction.transaction_id); -->
+    <!--     // const response = await poll(pollingUrl); -->
+    <!--     const decoded = await run(data); -->
+    <!---->
+    <!--     window.opener.postMessage(decoded, site); -->
+    <!--     window.close(); -->
+    <!-- }, false); -->
+    <!-- // }); -->
+    <!-- </script> -->
+
+    </body>
 </html>
