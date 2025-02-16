@@ -34,11 +34,11 @@ export class Request {
             headers: { ...this.defaultHeaders, ...headers },
             body: body ? JSON.stringify(body) : null,
         };
-        
+
         if (method === 'GET' || method === 'HEAD') {
             delete options.body;
         }
-        
+
         try {
             const response = await fetch(url, options);
             if (!response.ok) {

@@ -139,20 +139,20 @@
 
     #eudi-icon {
         align-items: center;
-        width: 800px; 
+        width: 800px;
         height: 400px;
     }
 </style>
 
 <body>
-    
+
     <div id="container">
         <img id="eudi-icon" src="./assets/ic-logo.svg">
         <div id="confirm-to-share-data">
             <span id="indicator">
                 <h2>By continuing, you accept to share the following data</h2>
             </span>
-        
+
             <div id="documents">
                 <div class="document-box">
                     <span class="document"><i class="fa-solid fa-id-card"></i><h3>PID</h3></span>
@@ -169,37 +169,37 @@
                 <div class="document-box">
                     <span class="document"><h3>Photo ID</h3></span>
                 </div>
-        
+
                 <div class="document-box">
                     <span class="document"><i class="fas fa-ban"></i><h3>Age over 18</h3></span>
                 </div>
-        
+
                 <div class="document-box">
                     <span class="document"><h3>Health ID</h3></span>
                 </div>
-        
+
                 <div class="document-box">
                     <span class="document"><h3>Reservation</h3></span>
                 </div>
-        
+
                 <div class="document-box">
                     <span class="document"><h3>Tax Number</h3></span>
                 </div>
-        
+
                 <div class="document-box">
                     <span class="document"><h3>Power Of Representation</h3></span>
                 </div>
-        
+
                 <div class="document-box">
                     <span class="document"><h3>Pseudonym Deferred</h3></span>
                 </div>
             </div>
-            
+
             <div id="continue-btn">
                 <button id="continue" onclick="generateQRCode()">Continue</button>
             </div>
         </div>
-    
+
 
     </div>
 
@@ -246,7 +246,7 @@
             };
 
             Object.entries(config).forEach(([key, value]) => {
-                if (value == true) { 
+                if (value == true) {
                     let div = document.createElement("div");
                     div.className = "field";
                     div.textContent = `${fieldNames[key]}`;
