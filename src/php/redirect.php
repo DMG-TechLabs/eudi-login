@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $path = str_replace("/php/redirect.php", "", $_SERVER['REQUEST_URI']);
 $target = $proxy->get($path);
 if ($target === null) {
-    echo json_encode(["error" => "Proxy Error: No records found for '" . $path . "'"]); 
+    echo json_encode(["error" => "Proxy Error: No records found for '" . $path . "'"]);
     exit;
 }
 

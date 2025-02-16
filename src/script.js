@@ -1,16 +1,16 @@
-import { Config } from './modules/config.mjs' 
+import { Config } from './modules/config.mjs'
 import { MdocDecoder } from './modules/decoder.mjs'
 import { poll } from './modules/polling.mjs';
 import { Request } from './modules/request.mjs';
 import { mapVpTokenToAttestations } from './modules/test.mjs'
 
-/** 
+/**
  * Backend proxy endpoint URL.
  * @constant {string}
  */
 const PROXY = "http://localhost/php/redirect.php";
 
-/** 
+/**
  * Presentations API endpoint.
  * @constant {string}
  */
@@ -79,7 +79,7 @@ function paintQR(uri) {
  * Initializes the transaction.
  * @async
  * @function TransactionInit
- * @param {json} transactionBody 
+ * @param {json} transactionBody
  * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
  */
 async function TransactionInit(transactionBody) {
@@ -156,7 +156,7 @@ main();
 //     const pollingUrl = buildPollingUrl(transaction.transaction_id);
 //     const response = await poll(pollingUrl)
 //     console.log(response);
-//     
+//
 //     window.opener.postMessage(response, site);
 //
 //     // Close the tab

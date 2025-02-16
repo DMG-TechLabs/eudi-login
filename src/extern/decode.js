@@ -82,7 +82,7 @@ export class Decoder {
 	decodeKey(key) {
 		return this.keyMap ? this.mapKey.get(key) || key : key
 	}
-	
+
 	encodeKey(key) {
 		return this.keyMap && this.keyMap.hasOwnProperty(key) ? this.keyMap[key] : key
 	}
@@ -105,12 +105,12 @@ export class Decoder {
 		map.forEach((v,k) => res[safeKey(this._mapKey.has(k) ? this._mapKey.get(k) : k)] =  v)
 		return res
 	}
-	
+
 	mapDecode(source, end) {
-	
+
 		let res = this.decode(source)
-		if (this._keyMap) { 
-			//Experiemntal support for Optimised KeyMap  decoding 
+		if (this._keyMap) {
+			//Experiemntal support for Optimised KeyMap  decoding
 			switch (res.constructor.name) {
 				case 'Array': return res.map(r => this.decodeKeys(r))
 				//case 'Map': return this.decodeKeys(res)
@@ -291,7 +291,7 @@ export function read() {
 					token = dataView.getBigUint64(position)
 				position += 8
 				break
-			case 0x1f: 
+			case 0x1f:
 				// indefinite length
 				switch(majorType) {
 					case 2: // byte string
@@ -379,8 +379,8 @@ export function read() {
 		case 4: // array
 			if (token >= maxArraySize) throw new Error(`Array length exceeds ${maxArraySize}`)
 			let array = new Array(token)
-		  //if (currentDecoder.keyMap) for (let i = 0; i < token; i++) array[i] = currentDecoder.decodeKey(read())	
-			//else 
+		  //if (currentDecoder.keyMap) for (let i = 0; i < token; i++) array[i] = currentDecoder.decodeKey(read())
+			//else
 			for (let i = 0; i < token; i++) array[i] = read()
 			return array
 		case 5: // map
@@ -519,7 +519,7 @@ function createStructureReader(structure) {
 		}
 		if (this.slowReads++ >= inlineObjectReadThreshold) { // create a fast compiled reader
 			let array = this.length == length ? this : this.slice(0, length)
-			compiledReader = currentDecoder.keyMap 
+			compiledReader = currentDecoder.keyMap
 			? new Function('r', 'return {' + array.map(k => currentDecoder.decodeKey(k)).map(k => validName.test(k) ? safeKey(k) + ':r()' : ('[' + JSON.stringify(k) + ']:r()')).join(',') + '}')
 			: new Function('r', 'return {' + array.map(key => validName.test(key) ? safeKey(key) + ':r()' : ('[' + JSON.stringify(key) + ']:r()')).join(',') + '}')
 			if (this.compiledReader)
@@ -1032,7 +1032,7 @@ currentExtensions[PACKED_REFERENCE_TAG_ID] = (data) => { // packed reference
 // }
 // currentExtensions[256].handlesRead = true
 
-currentExtensions[28] = (read) => { 
+currentExtensions[28] = (read) => {
 	// shareable http://cbor.schmorp.de/value-sharing (for structured clones)
 	if (!referenceMap) {
 		referenceMap = new Map()

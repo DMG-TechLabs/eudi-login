@@ -79,7 +79,7 @@ export class Config {
         await this.getAttestations();
         this.request = this.generateRequest();
     }
-    
+
     /**
      * Fetches available attestations from the endpoint.
      * @function fetchAttestations
@@ -109,7 +109,7 @@ export class Config {
             if (supportedAt.hasOwnProperty(key) && key != "eu.europa.ec.eudi.pid_jwt_vc_json") {
                 var at = new Attestation({
                     localName: "",
-                    scope: "", 
+                    scope: "",
                     claims: []
                 })
                 at.scope = supportedAt[key].scope
@@ -171,7 +171,7 @@ export class Config {
             "presentation_definition": {
                 "id": "",
                 "input_descriptors": [
-                    
+
                 ]
             }
         }
