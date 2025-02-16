@@ -1,8 +1,7 @@
 services:
   eu-login-alpine:
-    # image: eu-login-alpine
     build: .
-    container_name: alpine_container
+    container_name: eu-login-backend-alpine_container
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -17,3 +16,25 @@ services:
       #- SERVER_ADMIN=admin@example.xyz
       - TZ=Europe/Athens
       - PHP_MEMORY_LIMIT=512M
+
+
+  eu-login-demo_app:
+    build: .
+    container_name: eu-login-demo_app_container
+    depends_on:
+      - eu-login-alpine
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./demo:/htdocs
+    environment:
+      #- HTTP_SERVER_NAME=www.example.xyz
+      #- HTTPS_SERVER_NAME=www.example.xyz
+      #- SERVER_ADMIN=admin@example.xyz
+      - TZ=Europe/Athens
+      - PHP_MEMORY_LIMIT=512M
+

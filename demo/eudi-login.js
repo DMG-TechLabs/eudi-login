@@ -15,14 +15,14 @@ config_t = {
 
 const AUTH_URL = "https://your-auth-portal.com";
 
-function login(congif) {
+function login(config) {
     const authWindow = window.open(AUTH_URL, "_blank");
 
     authWindow.onload = () => {
         authWindow.postMessage({
             site: window.location.origin,
             data: config
-        }, "https://your-auth-portal.com");
+        }, AUTH_URL);
     };
 
     window.addEventListener("message", function(event) {
