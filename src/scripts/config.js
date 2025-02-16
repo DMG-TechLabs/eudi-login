@@ -43,7 +43,7 @@ class Config {
     }
 
     async getAttestations() {
-        const availableAttestations = await FetchAttestations();
+        const availableAttestations = await fetchAttestations();
         const supportedAt = availableAttestations.credential_configurations_supported;
 
         const attestationsFinal = Object.keys(supportedAt)

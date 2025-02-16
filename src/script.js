@@ -82,7 +82,7 @@ async function TransactionInit(transactionBody) {
 }
 
 async function main() {
-    config = new Config({
+    const config = new Config({
         AgeOver18: false,
         HealthID: false,
         IBAN: false,
@@ -97,7 +97,7 @@ async function main() {
         TaxNumber: false
     })
 
-    const requestBody = conffig.generateRequest();
+    const requestBody = config.generateRequest();
     const transaction = await TransactionInit(requestBody);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     paintQR(uri);
