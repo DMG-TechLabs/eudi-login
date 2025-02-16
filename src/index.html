@@ -72,7 +72,7 @@
         text-align: center;
         margin-left: 100px;
         width: 500px;
-        height: 500px;
+        height: 650px;
     }
 
     #indicator {
@@ -88,6 +88,7 @@
     #documents {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .document-box {
@@ -95,12 +96,8 @@
         border: 3px solid;
         border-radius: 10px;
         padding: 2%;
-        margin: 1%;
-        flex: 1 1 calc(100% / 6 - 10px);
-    }
-
-    .document-box:nth-child(n+7) {
-        flex: 1 1 calc(100% / 5 - 10px);
+        margin: 1.5%;
+        height: min-content;
     }
 
     .document {
