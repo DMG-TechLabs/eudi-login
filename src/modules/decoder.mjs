@@ -6,15 +6,19 @@ export class MdocDecoder {
         const buffer = this.decodeBase64OrHex(attestation);
         console.log("Buffer: ", buffer);
         const decodedData = this.decodeCborData(buffer);
-        console.log("Data: ", decodedData);
-        if (!decodedData || !decodedData.documents) {
+        console.log("Mdoc decoded Data: ", decodedData);
+        
+        if (!decodedData || !decodedData.get("documents")) {
+            console.log("Rejected")
             return Promise.reject("Invalid attestation data");
         }
 
-        if (decodedData.documents.length === 1) {
-            return Promise.resolve(this.extractAttestationSingle(decodedData.documents[0]));
+        if (decodedData.get("documents").length === 1) {
+            console.log("document length 1")
+            return Promise.resolve(this.extractAttestationSingle(decodedData.get("documents")[0]));
         } else {
-            const attestations = decodedData.documents.map(doc => this.extractAttestationSingle(doc));
+            console.log("document length > 1")
+            const attestations = decodedData.get("documents").map(doc => this.extractAttestationSingle(doc));
             return Promise.resolve({
                 kind: "enveloped",
                 attestations: attestations
@@ -24,17 +28,25 @@ export class MdocDecoder {
 
     extractAttestationSingle(document) {
         console.log("Document: ", document);
-        const namespaces = document.issuerSigned.nameSpaces;
+        const namespaces = document.get("issuerSigned").get("nameSpaces");
         const attributes = [];
 
-        Object.keys(namespaces).forEach(it => {
-            const namespace = namespaces[it];
+        // console.log("Namespaces: ", namespaces)
+        // Object.keys(namespaces).forEach(it => {
+        
+        namespaces.forEach((namespace, it) => { 
+            // console.log("Namespace: ", namespace);
+            // console.log("Namespace it: ", it);
+            // console.log("Namespace it: ", namespaces[it]);
+            // const namespace = namespaces[it];
             namespace.forEach(element => {
-                const decodedElement = this.decodeCborData(element);
+                // console.log("Element: ", element);
+                const decodedElement = this.decodeCborData(element.value);
                 
+                // console.log("Decoded Element: ", decodedElement);
                 attributes.push({
-                    key: `${it}:${decodedElement}`,
-                    value: decodedElement
+                    key: `${it}:${decodedElement.get("elementIdentifier")}`,
+                    value: decodedElement.get("elementValue")
                 });
             });
         });

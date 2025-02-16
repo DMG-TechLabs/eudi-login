@@ -2,6 +2,7 @@ import { Config } from './modules/config.mjs'
 import { MdocDecoder } from './modules/decoder.mjs'
 import { poll } from './modules/polling.mjs';
 import { Request } from './modules/request.mjs';
+import { mapVpTokenToAttestations } from './modules/test.mjs'
 
 /** 
  * Backend proxy endpoint URL.
@@ -116,10 +117,11 @@ async function main() {
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
     const response = await poll(pollingUrl)
     console.log(response);
-    console.log()
+    const decoded = await mapVpTokenToAttestations(response, "")
+    console.log(decoded)
     // const decoded = await new Decoder().decode(response.vp_token[0]);
     // const decoded = await new MdocDecoder().decode(response.vp_token[0]);
-    console.log(decoded)
+    // console.log(decoded)
 }
 
 main();

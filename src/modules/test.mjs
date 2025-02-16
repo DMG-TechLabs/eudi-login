@@ -1,14 +1,15 @@
+import { MdocDecoder } from './decoder.mjs'
 
-function mapVpTokenToAttestations(responce, nonce) {
+export async function mapVpTokenToAttestations(responce, nonce) {
     let decodings = [];
 
     // if (isPrExWalletResponse(concludedTransaction.walletResponse)) {
         let presentationSubmission = responce.presentation_submission;
         let vpToken = responce.vp_token;
         let formatsPerPath = deductVpTokenItemsFormats(presentationSubmission.descriptor_map);
-
-        decodings = Object.entries(formatsPerPath).map(entry => {
-            return mapAttestation(entry[0], entry[1], vpToken, nonce);
+        console.log(formatsPerPath)
+        decodings = Object.entries(formatsPerPath).map(async entry =>{
+            return await mapAttestation(entry[0], entry[1], vpToken, nonce);
         });
     // } 
   // else {
@@ -22,7 +23,7 @@ function mapVpTokenToAttestations(responce, nonce) {
     return Promise.all(decodings);
 }
 
-function mapAttestation(path, format, vpToken, nonce) {
+async function mapAttestation(path, format, vpToken, nonce) {
     let sharedAttestation = locateInVpToken(path, vpToken);
     if (!sharedAttestation) {
         console.log(`Could not match path ${path} to vp_token array`);
@@ -32,12 +33,16 @@ function mapAttestation(path, format, vpToken, nonce) {
             reason: `Could not match path ${path} to vp_token array`
         });
     } else {
-        return decodeAttestation(sharedAttestation, format, nonce);
+        return await decodeAttestation(sharedAttestation, format, nonce);
     }
 }
 
-function decodeAttestation(attestation, format, nonce) {
-    return Decoder().decode(attestation, nonce).catch(error => {
+async function decodeAttestation(attestation, format, nonce) {
+    const decoder = new MdocDecoder()
+    // console.log("att ",attestation)
+    // console.log("decoder decoded ", decoder.decode(attestation, nonce))
+    // decoder.decode(attestation, nonce)
+    return await decoder.decode(attestation, nonce).catch(error => {
         console.error(`Error decoding document in ${format}: ${error.message}`);
         return {
             kind: "error",
