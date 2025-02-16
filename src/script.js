@@ -1,5 +1,5 @@
-import { Config } from './modules/config.mjs'
-import { MdocDecoder } from './modules/decoder.mjs'
+import { Config } from './modules/config.mjs';
+import { MdocDecoder } from './modules/decoder.mjs';
 import { poll } from './modules/polling.mjs';
 import { Request } from './modules/request.mjs';
 
@@ -95,7 +95,7 @@ async function TransactionInit(transactionBody) {
 async function main() {
     const config = new Config({
         AgeOver18: true,
-        HealthID: false,
+        HealthID: true,
         IBAN: false,
         Loyalty: true,
         mDL: false,
@@ -105,7 +105,7 @@ async function main() {
         PowerOfRepresentation: false,
         PseudonymDeferred: false,
         Reservation: false,
-        TaxNumber: false
+        TaxNumber: true
     })
     await config.init();
     localStorage.setItem('config', JSON.stringify(config.settings));
@@ -118,7 +118,6 @@ async function main() {
     const response = await poll(pollingUrl)
     const decoded = await new MdocDecoder().run(response)
     console.log(decoded)
-    
 }
 
 main();
