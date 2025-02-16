@@ -78,11 +78,11 @@ function paintQR(uri) {
 /**
  * Initializes the transaction.
  * @async
- * @function TransactionInit
+ * @function transactionInit
  * @param {json} transactionBody
  * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
  */
-async function TransactionInit(transactionBody) {
+async function transactionInit(transactionBody) {
     try {
         const request = new Request(PROXY);
         const response = await request.post(PRESENTATIONS_ENDPOINT, transactionBody);
@@ -91,6 +91,25 @@ async function TransactionInit(transactionBody) {
         console.error('Error:', error);
         return null;
     }
+}
+
+function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // List of common mobile devices and user agents
+    const mobileAgents = [
+        'Android', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Opera Mini', 'Windows Phone', 'webOS',
+        'Mobile', 'Silk', 'Kindle', 'Samsung', 'SonyEricsson', 'Mobi'
+    ];
+
+    // Check if the user agent contains any of the mobile device strings
+    for (let i = 0; i < mobileAgents.length; i++) {
+        if (userAgent.indexOf(mobileAgents[i]) > -1) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 /**
@@ -135,8 +154,9 @@ export async function run(conf) {
     await config.init();
     localStorage.setItem('config', JSON.stringify(config.settings));
 
+    console.log("Is Mobile: ", isMobileDevice())
 
-    const transaction = await TransactionInit(config.request);
+    const transaction = await transactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     paintQR(uri);
 
