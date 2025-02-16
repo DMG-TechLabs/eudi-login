@@ -58,7 +58,26 @@ function EUDILogin(config, target = window.location.origin) {
     setTimeout(() => clearInterval(interval), 1000);
 }
 
+function transformData(input) {
+    const result = {};
+
+    input.forEach(item => {
+        item.attributes.forEach(attr => {
+            const scopeKey = attr.key.split(":")[0]; // Extract scope from key
+            const key = attr.key.split(":").slice(1).join(":"); // Extract actual key
+
+            if (!result[scopeKey]) {
+                result[scopeKey] = {};
+            }
+
+            result[scopeKey][key] = attr.value.value !== undefined ? attr.value.value : attr.value;
+        });
+    });
+
+    return result;
+}
+
 function EUDILoadData(){
-    return JSON.parse(sessionStorage.getItem("user_data"));
+    return transformData(JSON.parse(sessionStorage.getItem("user_data"))[0].attestations)
 }
 
