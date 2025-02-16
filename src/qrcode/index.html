@@ -110,6 +110,7 @@
 
             const validData = result.conf.validate(result.data);
             if(validData){
+                console.log(site)
                 window.opener.postMessage(result.data, site);
                 window.close();
             }
