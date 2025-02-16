@@ -1,4 +1,4 @@
-<?php 
+<?php
 class Record {
     public string $local;
     private string $remote;
