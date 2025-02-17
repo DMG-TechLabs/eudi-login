@@ -48,12 +48,6 @@
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Active (clicked) effect */
-    #eudi-login:active {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
     #google-login {
         display: block;
     }
@@ -78,17 +72,11 @@
         transform: scale(1.1);
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
     }
-
-    /* Active (clicked) effect */
-    #google-login:active {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
 </style>
 <body>
     <div class="login-btns">
         <div class="login-btn">
-            <button id="eudi-login" onclick="login()">Login with EUDI Wallet</button>
+            <button id="eudi-login" type="button" onclick="login()">Login with EUDI Wallet</button>
         </div>
 
         <div class="login-btn">
@@ -97,11 +85,75 @@
     </div>
 
     <script type="text/javascript">
+        const loginButton = document.getElementById("eudi-login");
+        const googleButton = document.getElementById("google-login");
+        let isTouch = false;
+        
+        // Listeners for touching login button
+        loginButton.addEventListener("touchstart", (event) => {
+            if (event.pointerType === "touch" || event.touches.length > 0) {
+                isTouch = true;
+            }
+
+            loginButton.style.transform = "scale(0.95)";
+            loginButton.style.boxShadow = "0px 2px 5px rgba(0, 0, 0, 0.2)";
+        });
+
+        loginButton.addEventListener("touchend", () => {
+            loginButton.style.transform = "scale(1)";
+            loginButton.style.boxShadow = "0px 6px 15px rgba(0, 0, 0, 0.3)";
+
+            if (isTouch) {
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+            }
+        });
+
+        loginButton.addEventListener("touchmove", (event) => {
+            event.preventDefault();
+        });
+
+        loginButton.addEventListener("touchcancel", () => {
+            loginButton.style.transform = "scale(1)";
+            loginButton.style.boxShadow = "0px 6px 15px rgba(0, 0, 0, 0.3)";
+        });
+
+        // Listeners for touching google button
+        googleButton.addEventListener("touchstart", (event) => {
+            if (event.pointerType === "touch" || event.touches.length > 0) {
+                isTouch = true;
+            }
+
+            googleButton.style.transform = "scale(0.95)";
+            googleButton.style.boxShadow = "0px 2px 5px rgba(0, 0, 0, 0.2)";
+        });
+
+        googleButton.addEventListener("touchend", () => {
+            googleButton.style.transform = "scale(1)";
+            googleButton.style.boxShadow = "0px 6px 15px rgba(0, 0, 0, 0.3)";
+
+            if (isTouch) {
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+            }
+        });
+
+        googleButton.addEventListener("touchmove", (event) => {
+            event.preventDefault();
+        });
+
+        googleButton.addEventListener("touchcancel", () => {
+            googleButton.style.transform = "scale(1)";
+            googleButton.style.boxShadow = "0px 6px 15px rgba(0, 0, 0, 0.3)";
+        });
+
         function login() {
             const config = {
                 AgeOver18: true,
-                HealthID: false,
-                IBAN: false,
+                HealthID: true,
+                IBAN: true,
                 Loyalty: false,
                 mDL: false,
                 MSISDN: false,

@@ -79,11 +79,6 @@
         color: #2f2f2f;
     }
 
-    #container {
-        display: flex;
-        justify-content: center;
-    }
-
     #documents {
         display: none;
         flex-wrap: wrap;
@@ -133,7 +128,7 @@
     }
 
     /* Active (clicked) effect */
-    #cancel:active {
+    #cancel:active, #cancel:focus {
         transform: scale(0.95);
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
@@ -162,7 +157,7 @@
     }
 
     /* Active (clicked) effect */
-    #continue:active {
+    #continue:active, #continue:focus {
         transform: scale(0.95);
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
