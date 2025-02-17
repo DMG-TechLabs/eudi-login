@@ -101,7 +101,7 @@ function isMobileDevice() {
     return false;
 }
 
-function cleanLocalStorage(){
+export function cleanLocalStorage(){
     localStorage.removeItem("config")
     localStorage.removeItem("site")
 }
@@ -213,11 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showDivs(data);
     }, false);
 
-    window.addEventListener("beforeunload", (event) => {
-        window.opener.postMessage("Cancelled", localStorage.getItem('site'));
-
-        cleanLocalStorage();
-    });
 
 });
 
@@ -225,3 +220,4 @@ document.addEventListener("DOMContentLoaded", () => {
 window.main = main;
 window.run = run;
 window.start = start;
+window.cleanLocalStorage = cleanLocalStorage;

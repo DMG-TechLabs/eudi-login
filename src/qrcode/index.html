@@ -15,9 +15,8 @@
             display: block;
             margin:15px auto;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            left: 0;
+            right: 0;
             color: #FFF;
             box-sizing: border-box;
             animation: rotation 1s linear infinite;
@@ -59,11 +58,8 @@
         #qr-container {
             display: none;
             flex-direction: column;
-            justify-content: space-evenly;
+            justify-content: center;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background: white;
             padding: 20px;
             border-radius: 15px;
@@ -81,11 +77,9 @@
 
         #eudi-icon {
             position: absolute;
-            top: 17%;
-            left: 50%;
+            top: 3%;
             transform: translate(-50%, -50%);
             align-items: center;
-
             aspect-ratio: 7/3;
             height: 250px;
         }
@@ -124,11 +118,13 @@
           cursor: pointer;
         }
 
-        @media (max-width: 768px) {
-
+        @media (max-width: 480px) {
             #eudi-icon {
-                top: 15%;
-                aspect-ratio: 4/3;
+                width: 80%;
+                height: auto;
+                top: 1%;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
 
@@ -161,9 +157,14 @@
             window.close();
         }
 
+        window.addEventListener("beforeunload", (event) => {
+            cleanLocalStorage();
+        });
+
+
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
-            document.getElementById("qr-container").style.display = "block";
+            document.getElementById("qr-container").style.display = "flex";
         }, 1500);
         document.addEventListener("DOMContentLoaded", () => {
             start()

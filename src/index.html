@@ -34,12 +34,12 @@
             border-radius: 50%;
             animation: animloader 1s infinite ease-in-out;
         }
-    
+
         .loader::before {
             background-color: #1238ea;
             transform: scale(0.5) translate(-48px, -48px);
         }
-    
+
         @keyframes rotation {
             0% {
                 transform: rotate(0deg);
@@ -53,7 +53,7 @@
                 transform: scale(1) translate(-50%, -50%);
             }
         }
-    
+
         #confirm-to-share-data {
             display: flex;
             flex-direction: column;
@@ -69,19 +69,19 @@
             width: 500px;
             height: 650px;
         }
-    
+
         #indicator {
             display: none;
             margin-bottom: 30px;
             color: #2f2f2f;
         }
-    
+
         #documents {
             display: none;
             flex-wrap: wrap;
             width: 500px;
         }
-    
+
         .document-box {
             font-size: 20px;
             border: 3px solid;
@@ -89,22 +89,22 @@
             padding: 18px 10px 18px 10px;
             margin: 1.5%;
         }
-    
+
         .buttons {
             display: flex;
             justify-content: center;
             position: absolute;
             bottom: 10%;
         }
-    
+
         .button {
             margin-left: 20px;
         }
-    
+
         #cancel {
             display: block;
         }
-    
+
         #cancel {
             padding: 12px 24px;
             font-size: 18px;
@@ -119,21 +119,21 @@
             transition: all 0.3s ease-in-out;
             letter-spacing: 1px;
         }
-    
+
         #cancel:hover {
             box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
         }
-    
+
         /* Active (clicked) effect */
         #cancel:active, #cancel:focus {
             transform: scale(0.95);
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
         }
-    
+
         #continue {
             display: none;
         }
-    
+
         #continue {
             padding: 12px 24px;
             font-size: 18px;
@@ -148,17 +148,17 @@
             transition: all 0.3s ease-in-out;
             letter-spacing: 1px;
         }
-    
+
         #continue:hover {
             box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
         }
-    
+
         /* Active (clicked) effect */
         #continue:active, #continue:focus {
             transform: scale(0.95);
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
         }
-    
+
         #eudi-icon {
             position: absolute;
             top: 50%;
@@ -171,18 +171,19 @@
 
         @media (min-width: 481px) and (max-width: 1300px) {
             #confirm-to-share-data {
-                top: 62%; /* Center vertically */
-                left: 50%; /* Center horizontally */
-                transform: translate(-50%, -50%); /* Center perfectly */
-                width: 80%; /* Adjust width for tablets */
-                height: auto; /* Let height adjust to content */
-                max-width: 700px; /* Limit max width */
+                display: none;
+                top: 50%;
+                left: 50%; 
+                transform: translate(-50%, -50%); 
+                width: 70%; 
+                height: auto; 
+                max-width: 700px; 
                 padding: 20px;
-                margin: 0; /* Remove default margins */
+                margin: 0;
             }
 
             #indicator {
-                display: none;
+                display: block;
             }
 
             #eudi-icon {
@@ -194,7 +195,7 @@
             }
 
             #documents {
-                display: none;
+                display: flex;
                 flex-wrap: wrap;
                 justify-content: center; /* Center documents */
                 width: 100%;
@@ -202,7 +203,7 @@
 
             .document-box {
                 font-size: 16px; /* Adjust font size */
-                width: 45%; /* Two documents per row (adjust as needed) */
+                /* Two documents per row (adjust as needed) */
                 margin: 1%; /* Adjust margins */
                 box-sizing: border-box; /* Include padding/border in width */
             }
@@ -226,9 +227,8 @@
             }
 
             .loader {
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%); /* Center loader */
+                left: 0;
+                right: 0;
             }
         }
 
@@ -237,8 +237,7 @@
                 overflow-y: auto;
                 height: 150%;
             }*/
-            
-            /* Loader adjustments */
+
             .loader {
                 width: 40px;
                 height: 40px;
@@ -248,12 +247,14 @@
             }
 
             #confirm-to-share-data {
-                top: 20%;
-                left: 25%;
-                transform: translateX(-50%);
+                display: none;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 width: 80%;
-                height: auto;
+                height: 62%;
+                margin: 0;
                 padding: 15px;
+                top: 50%;
             }
 
             #indicator {
@@ -264,23 +265,26 @@
                 display: none;
                 flex-wrap: wrap;
                 justify-content: center;
-                width: auto; 
+                width: auto;
             }
 
             .document-box {
                 font-size: 10px;
-                width: max-content; 
+                width: max-content;
                 margin: 5px;
                 align-content: center;
             }
 
             .buttons {
-                flex-direction: row;
-                gap: 10px;
-                position: absolute;
-                top: 102%;
+                flex-direction: row; 
+                justify-content: center; 
+                position: absolute; 
+                top: 82%; 
                 left: 50%;
                 transform: translate(-50%, -50%);
+                margin-top: 20px; 
+                width: 100%;
+                gap: 10px;
             }
 
             .button {
@@ -293,7 +297,7 @@
             }
 
             #continue {
-                display: none;
+                display: block;
                 padding: 10px 20px;
                 font-size: 16px;
             }
@@ -301,7 +305,7 @@
             #eudi-icon {
                 width: 80%;
                 height: auto;
-                top: 5%;
+                top: 3%;
                 left: 50%;
                 transform: translateX(-50%);
             }
@@ -344,12 +348,14 @@
             document.getElementById("loader").style.display = "none";
             document.getElementById("indicator").style.display = "block";
             document.getElementById("documents").style.display = "flex";
-            document.getElementById("continue").style.display = "block"
+            document.getElementById("continue").style.display = "block";
+            document.getElementById("confirm-to-share-data").style.display = "block";
         }, 1100);
 
         function cancel() {
             console.log("Cancelled")
-            // window.opener.postMessage("Cancelled", localStorage.getItem('site'));
+            window.opener.postMessage("Cancelled", localStorage.getItem('site'));
+            cleanLocalStorage();
             window.close();
         }
 
@@ -385,6 +391,8 @@
             }
 
         });
+
+
 
     </script>
 </body>
