@@ -200,11 +200,11 @@
         <div class="right-panel">
             <div class="info">
                 <h3>Personal Information</h3>
-                <p><strong>Name:</strong> John</p>
-                <p><strong>Surname:</strong> Doe</p>
-                <p><strong>Birthday:</strong> 01/01/1990</p>
-                <p><strong>Over 18:</strong> Yes</p>
-                <p><strong>IBAN:</strong> GR12345678901234567890123</p>
+                <p id="name" ><strong>Name:</strong> John</p>
+                <p id="surname" ><strong>Surname:</strong> Doe</p>
+                <p id="birthday" ><strong>Birthday:</strong> 01/01/1990</p>
+                <p id="over18" ><strong>Over 18:</strong> Yes</p>
+                <p id="iban" ><strong>IBAN:</strong> GR12345678901234567890123</p>
             </div>
 
             <div class="insurance">
@@ -240,7 +240,20 @@
         document.addEventListener("DOMContentLoaded", () => {
             const userData = EUDILoadData();
             console.log(userData);
+
+            const name = document.getElementById("name");
+            name.innerHTML = `<strong>Name:</strong> ${userData.get("PID").get("given_name")}`;
+            const surname = document.getElementById("surname");
+            surname.innerHTML = `<strong>Surname:</strong> ${userData.get("PID").get("family_name")}`;
+            const birthday = document.getElementById("birthday");
+            birthday.innerHTML = `<strong>Birthday:</strong> ${userData.get("PID").get("birth_date")}`;
+            const over18 = document.getElementById("over18");
+            over18.innerHTML = `<strong>Over 18:</strong> ${userData.get("AgeOver18").get("age_over_18")}`;
+            const iban = document.getElementById("iban");
+            iban.innerHTML = `<strong>IBAN:</strong> ${userData.get("IBAN").get("iban")}`;
         });
+
+
 
     </script>
 </body>
