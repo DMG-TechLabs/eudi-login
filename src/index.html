@@ -171,18 +171,19 @@
 
         @media (min-width: 481px) and (max-width: 1300px) {
             #confirm-to-share-data {
-                top: 62%; /* Center vertically */
-                left: 50%; /* Center horizontally */
-                transform: translate(-50%, -50%); /* Center perfectly */
-                width: 80%; /* Adjust width for tablets */
-                height: auto; /* Let height adjust to content */
-                max-width: 700px; /* Limit max width */
+                display: none;
+                top: 50%;
+                left: 50%; 
+                transform: translate(-50%, -50%); 
+                width: 70%; 
+                height: auto; 
+                max-width: 700px; 
                 padding: 20px;
-                margin: 0; /* Remove default margins */
+                margin: 0;
             }
 
             #indicator {
-                display: none;
+                display: block;
             }
 
             #eudi-icon {
@@ -194,7 +195,7 @@
             }
 
             #documents {
-                display: none;
+                display: flex;
                 flex-wrap: wrap;
                 justify-content: center; /* Center documents */
                 width: 100%;
@@ -202,7 +203,7 @@
 
             .document-box {
                 font-size: 16px; /* Adjust font size */
-                width: 45%; /* Two documents per row (adjust as needed) */
+                /* Two documents per row (adjust as needed) */
                 margin: 1%; /* Adjust margins */
                 box-sizing: border-box; /* Include padding/border in width */
             }
@@ -226,9 +227,8 @@
             }
 
             .loader {
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%); /* Center loader */
+                left: 0;
+                right: 0;
             }
         }
 
@@ -238,7 +238,6 @@
                 height: 150%;
             }*/
 
-            /* Loader adjustments */
             .loader {
                 width: 40px;
                 height: 40px;
@@ -248,8 +247,8 @@
             }
 
             #confirm-to-share-data {
-                top: 20%;
-                left: 25%;
+                display: none;
+                left: 28.5%;
                 transform: translateX(-50%);
                 width: 80%;
                 height: auto;
@@ -261,7 +260,7 @@
             }
 
             #documents {
-                display: none;
+                display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 width: auto;
@@ -275,12 +274,13 @@
             }
 
             .buttons {
-                flex-direction: row;
+                flex-direction: row; 
+                justify-content: center; 
+                position: relative; 
+                bottom: auto; 
+                margin-top: 20px; 
+                width: 100%;
                 gap: 10px;
-                position: absolute;
-                top: 102%;
-                left: 50%;
-                transform: translate(-50%, -50%);
             }
 
             .button {
@@ -293,7 +293,7 @@
             }
 
             #continue {
-                display: none;
+                display: block;
                 padding: 10px 20px;
                 font-size: 16px;
             }
@@ -343,8 +343,7 @@
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("indicator").style.display = "block";
-            document.getElementById("documents").style.display = "flex";
-            document.getElementById("continue").style.display = "block"
+            document.getElementById("confirm-to-share-data").style.display = "block";
         }, 1100);
 
         function cancel() {
