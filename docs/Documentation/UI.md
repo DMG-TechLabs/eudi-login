@@ -10,8 +10,8 @@ The **EU Digital Identity Wallet (EUDI Wallet)** is a digital authentication and
 ## Authentication Process
 
 ### 1. Login Selection
-- Users can **log in** using the EUDI Wallet or Google authentication.
-- This provides flexibility for users who may not have an EUDI Wallet.
+- Users can **log in** using the EUDI Wallet instead of Google authentication.
+- This provides flexibility for users who may not have a Google account.
 
 ![Login Options](../assets/login.png)
 
