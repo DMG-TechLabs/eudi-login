@@ -1,12 +1,21 @@
 {
   "version": "3.6.0",
-  "created": "2025-02-17T16:43:28Z",
+  "created": "2025-02-17T17:40:16Z",
   "files": [
     {
       "path": ".nojekyll"
     },
     {
       "path": "404.html"
+    },
+    {
+      "path": "assets/login.png"
+    },
+    {
+      "path": "assets/qrcode.png"
+    },
+    {
+      "path": "assets/shared-data.png"
     },
     {
       "path": "authentication/index.html",
@@ -100,7 +109,8 @@
       "path": "sitemap.xml.gz"
     },
     {
-      "path": "todo/index.html"
+      "path": "todo/index.html",
+      "old": true
     },
     {
       "path": "ui/index.html",
