@@ -3,87 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../../src/style.css">
-    <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
-    <!-- <script src="http://192.168.1.8/eudi-sdk.js"></script> -->
+    <title>Minimal Bank Login</title>
     <style>
-        .login-btns {
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
-            flex-direction: column;
             align-items: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
         }
 
         .login-btn {
-            margin-bottom: 20px;
+            transition: all 0.2s ease-in-out;
         }
 
-        #eudi-login {
-            display: block;
+        .login-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        #eudi-login {
-            width: 270px;
-            padding: 12px 24px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
+        .google-button {
+            transition: all 0.2s ease-in-out;
+            background-color: #db4437;
+        }
+
+        .google-button:hover {
+            background-color: #c23326;
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .eudi-button {
+            transition: all 0.2s ease-in-out;
             background: linear-gradient(45deg, #032e8a, #3c70df);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
-            letter-spacing: 1px;
         }
 
-        #eudi-login:hover {
+        .eudi-button:hover {
             transform: scale(1.1);
             box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #022266, #2d55b3);
         }
 
-        #google-login {
-            display: block;
+        .or-divider {
+            margin: 20px 0;
+            position: relative;
+            text-align: center;
         }
 
-        #google-login {
-            width: 270px;
-            padding: 12px 24px;
-            font-size: 18px;
-            font-weight: bold;
-            color: black;
-            /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
-            border: none;
-            border-radius: 5px;
-            border-color: black;
-            cursor: pointer;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
-            letter-spacing: 1px;
+        .or-divider span {
+            background-color: #fff;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
         }
 
-        #google-login:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        .or-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #ddd;
         }
     </style>
 </head>
 <body>
-    <div class="login-btns">
-        <div class="login-btn">
-            <button id="eudi-login" type="button" onclick="login()">Login with EUDI Wallet</button>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="#" method="post">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
+            </div>
+            <button class="login-btn"type="submit">Login</button>
+        </form>
+
+        <div class="or-divider">
+            <span>OR</span>
         </div>
 
-        <div class="login-btn">
-            <button id="google-login">Login with Google</button>
-        </div>
+        <button id="google-login" class="login-btn google-button">Login with Google</button>
+        <button id="eudi-login" class="login-btn eudi-button" onclick="login()" >Login with EUDI Wallet</button>
     </div>
-
     <script type="text/javascript">
         const loginButton = document.getElementById("eudi-login");
         const googleButton = document.getElementById("google-login");
@@ -173,5 +232,6 @@
             EUDILogin(config, "./dashboard.html");
         }
     </script>
+
 </body>
 </html>

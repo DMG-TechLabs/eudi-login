@@ -235,7 +235,7 @@
         // FIXME: This is a temporary solution to load the SDK from the same host as the login page.
         // The SDK should be loaded from a CDN.
         const host = window.location.hostname;
-        document.write(`<script src="http://${host}/eudi-sdk.js"><\/script>`);
+        document.write(`<script src="http://${host}:8080/eudi-sdk.js"><\/script>`);
 
         document.addEventListener("DOMContentLoaded", () => {
             const userData = EUDILoadData();
