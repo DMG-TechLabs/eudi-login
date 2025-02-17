@@ -1,16 +1,16 @@
 input: ./docs
 output: .retype
-# url: https://dmg-techlabs.github.io/eudi-login
+url: https://dmg-techlabs.github.io/eudi-login
 branding:
   title: eudi-login
-  label: 0.1.1
+  label: 0.2.0
 links:
-- text: Source code
-  link: https://github.com/DMG-TechLabs/eudi-login
-  icon: mark-github
-  target: blank
+  - text: Source code
+    link: https://github.com/DMG-TechLabs/eudi-login
+    icon: mark-github
+    target: blank
 - text: Digital Identity EU
   link: https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home
   target: blank
-footer:
-  copyright: "&copy; Copyright {{ year }}. All rights reserved."
+  footer:
+    copyright: "&copy; Copyright {{ year }}. All rights reserved."
