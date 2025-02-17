@@ -98,10 +98,8 @@
 
     <script type="text/javascript">
 
-        /*
-        * TODO: This is a temporary solution to load the SDK from the same host as the login page.
-        *       The SDK should be loaded from a CDN.
-        */
+        // FIXME: This is a temporary solution to load the SDK from the same host as the login page.
+        // The SDK should be loaded from a CDN.
         const host = window.location.hostname;
         document.write(`<script src="http://${host}/eudi-sdk.js"><\/script>`);
 
