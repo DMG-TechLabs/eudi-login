@@ -23,6 +23,12 @@ const AUTH_URL = "http://"+window.location.hostname;
  * @param {string} [target=window.location.origin] - The target URL to redirect to after authentication.
  */
 function EUDILogin(config, target = window.location.origin) {
+    if(Object.values(config).filter(value => value === true).length == 0){
+        window.alert("Please set at least one value to true");
+        return;
+    }
+
+
     window.addEventListener("message", function(event) {
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
@@ -33,7 +39,11 @@ function EUDILogin(config, target = window.location.origin) {
     }, { once: true });
 
 
-    const authWindow = window.open(AUTH_URL, "_blank");
+    const authWindow = window.open(
+        AUTH_URL,
+        "EUDI Login",
+        "width=500,height=600"
+    );
 
     const messageData = {
         site: window.location.origin,
