@@ -1,5 +1,7 @@
 # eudi-login
 
+Login service and SDK that leverages the [EUDI Wallet](https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home) functionality
+
 ## Get Started
 
 ```bash
