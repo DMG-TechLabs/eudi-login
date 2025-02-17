@@ -189,8 +189,11 @@ export async function start(){
         window.close();
     }
     else{
+        console.log("Missing attestations")
         window.opener.postMessage("Missing attestations", site);
-        window.alert("Not all requied files available. Please try again.")
+        document.getElementById('dialog').style.display = 'flex';
+
+        // window.alert("Not all requied files available. Please try again.")
     }
 }
 
