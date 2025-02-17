@@ -19,6 +19,6 @@ $ make start
 
 ## Authors
 
-- [KDesp73 (Konstantinos Despoinidis)](https://github.com/KDesp73)
-- [creatorkostas (Konstantinos Mokas)](https://github.com/creatorkostas)
-- [ThanasisGeorg (Athanasios Georgalis)](https://github.com/ThanasisGeorg)
+- [KDesp73](https://github.com/KDesp73) (Konstantinos Despoinidis)
+- [creatorkostas](https://github.com/creatorkostas) (Konstantinos Mokas)
+- [ThanasisGeorg](https://github.com/ThanasisGeorg) (Athanasios Georgalis)
