@@ -105,38 +105,41 @@
         <div class="spaced-line">
             <span>OR</span>
         </div>
-        <button class="accent-button">Open Wallet</button>
+        <button onclick="openWallet()" class="accent-button">Open Wallet</button>
     </div>
 
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("qr-container").style.display = "block";
-        }, 1500);
+            setTimeout(() => {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("qr-container").style.display = "block";
+            }, 1500);
 
-        async function start(){
-            const site = localStorage.getItem('site');
-            const data = JSON.parse(localStorage.getItem('config'));
-            const result = await run(data);
-            console.log(result)
+            async function start(){
+                const site = localStorage.getItem('site');
+                const data = JSON.parse(localStorage.getItem('config'));
+                const result = await run(data);
+                console.log(result)
 
-            const validData = result.conf.validate(result.data);
-            if(validData){
-                console.log(site)
-                window.opener.postMessage(result.data, site);
-                window.close();
+                const validData = result.conf.validate(result.data);
+                if(validData){
+                    console.log(site)
+                    window.opener.postMessage(result.data, site);
+                    window.close();
+                }
+                else{
+                    window.opener.postMessage("Missing attestations", site);
+                    window.alert("Not all requied files available. Please try again.")
+                }
             }
-            else{
-                window.opener.postMessage("Missing attestations", site);
-                window.alert("Not all requied files available. Please try again.")
-            }
-        }
 
             start()
         });
 
-        </script>
+        function openWallet(){
+            window.location.href = localStorage.getItem("app_uri");
+        }
+    </script>
 
 </body>
 </html>

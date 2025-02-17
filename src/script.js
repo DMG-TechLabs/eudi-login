@@ -158,6 +158,8 @@ export async function run(conf) {
 
     const transaction = await transactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
+    if(isMobileDevice())
+        localStorage.setItem("app_uri", uri);
     paintQR(uri);
 
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
