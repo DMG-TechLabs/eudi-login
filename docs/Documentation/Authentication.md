@@ -27,6 +27,7 @@ This document describes the authorization process facilitated through the EUDI W
 ### 4. User Confirmation & Authentication Completion
 - The user confirms the transaction in the EUDI Wallet application.
 - If the user holds all required attestations, the authorization is marked as complete.
+- Otherwise a dialog appears with a message informing the user that he is missing a required document.
 - The user is redirected to the original website upon successful authentication.
 
 ## Security Considerations

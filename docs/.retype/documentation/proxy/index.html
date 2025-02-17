@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793117490736">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793125806129">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
@@ -11,6 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Proxy</title>
     <meta name="title" content="Proxy">
+    <meta name="description" content="This document explains the functionality of two PHP files that implement a proxy system.">
 
     <!-- Canonical -->
     <link rel="canonical" href="/documentation/proxy/">
@@ -19,19 +20,21 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/documentation/proxy/">
     <meta property="og:title" content="Proxy">
+    <meta property="og:description" content="This document explains the functionality of two PHP files that implement a proxy system.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/documentation/proxy/">
     <meta property="twitter:title" content="Proxy">
+    <meta property="twitter:description" content="This document explains the functionality of two PHP files that implement a proxy system.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../resources/css/retype.css?v=3.6.0.793117490736" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.793125806129" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793117490736" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793125806129" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793117490736" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793125806129" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -152,6 +155,81 @@
         <span>Proxy</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="overview">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
+        <span>Overview</span>
+    </h2>
+</doc-anchor-target>
+<p>This document explains the functionality of two PHP files that implement a proxy system. The proxy is designed to securely forward HTTP requests while enforcing access control policies and preventing security vulnerabilities such as SSRF (Server-Side Request Forgery).</p>
+<doc-anchor-target id="file-1-redirectphp">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#file-1-redirectphp">#</doc-anchor-trigger>
+        <span>File 1: <code v-pre>redirect.php</code></span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="purpose">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#purpose">#</doc-anchor-trigger>
+        <span>Purpose</span>
+    </h3>
+</doc-anchor-target>
+<p>This script acts as an HTTP proxy, forwarding client requests to backend services while enforcing security policies. It ensures that only allowed origins can access the proxy and prevents unauthorized access to internal network resources.</p>
+<doc-anchor-target id="key-features">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-features">#</doc-anchor-trigger>
+        <span>Key Features</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>CORS Handling</strong>: Implements Cross-Origin Resource Sharing (CORS) to control which origins can access the proxy.</li>
+<li><strong>Request Forwarding</strong>: Extracts the target URL from the request and forwards it using cURL.</li>
+<li><strong>SSRF Protection</strong>: Checks if the target URL resolves to an internal IP and blocks such requests.</li>
+<li><strong>Error Handling</strong>: Ensures invalid requests return appropriate HTTP error codes and messages.</li>
+<li><strong>Security Enhancements</strong>: Prevents XSS attacks by sanitizing output data.</li>
+</ul>
+<doc-anchor-target id="file-2-proxyphp">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#file-2-proxyphp">#</doc-anchor-trigger>
+        <span>File 2: <code v-pre>proxy.php</code></span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="purpose-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#purpose-1">#</doc-anchor-trigger>
+        <span>Purpose</span>
+    </h3>
+</doc-anchor-target>
+<p>This file defines the <code v-pre>Proxy</code> class, which manages the allowed proxy endpoints and retrieves the appropriate target URL for forwarding.</p>
+<doc-anchor-target id="key-features-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-features-1">#</doc-anchor-trigger>
+        <span>Key Features</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>Configuration Loading</strong>: Reads allowed proxy target mappings from a JSON file.</li>
+<li><strong>Validation</strong>: Ensures that only predefined paths are accessible through the proxy.</li>
+<li><strong>URL Resolution</strong>: Matches incoming request paths to valid target URLs.</li>
+</ul>
+<doc-anchor-target id="security-considerations">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#security-considerations">#</doc-anchor-trigger>
+        <span>Security Considerations</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><strong>CORS Restrictions</strong>: Only specific origins can access the proxy to prevent unauthorized cross-origin requests.</li>
+<li><strong>SSRF Mitigation</strong>: Internal and reserved IP addresses are blocked from being accessed via the proxy.</li>
+<li><strong>Input Sanitization</strong>: Ensures only valid JSON and URLs are processed, reducing the risk of injection attacks.</li>
+</ul>
+<doc-anchor-target id="conclusion">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#conclusion">#</doc-anchor-trigger>
+        <span>Conclusion</span>
+    </h2>
+</doc-anchor-target>
+<p>These PHP scripts work together to provide a secure proxy mechanism for forwarding requests to predefined backend services. The implementation follows best security practices to mitigate common web vulnerabilities while ensuring flexibility in handling API requests.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -165,7 +243,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                                                <span class="block mt-1">Authentication</span>
+                                                <span class="block mt-1">Authorization Process</span>
                                             </span>
                                         </a>
                                     </div>

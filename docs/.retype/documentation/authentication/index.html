@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793117490736">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793125806129">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
 
     <!-- Primary Meta Tags -->
-    <title>Authentication</title>
-    <meta name="title" content="Authentication">
+    <title>Authorization Process</title>
+    <meta name="title" content="Authorization Process">
+    <meta name="description" content="This document describes the authorization process facilitated through the EUDI Wallet.">
 
     <!-- Canonical -->
     <link rel="canonical" href="/documentation/authentication/">
@@ -18,20 +19,22 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="/documentation/authentication/">
-    <meta property="og:title" content="Authentication">
+    <meta property="og:title" content="Authorization Process">
+    <meta property="og:description" content="This document describes the authorization process facilitated through the EUDI Wallet.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/documentation/authentication/">
-    <meta property="twitter:title" content="Authentication">
+    <meta property="twitter:title" content="Authorization Process">
+    <meta property="twitter:description" content="This document describes the authorization process facilitated through the EUDI Wallet.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../resources/css/retype.css?v=3.6.0.793117490736" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.793125806129" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793117490736" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793125806129" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793117490736" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793125806129" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -146,12 +149,87 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="docs-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="authentication" class="break-words">
+<doc-anchor-target id="authorization-process" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#authentication">#</doc-anchor-trigger>
-        <span>Authentication</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#authorization-process">#</doc-anchor-trigger>
+        <span>Authorization Process</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="overview">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#overview">#</doc-anchor-trigger>
+        <span>Overview</span>
+    </h2>
+</doc-anchor-target>
+<p>This document describes the authorization process facilitated through the EUDI Wallet. The process ensures secure identity verification by interacting with the <code v-pre>/ui/presentations</code> endpoint and handling user authentication via QR codes.</p>
+<doc-anchor-target id="steps">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#steps">#</doc-anchor-trigger>
+        <span>Steps</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="1-initialize-transaction">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-initialize-transaction">#</doc-anchor-trigger>
+        <span>1. Initialize Transaction</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>The system initializes an authorization transaction using a predefined configuration.</li>
+<li>This configuration defines the required attestations and constructs the request body accordingly.</li>
+<li>The constructed request body is sent to the <code v-pre>/ui/presentations</code> endpoint via the proxy.</li>
+<li>The response contains transaction information, confirming the transaction&#x27;s initialization.</li>
+</ul>
+<doc-anchor-target id="2-generate-qr-code-for-authentication">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-generate-qr-code-for-authentication">#</doc-anchor-trigger>
+        <span>2. Generate QR Code for Authentication</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Using the <code v-pre>client_id</code> and <code v-pre>request_uri</code> from the response, a URI is created.</li>
+<li>The URI is encoded into a QR code.</li>
+<li>On mobile devices, a button is displayed for initiating authentication.</li>
+</ul>
+<doc-anchor-target id="3-poll-for-authorization-status">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-poll-for-authorization-status">#</doc-anchor-trigger>
+        <span>3. Poll for Authorization Status</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>The system immediately starts polling the <code v-pre>/ui/presentations/{transaction_id}</code> endpoint via the proxy.</li>
+<li>Polling continues for a maximum of 2 minutes, checking for user confirmation.</li>
+</ul>
+<doc-anchor-target id="4-user-confirmation--authentication-completion">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-user-confirmation--authentication-completion">#</doc-anchor-trigger>
+        <span>4. User Confirmation &amp; Authentication Completion</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>The user confirms the transaction in the EUDI Wallet application.</li>
+<li>If the user holds all required attestations, the authorization is marked as complete.</li>
+<li>The user is redirected to the original website upon successful authentication.</li>
+</ul>
+<doc-anchor-target id="security-considerations">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#security-considerations">#</doc-anchor-trigger>
+        <span>Security Considerations</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><strong>Polling Timeout</strong>: The system enforces a 2-minute timeout to prevent indefinite polling.</li>
+<li><strong>QR Code Encoding</strong>: The authentication URI is securely encoded to avoid manipulation.</li>
+<li><strong>Proxy Handling</strong>: Requests pass through a secure proxy to prevent direct exposure of backend endpoints.</li>
+</ul>
+<doc-anchor-target id="conclusion">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#conclusion">#</doc-anchor-trigger>
+        <span>Conclusion</span>
+    </h2>
+</doc-anchor-target>
+<p>This process ensures secure and efficient user authentication using the EUDI Wallet, minimizing security risks while maintaining a seamless user experience.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -218,6 +296,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Authentication", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Authorization Process", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

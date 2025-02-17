@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793117490736">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793125806129">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
@@ -11,6 +11,7 @@
     <!-- Primary Meta Tags -->
     <title>Getting Started</title>
     <meta name="title" content="Getting Started">
+    <meta name="description" content="The EUDI SDK is a JavaScript library that allows you to integrate the EUDI Wallet into your application.">
 
     <!-- Canonical -->
     <link rel="canonical" href="/guides/getting-started/">
@@ -19,19 +20,22 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="/guides/getting-started/">
     <meta property="og:title" content="Getting Started">
+    <meta property="og:description" content="The EUDI SDK is a JavaScript library that allows you to integrate the EUDI Wallet into your application.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="/guides/getting-started/">
     <meta property="twitter:title" content="Getting Started">
+    <meta property="twitter:description" content="The EUDI SDK is a JavaScript library that allows you to integrate the EUDI Wallet into your application.">
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../resources/css/retype.css?v=3.6.0.793117490736" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.793125806129" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793117490736" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793125806129" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793117490736" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793125806129" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.793125806129" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -152,6 +156,130 @@
         <span>Getting Started</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="adding-the-eudi-sdk-to-your-project">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#adding-the-eudi-sdk-to-your-project">#</doc-anchor-trigger>
+        <span>Adding the EUDI SDK to your project</span>
+    </h2>
+</doc-anchor-target>
+<p>The EUDI SDK is a JavaScript library that allows you to integrate the EUDI Wallet into your application.
+To use the SDK, you need to include the <code v-pre>eudi-sdk.js</code> file in your HTML file.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">&lt;script src=&quot;https://raw.githubusercontent.com/DMG-TechLabs/eudi-login/refs/heads/main/src/eudi-sdk.js&quot;&gt;&lt;/script&gt;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="initializing-the-sdk">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#initializing-the-sdk">#</doc-anchor-trigger>
+        <span>Initializing the SDK</span>
+    </h2>
+</doc-anchor-target>
+<p>To use the SDK, you need to pass into the <code v-pre>EUDILogin</code> function (that is used to start the authentication process) the configuration options.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">EUDILogin(config, target);</code></pre>
+</doc-codeblock></div>
+<ul>
+<li><code v-pre>config</code>: An object containing the configuration options for the authentication process. The available options are:
+<ul>
+<li><code v-pre>AgeOver18</code>: Whether the user is over 18 years old.</li>
+<li><code v-pre>HealthID</code>: Whether to include Health ID attestation.</li>
+<li><code v-pre>IBAN</code>: Whether to include IBAN attestation.</li>
+<li><code v-pre>Loyalty</code>: Whether to include Loyalty attestation.</li>
+<li><code v-pre>mDL</code>: Whether to include mobile Driver’s License (mDL) attestation.</li>
+<li><code v-pre>MSISDN</code>: Whether to include MSISDN (phone number) attestation.</li>
+<li><code v-pre>PhotoId</code>: Whether to include Photo ID attestation.</li>
+<li><code v-pre>PID</code>: Whether to include Personal ID (PID) attestation.</li>
+<li><code v-pre>PowerOfRepresentation</code>: Whether to include Power of Representation attestation.</li>
+<li><code v-pre>PseudonymDeferred</code>: Whether to include Pseudonym Deferred attestation.</li>
+<li><code v-pre>Reservation</code>: Whether to include Reservation attestation.</li>
+<li><code v-pre>TaxNumber</code>: Whether to include Tax Number attestation.</li>
+</ul>
+</li>
+<li><code v-pre>target</code>: (optional) The URL to redirect to after the authentication process. If not provided there will be no redirect.</li>
+</ul>
+<doc-anchor-target id="handling-the-authentication-result">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#handling-the-authentication-result">#</doc-anchor-trigger>
+        <span>Handling the authentication result</span>
+    </h2>
+</doc-anchor-target>
+<p>After the authentication process is complete, the SDK will redirect to the specified <code v-pre>target</code> URL.
+If the authentication process is successful, the URL will contain the user&#x27;s data in the query parameters.
+If the authentication process is cancelled or fails, the URL will contain an error message.</p>
+<p>Possible values for the <code v-pre>event.data</code> property are:</p>
+<ul>
+<li><code v-pre>&quot;Missing attestations&quot;</code>: The user did not provide all required attestations.</li>
+<li><code v-pre>&quot;Cancelled&quot;</code>: The authentication process was cancelled.</li>
+<li>An object containing the user&#x27;s data.</li>
+</ul>
+<doc-anchor-target id="retrieving-the-user-data">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#retrieving-the-user-data">#</doc-anchor-trigger>
+        <span>Retrieving the user data</span>
+    </h2>
+</doc-anchor-target>
+<p>To retrieve the user data, you can use the <code v-pre>EUDILoadData</code> function.
+This function returns a <code v-pre>Map</code> object that contains the user&#x27;s data.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-javascript"><code v-pre class="language-javascript">const userData = EUDILoadData();</code></pre>
+</doc-codeblock></div>
+<p>The <code v-pre>Map</code> object contains the following keys:</p>
+<ul>
+<li><code v-pre>AgeOver18</code>: The user&#x27;s age verified by the EUDI Wallet.</li>
+<li><code v-pre>HealthID</code>: The user&#x27;s Health ID.</li>
+<li><code v-pre>IBAN</code>: The user&#x27;s IBAN.</li>
+<li><code v-pre>Loyalty</code>: The user&#x27;s Loyalty card number.</li>
+<li><code v-pre>mDL</code>: The user&#x27;s mDL number.</li>
+<li><code v-pre>MSISDN</code>: The user&#x27;s MSISDN (phone number).</li>
+<li><code v-pre>PhotoId</code>: The user&#x27;s Photo ID.</li>
+<li><code v-pre>PID</code>: The user&#x27;s Personal ID.</li>
+<li><code v-pre>PowerOfRepresentation</code>: The user&#x27;s Power of Representation.</li>
+<li><code v-pre>PseudonymDeferred</code>: The user&#x27;s Pseudonym Deferred.</li>
+<li><code v-pre>Reservation</code>: The user&#x27;s Reservation.</li>
+<li><code v-pre>TaxNumber</code>: The user&#x27;s Tax Number.</li>
+</ul>
+<doc-anchor-target id="example">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example">#</doc-anchor-trigger>
+        <span>Example</span>
+    </h2>
+</doc-anchor-target>
+<p>Here&#x27;s an example of how to use the SDK in a simple HTML file:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;EUDI Login&lt;/title&gt;
+    &lt;script src=&quot;https://raw.githubusercontent.com/DMG-TechLabs/eudi-login/refs/heads/main/src/eudi-sdk.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button onclick=&quot;login()&quot;&gt;Login with EUDI Wallet&lt;/button&gt;
+
+    &lt;script&gt;
+        function login() {
+            const config = {
+                AgeOver18: true,
+                HealthID: true,
+                IBAN: true,
+                Loyalty: true,
+                mDL: true,
+                MSISDN: true,
+                PhotoId: true,
+                PID: true,
+                PowerOfRepresentation: true,
+                PseudonymDeferred: true,
+                Reservation: true,
+                TaxNumber: true
+            };
+            EUDILogin(config, &quot;./homepage&quot;);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</doc-codeblock></div>
+<p>In this example, the user will be prompted to login with the EUDI Wallet.
+After the authentication process is complete, the user will be redirected to <code v-pre>https://your-domain.com/homepage</code>.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -218,6 +346,6 @@
 
     <div id="docs-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "Getting Started", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Getting Started", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
