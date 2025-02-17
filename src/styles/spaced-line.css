@@ -1,0 +1,22 @@
+.spaced-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.spaced-line::before,
+.spaced-line::after {
+    content: "";
+    flex-grow: 1;
+    border-bottom: 1px solid #000;
+    margin: 0 10px;
+}
+
+.spaced-line span {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
