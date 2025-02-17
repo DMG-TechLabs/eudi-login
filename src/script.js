@@ -204,6 +204,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         showDivs(data);
     }, false);
+
+    window.addEventListener("beforeunload", (event) => {
+        event.preventDefault(); // This is required for older browsers
+        window.opener.postMessage("Cancelled", localStorage.getItem('site'));
+
+    });
+
 });
 
 window.main = main;

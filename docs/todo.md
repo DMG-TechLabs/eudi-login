@@ -15,11 +15,11 @@
 
 ### edge cases
 
-- [ ] reloads
-- [ ] not attestations
-- [ ] empty config
-- [ ] continue before load
-- [ ] cancel
-- [ ] close demo page
-- [ ] close auth page
-- [ ] open with wallet in pc
+- [x] reloads
+- [x] not attestations
+- [x] empty config
+- [x] continue before load
+- [x] cancel
+- [x] close demo page
+- [x] close auth page
+- [x] open with wallet in pc
