@@ -1,6 +1,1 @@
----
-icon: home
----
-
-
 # eudi-login

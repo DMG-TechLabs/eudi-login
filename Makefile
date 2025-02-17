@@ -32,6 +32,7 @@ distclean: ## Clean the distribution
 
 .PHONY: docs
 docs: ## Generate the documentation site
+	./scripts/readme.sh
 	retype build docs
 
 .PHONY: help
