@@ -39,7 +39,11 @@ function EUDILogin(config, target = window.location.origin) {
     }, { once: true });
 
 
-    const authWindow = window.open(AUTH_URL, "_blank");
+    const authWindow = window.open(
+        AUTH_URL,
+        "EUDI Login",
+        "width=500,height=600"
+    );
 
     const messageData = {
         site: window.location.origin,
