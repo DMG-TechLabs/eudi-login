@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dmg-techlabs.github.io/eudi-login/sitemap.xml.gz
