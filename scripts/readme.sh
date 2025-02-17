@@ -3,6 +3,7 @@
 header=$(cat << EOF
 ---
 icon: home
+label: Home
 ---
 EOF
 )
