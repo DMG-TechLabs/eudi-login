@@ -5,60 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUDI Login</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/buttons.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
 </head>
 <script src="./extern/qrcode.js"></script>
 <script type="module" src="./script.js"></script>
 <script type="module" src="./modules/ui.mjs"></script>
 <style>
-    .loader {
-        width: 48px;
-        height: 48px;
-        display: block;
-        margin:15px auto;
-        position: absolute;
-        top: 40%;
-        left: 45%;
-        transform: translate(-50%, -50%);
-        color: #FFF;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-    }
-
-    .loader::after,
-    .loader::before {
-        content: '';
-        box-sizing: border-box;
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        top: 50%;
-        left: 50%;
-        transform: scale(0.5) translate(0, 0);
-        background-color: #e9f66a;
-        border-radius: 50%;
-        animation: animloader 1s infinite ease-in-out;
-    }
-
-    .loader::before {
-        background-color: #1238ea;
-        transform: scale(0.5) translate(-48px, -48px);
-    }
-
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    @keyframes animloader {
-        50% {
-            transform: scale(1) translate(-50%, -50%);
-        }
-    }
-
     #confirm-to-share-data {
         display: flex;
         flex-direction: column;
@@ -72,7 +25,6 @@
         text-align: center;
         margin-left: 100px;
         width: 500px;
-        height: 650px;
     }
 
     #indicator {
@@ -88,16 +40,20 @@
     #documents {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
     }
 
     .document-box {
         font-size: 20px;
-        border: 3px solid;
+        font-weight: bold;
+        border: 2px solid;
         border-radius: 10px;
         padding: 2%;
-        margin: 1.5%;
-        height: min-content;
+        margin: 1%;
+        flex: 1 1 calc(100% / 6 - 10px);
+    }
+
+    .document-box:nth-child(n+7) {
+        flex: 1 1 calc(100% / 5 - 10px);
     }
 
     .document {
@@ -109,8 +65,7 @@
     .buttons {
         display: flex;
         justify-content: center;
-        position: absolute;
-        bottom: 10%;
+        margin-top: 30px;
     }
 
     .button {
@@ -146,35 +101,6 @@
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    #continue {
-        display: block;
-    }
-
-    #continue {
-        padding: 12px 24px;
-        font-size: 18px;
-        font-weight: bold;
-        color: white;
-        background: #cfd3dc;
-        background: linear-gradient(45deg, #032e8a, #3c70df);
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
-        transition: all 0.3s ease-in-out;
-        letter-spacing: 1px;
-    }
-
-    #continue:hover {
-        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Active (clicked) effect */
-    #continue:active {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
     #eudi-icon {
         position: absolute;
         top: 50%;
@@ -192,9 +118,7 @@
             <h2>By continuing, you accept to share the following data</h2>
         </span>
 
-        <div id="documents">
-            <span class="loader" id="loader"></span>
-        </div>
+        <div id="documents"></div>
 
         <div class="buttons">
             <div class="button">
@@ -202,16 +126,12 @@
             </div>
 
             <div class="button">
-                <button id="continue" onclick="generateQRCode()">Continue</button>
+                <button class="accent-button" id="continue" onclick="generateQRCode()">Continue</button>
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        setTimeout(() => {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("documents").style.display = "flex";
-        }, 1500);
 
         function cancel() {
             <!----TODO---->
@@ -221,34 +141,26 @@
             window.location.href = "./qrcode/index.html";
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const config = JSON.parse(localStorage.getItem('config'));
-            console.log(config)
-            if (config != null) {
-                console.log("config is not null")
-                showDivs(config);
-            }else{
-                console.log("config is null")
-                const startConfig = {
-                    AgeOver18: false,
-                    HealthID: false,
-                    IBAN: false,
-                    Loyalty: false,
-                    mDL: false,
-                    MSISDN: false,
-                    PhotoId: false,
-                    PID: false,
-                    PowerOfRepresentation: false,
-                    PseudonymDeferred: false,
-                    Reservation: false,
-                    TaxNumber: false
-                }
 
-                localStorage.setItem('config', JSON.stringify(startConfig));
-                showDivs(startConfig);
-            }
+        localStorage.setItem('config', JSON.stringify({
+            AgeOver18: false,
+            HealthID: false,
+            IBAN: false,
+            Loyalty: false,
+            mDL: false,
+            MSISDN: false,
+            PhotoId: false,
+            PID: false,
+            PowerOfRepresentation: false,
+            PseudonymDeferred: false,
+            Reservation: false,
+            TaxNumber: false
+        } ));
 
-        });
+
+        const config = JSON.parse(localStorage.getItem('config'));
+
+        showDivs(config);
 
     </script>
 </body>
