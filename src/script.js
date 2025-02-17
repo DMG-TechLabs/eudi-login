@@ -3,11 +3,13 @@ import { MdocDecoder } from './modules/decoder.mjs';
 import { poll } from './modules/polling.mjs';
 import { Request } from './modules/request.mjs';
 
+const HOST = "http://192.168.1.8";
+
 /**
  * Backend proxy endpoint URL.
  * @constant {string}
  */
-const PROXY = "http://localhost/php/redirect.php";
+const PROXY = HOST + "/php/redirect.php";
 
 /**
  * Presentations API endpoint.

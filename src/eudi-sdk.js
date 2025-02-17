@@ -1,4 +1,4 @@
-const AUTH_URL = "http://localhost";
+const AUTH_URL = "http://192.168.1.8";
 
 /**
 * @typedef {Object} ConfigOptions
