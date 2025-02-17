@@ -78,11 +78,11 @@ function paintQR(uri) {
 /**
  * Initializes the transaction.
  * @async
- * @function TransactionInit
+ * @function transactionInit
  * @param {json} transactionBody
  * @returns {Promise<any>} - Resolves with the response data or null if an error occurs.
  */
-async function TransactionInit(transactionBody) {
+async function transactionInit(transactionBody) {
     try {
         const request = new Request(PROXY);
         const response = await request.post(PRESENTATIONS_ENDPOINT, transactionBody);
@@ -93,7 +93,31 @@ async function TransactionInit(transactionBody) {
     }
 }
 
+function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
+    // List of common mobile devices and user agents
+    const mobileAgents = [
+        'Android', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Opera Mini', 'Windows Phone', 'webOS',
+        'Mobile', 'Silk', 'Kindle', 'Samsung', 'SonyEricsson', 'Mobi'
+    ];
+
+    // Check if the user agent contains any of the mobile device strings
+    for (let i = 0; i < mobileAgents.length; i++) {
+        if (userAgent.indexOf(mobileAgents[i]) > -1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Main function to initialize and validate the authentication process (ONLY FOR DEVELOPMENT).
+ * @async
+ * @function main
+ * @returns {Promise<void>}
+ */
 export async function main() {
     const config = {
         AgeOver18: true,
@@ -117,16 +141,22 @@ export async function main() {
     console.log(success);
 }
 
-
+/**
+ * Runs the authentication process based on the provided configuration.
+ * @async
+ * @function run
+ * @param {ConfigOptions} conf - The configuration settings.
+ * @returns {Promise<{data: Object, conf: Config} | null>} The decoded data and configuration, or null if no attestations are active.
+ */
 export async function run(conf) {
-    // showDivs(conf);
     const config = new Config(conf)
     if(config.countActive() == 0) return null;
     await config.init();
     localStorage.setItem('config', JSON.stringify(config.settings));
 
+    console.log("Is Mobile: ", isMobileDevice())
 
-    const transaction = await TransactionInit(config.request);
+    const transaction = await transactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     paintQR(uri);
 
@@ -138,10 +168,34 @@ export async function run(conf) {
     return {data: decoded, conf: config}
 }
 
-// main();
+/**
+ * Starts the authentication process by retrieving stored configuration and validating data.
+ * @async
+ * @function start
+ * @returns {Promise<void>}
+ */
+export async function start(){
+    const site = localStorage.getItem('site');
+    const data = JSON.parse(localStorage.getItem('config'));
+    const result = await run(data);
+    console.log(result)
+
+    const validData = result.conf.validate(result.data);
+    if(validData){
+        console.log(site)
+        window.opener.postMessage(result.data, site);
+        window.close();
+    }
+    else{
+        window.opener.postMessage("Missing attestations", site);
+        window.alert("Not all requied files available. Please try again.")
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("message", async function(event) {
+    window.addEventListener("message", async function(event) {
         console.log("Received message from:", event.origin);
 
         // Extract the received data
@@ -149,29 +203,17 @@ window.addEventListener("message", async function(event) {
         console.log("User's Site:", site);
         console.log("Received Data:", data);
 
-        // if (site !== event.origin) {
-        //     console.error("Invalid site:", site);
-        //     return;
-        // }
+        if (site !== event.origin) {
+            console.error("Invalid site:", site);
+            return;
+        }
         localStorage.setItem('site', site);
         localStorage.setItem('config', JSON.stringify(data));
 
         showDivs(data);
-        // const config = new Config(data);
-        // config.init();
-        //
-        // const transaction = await TransactionInit(config.request);
-        // const uri = buildQRUri(transaction.client_id, transaction.request_uri);
-        // paintQR(uri);
-        //
-        // const pollingUrl = buildPollingUrl(transaction.transaction_id);
-        // const response = await poll(pollingUrl);
-        // const decoded = await run(data);
-        // console.log(decoded)
-        // window.opener.postMessage(decoded, site);
-        // window.close();
     }, false);
 });
 
 window.main = main;
 window.run = run;
+window.start = start;

@@ -97,6 +97,7 @@
     </div>
 
     <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("qr-container").style.display = "block";
@@ -119,7 +120,7 @@
                 window.alert("Not all requied files available. Please try again.")
             }
         }
-        document.addEventListener("DOMContentLoaded", () => {
+
             start()
         });
         // start()
