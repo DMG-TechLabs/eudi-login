@@ -168,8 +168,66 @@
             height: 280px;
         }
 
-        /* Mobile & Tablet specific styles */
-        @media (max-width: 768px) {
+        @media (min-width: 481px) and (max-width: 1300px) {
+            #confirm-to-share-data {
+                top: 62%; /* Center vertically */
+                left: 50%; /* Center horizontally */
+                transform: translate(-50%, -50%); /* Center perfectly */
+                width: 80%; /* Adjust width for tablets */
+                height: auto; /* Let height adjust to content */
+                max-width: 700px; /* Limit max width */
+                padding: 20px;
+                margin: 0; /* Remove default margins */
+            }
+
+            #eudi-icon {
+                width: 50%; /* Adjust icon width */
+                height: auto;
+                top: 4%; /* Adjust top positioning */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            #documents {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center; /* Center documents */
+                width: 100%;
+            }
+
+            .document-box {
+                font-size: 16px; /* Adjust font size */
+                width: 45%; /* Two documents per row (adjust as needed) */
+                margin: 1%; /* Adjust margins */
+                box-sizing: border-box; /* Include padding/border in width */
+            }
+
+            .buttons {
+                flex-direction: row; /* Buttons in a row */
+                justify-content: center; /* Center buttons */
+                position: relative; /* Remove absolute positioning */
+                bottom: auto; /* Remove bottom positioning */
+                margin-top: 20px; /* Add space above buttons */
+                width: 100%;
+            }
+
+            .button {
+                margin: 0 10px; /* Adjust button margins */
+            }
+
+            #cancel, #continue {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+
+            .loader {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); /* Center loader */
+            }
+        }
+
+        @media (max-width: 480px) {
             /*body {
                 overflow-y: auto;
                 height: 150%;
@@ -244,22 +302,6 @@
                 left: 45%;
             }
         }
-
-        @media (max-width: 480px) {
-            #indicator {
-                font-size: 14px;
-            }
-
-            .document-box {
-                font-size: 14px;
-                
-            }
-
-            #cancel, #continue {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-        }
     </style>
 </head>
 <script src="./extern/qrcode.js"></script>
@@ -284,6 +326,8 @@
                 <button id="continue" onclick="generateQRCode()">Continue</button>
             </div>
         </div>
+    </div>
+    <div>
     </div>
 
     <script type="text/javascript">
