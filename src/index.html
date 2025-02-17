@@ -18,13 +18,12 @@
         margin:15px auto;
         position: absolute;
         top: 40%;
-        left: 45%;
-        transform: translate(-50%, -50%);
+        left: 74%;
         color: #FFF;
         box-sizing: border-box;
         animation: rotation 1s linear infinite;
+        z-index: 2;
     }
-
     .loader::after,
     .loader::before {
         content: '';
@@ -86,24 +85,17 @@
     }
 
     #documents {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
-        justify-content: center;
+        width: 500px;
     }
 
     .document-box {
         font-size: 20px;
         border: 3px solid;
         border-radius: 10px;
-        padding: 2%;
+        padding: 18px 10px 18px 10px;
         margin: 1.5%;
-        height: min-content;
-    }
-
-    .document {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
     }
 
     .buttons {
@@ -186,15 +178,14 @@
     }
 </style>
 <body>
+    <span class="loader" id="loader"></span>
     <img id="eudi-icon" src="./assets/ic-logo.svg">
     <div id="confirm-to-share-data">
         <span id="indicator">
             <h2>By continuing, you accept to share the following data</h2>
         </span>
 
-        <div id="documents">
-            <span class="loader" id="loader"></span>
-        </div>
+        <div id="documents"></div>
 
         <div class="buttons">
             <div class="button">
