@@ -41,9 +41,11 @@ The **EU Digital Identity Wallet (EUDI Wallet)** is a digital authentication and
 ![QR Code Authentication](../assets/qrcode.png)
 
 
-## Security & Privacy
-- The EUDI Wallet ensures **secure authentication** and **data privacy** by allowing users to **control the data** they share.
-- Only **authorized services** can request specific credentials.
+## Programming Languages
+- For this site the programming languages that has been used are
+  - HTML
+  - CSS
+  - Javascript
 
 ## Conclusion
 The EU Digital Identity Wallet simplifies authentication while maintaining **strong security** and **privacy** standards. It enables seamless digital identity verification for users across different platforms.
