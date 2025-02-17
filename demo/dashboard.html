@@ -3,81 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <script src="http://localhost/eudi-sdk.js"></script>
+    <title>Minimal Bank Mockup</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background: #333;
+
+        nav {
+            background-color: #333;
             color: white;
-            padding: 20px;
-            position: fixed;
-            left: 0;
-            top: 0;
+            padding: 10px 20px;
         }
-        .sidebar h2 {
-            margin: 0;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #555;
-        }
-        .sidebar ul {
+
+        nav ul {
             list-style: none;
             padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
         }
-        .sidebar ul li {
-            padding: 10px;
-            margin: 10px 0;
-            background: #444;
-            cursor: pointer;
+
+        nav li {
+            margin: 0 15px;
         }
-        .content {
-            margin-left: 300px;
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            gap: 10rem;
+            width: min-content;
+            /* width: 90%; /* Adjust width for responsiveness */ */
+            max-width:  90%; /* Limit max width on larger screens */
+        }
+
+        .left-panel, .right-panel {
+            width: 20rem;
             padding: 20px;
         }
+
         .card {
-            background: white;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             margin-bottom: 20px;
+            position: relative;
+        }
+
+        .card::before {
+            content: 'VISA';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .insurance {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .insurance-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        footer {
+            background-color: #eee;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .info {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .transactions {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) { /* Tablet */
+            .container {
+                gap: 0;
+                flex-direction: column;
+                grid-template-columns: 1fr; /* Stack panels on tablet */
+            }
+        }
+
+        @media (max-width: 480px) { /* Phone */
+            .container {
+                flex-direction: column;
+                width: 95%; /* Adjust width for smaller screens */
+                max-width: 95%;
+                padding: 10px;
+            }
+
+            .left-panel, .right-panel {
+                padding: 10px;
+            }
+
+            nav ul {
+                flex-direction: column; /* Stack nav items on phone */
+                align-items: center;
+            }
+
+            nav li {
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Dashboard</h2>
+    <nav>
         <ul>
-            <li>Home</li>
-            <li>Reports</li>
-            <li>Settings</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Accounts</a></li>
+            <li><a href="#">Payments</a></li>
+            <li><a href="#">Profile</a></li>
         </ul>
-    </div>
+    </nav>
 
-    <div class="content">
-        <h1>Welcome <span id="name"></span></h1>
-        <div class="card">
-            <h3>Overview</h3>
-            <p>This is a simple dashboard layout.</p>
-                    </div>
-        <div class="card">
-            <h3>Statistics</h3>
-            <p>Data and insights go here.</p>
+    <div class="container">
+        <div class="left-panel">
+            <div class="card">
+                <h2>149.00 EUR</h2>
+                <p>3456 2365 1274 2379</p>
+                <p>06/20</p>
+            </div>
+
+            <div class="transactions">
+                <h3>Recent Transactions</h3>
+                <div class="transaction-item">
+                    <span>MW Media World</span>
+                    <span>-$67.20</span>
+                </div>
+                <div class="transaction-item">
+                    <span>RC Rentalcars</span>
+                    <span>-$34.25</span>
+                </div>
+                <div class="transaction-item">
+                    <span>IC Instacart</span>
+                    <span>-$53.60</span>
+                </div>
+                <div class="transaction-item">
+                    <span>RY Ryanair</span>
+                    <span>-$34.25</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="info">
+                <h3>Personal Information</h3>
+                <p><strong>Name:</strong> John</p>
+                <p><strong>Surname:</strong> Doe</p>
+                <p><strong>Birthday:</strong> 01/01/1990</p>
+                <p><strong>Over 18:</strong> Yes</p>
+                <p><strong>IBAN:</strong> GR12345678901234567890123</p>
+            </div>
+
+            <div class="insurance">
+                <h3>Insurance</h3>
+                <p>100% Personal account</p>
+                <div class="insurance-item">
+                    <span>Education Insurance</span>
+                    <span>25%</span>
+                </div>
+                <div class="insurance-item">
+                    <span>Medical Insurance</span>
+                    <span>30%</span>
+                </div>
+                <div class="insurance-item">
+                    <span>Personal Insurance</span>
+                    <span>45%</span>
+                </div>
+            </div>
         </div>
     </div>
 
-</body>
-<script type="text/javascript">
-    const userData = EUDILoadData();
+    <footer>
+        <p>&copy; 2024 Minimal Bank</p>
+    </footer>
 
-    const name = userData.get("PID").get("given_name")
-    const surname = userData.get("PID").get("family_name")
-    document.getElementById("name").innerText = name + " " + surname;
-</script>
+    <script type="text/javascript">
+
+        // FIXME: This is a temporary solution to load the SDK from the same host as the login page.
+        // The SDK should be loaded from a CDN.
+        const host = window.location.hostname;
+        document.write(`<script src="http://${host}/eudi-sdk.js"><\/script>`);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userData = EUDILoadData();
+            console.log(userData);
+        });
+
+    </script>
+</body>
 </html>
