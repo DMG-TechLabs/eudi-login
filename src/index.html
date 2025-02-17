@@ -94,7 +94,9 @@
             display: flex;
             justify-content: center;
             position: absolute;
-            bottom: 10%;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .button {
@@ -169,14 +171,14 @@
             height: 280px;
         }
 
-        @media (min-width: 481px) and (max-width: 1300px) {
+        @media (min-width: 481px) and (max-width: 667px) {
             #confirm-to-share-data {
                 display: none;
-                top: 50%;
+                top: 51%;
                 left: 50%; 
                 transform: translate(-50%, -50%); 
                 width: 70%; 
-                height: auto; 
+                height: 65%; 
                 max-width: 700px; 
                 padding: 20px;
                 margin: 0;
@@ -202,23 +204,88 @@
             }
 
             .document-box {
-                font-size: 16px; /* Adjust font size */
-                /* Two documents per row (adjust as needed) */
-                margin: 1%; /* Adjust margins */
-                box-sizing: border-box; /* Include padding/border in width */
+                font-size: 16px; 
+                margin: 1%; 
+                box-sizing: border-box; 
             }
 
             .buttons {
-                flex-direction: row; /* Buttons in a row */
-                justify-content: center; /* Center buttons */
-                position: relative; /* Remove absolute positioning */
-                bottom: auto; /* Remove bottom positioning */
-                margin-top: 20px; /* Add space above buttons */
+                flex-direction: row;
+                justify-content: center; 
+                position: absolute;
+                top: 90%; 
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-top: 20px; 
                 width: 100%;
             }
 
             .button {
-                margin: 0 10px; /* Adjust button margins */
+                margin: 0 10px; 
+            }
+
+            #cancel, #continue {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+
+            .loader {
+                left: 0;
+                right: 0;
+            }
+        }
+
+        @media (min-width: 668px) and (max-width: 1300px) {
+            #confirm-to-share-data {
+                display: none;
+                top: 60%;
+                left: 50%; 
+                transform: translate(-50%, -50%); 
+                width: 70%; 
+                height: 50%; 
+                max-width: 700px; 
+                padding: 20px;
+                margin: 0;
+            }
+
+            #indicator {
+                display: block;
+            }
+
+            #eudi-icon {
+                width: 50%; /* Adjust icon width */
+                height: auto;
+                top: 4%; /* Adjust top positioning */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            #documents {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center; /* Center documents */
+                width: 100%;
+            }
+
+            .document-box {
+                font-size: 16px; 
+                margin: 1%; 
+                box-sizing: border-box; 
+            }
+
+            .buttons {
+                flex-direction: row;
+                justify-content: center; 
+                position: absolute;
+                top: 85%; 
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-top: 20px; 
+                width: 100%;
+            }
+
+            .button {
+                margin: 0 10px; 
             }
 
             #cancel, #continue {
@@ -279,7 +346,7 @@
                 flex-direction: row; 
                 justify-content: center; 
                 position: absolute; 
-                top: 82%; 
+                top: 86%; 
                 left: 50%;
                 transform: translate(-50%, -50%);
                 margin-top: 20px; 

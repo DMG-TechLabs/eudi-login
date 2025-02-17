@@ -10,8 +10,8 @@ services:
     tty: true
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
     volumes:
       - ./src:/htdocs
     environment:
@@ -32,8 +32,8 @@ services:
     tty: true
     restart: unless-stopped
     ports:
-      - "8080:80"
-      - "8443:443"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./demo:/htdocs
     environment:
