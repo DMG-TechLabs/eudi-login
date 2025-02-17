@@ -59,23 +59,37 @@ function EUDILogin(config, target = window.location.origin) {
 }
 
 function transformData(input) {
-    const result = {};
+    const scopeConfig = {
+        "eu.europa.ec.eudi.pid.1": "PID",
+        "org.iso.18013.5.1.mDL": "mDL",
+        "eu.europa.ec.eudi.iban.1": "IBAN",
+        "eu.europa.ec.eudi.loyalty.1": "Loyalty",
+        "org.iso.23220.photoid.1": "PhotoId",
+        "eu.europa.ec.eudi.pseudonym.age_over_18.1": "AgeOver18",
+        "eu.europa.ec.eudi.hiid.1": "HealthID",
+        "org.iso.18013.5.1.reservation": "Reservation",
+        "eu.europa.ec.eudi.tax.1": "TaxNumber",
+        "eu.europa.ec.eudi.por.1": "PowerOfRepresentation",
+        "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint": "PseudonymDeferred"
+    };
+
+    const result = new Map();
 
     input.forEach(item => {
         item.attributes.forEach(attr => {
-            const scopeKey = attr.key.split(":")[0]; // Extract scope from key
+            const rawScopeKey = attr.key.split(":")[0]; // Extract scope from key
+            const scopeKey = scopeConfig[rawScopeKey] || rawScopeKey; // Map to predefined scope name or keep original
             const key = attr.key.split(":").slice(1).join(":"); // Extract actual key
 
-            if (!result[scopeKey]) {
-                result[scopeKey] = {};
+            if (!result.has(scopeKey)) {
+                result.set(scopeKey, new Map());
             }
 
-            result[scopeKey][key] = attr.value.value !== undefined ? attr.value.value : attr.value;
+            result.get(scopeKey).set(key, attr.value.value !== undefined ? attr.value.value : attr.value);
         });
     });
 
-    return result;
-}
+    return result;}
 
 function EUDILoadData(){
     return transformData(JSON.parse(sessionStorage.getItem("user_data"))[0].attestations)
