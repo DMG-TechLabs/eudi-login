@@ -1,4 +1,4 @@
-const AUTH_URL = "http://"+window.location.hostname;
+const AUTH_URL = "http://"+window.location.hostname+":8080";
 
 /**
 * @typedef {Object} ConfigOptions

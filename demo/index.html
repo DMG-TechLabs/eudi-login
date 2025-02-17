@@ -153,22 +153,22 @@
         // FIXME: This is a temporary solution to load the SDK from the same host as the login page.
         // The SDK should be loaded from a CDN.
         const host = window.location.hostname;
-        document.write(`<script src="http://${host}/eudi-sdk.js"><\/script>`);
+        document.write(`<script src="http://${host}:8080/eudi-sdk.js"><\/script>`);
 
         function login() {
             const config = {
                 AgeOver18: true,
-                HealthID: true,
+                HealthID: false,
                 IBAN: true,
-                Loyalty: true,
-                mDL: true,
-                MSISDN: true,
-                PhotoId: true,
+                Loyalty: false,
+                mDL: false,
+                MSISDN: false,
+                PhotoId: false,
                 PID: true,
-                PowerOfRepresentation: true,
-                PseudonymDeferred: true,
-                Reservation: true,
-                TaxNumber: true
+                PowerOfRepresentation: false,
+                PseudonymDeferred: false,
+                Reservation: false,
+                TaxNumber: false
             };
             EUDILogin(config, "./dashboard.html");
         }

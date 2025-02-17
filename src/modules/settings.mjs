@@ -2,7 +2,7 @@
  * The ip or domain of the login service
  * @constant {string}
 */
-export const HOST = "http://"+window.location.hostname;
+export const HOST = "http://"+window.location.hostname+":8080";
 
 /**
  * Backend proxy endpoint URL.
