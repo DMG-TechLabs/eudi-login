@@ -17,8 +17,8 @@ $ make start
 
 ## Endpoints
 
-- localhost:80: Demo App using the `eudi-login`
-- localhost:8080: The `eudi-login` service
+- **localhost:80**: Demo App using the `eudi-login` service including just the SDK
+- **localhost:8080**: The `eudi-login` service
 
 ## Documentation
 
