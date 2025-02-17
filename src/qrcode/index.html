@@ -95,8 +95,48 @@
     .spaced-line {
         margin: 1em 0;
     }
+
+    .dialog-overlay {
+        display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      /* display: flex; */
+      justify-content: center;
+      align-items: center;
+        z-index: 10;
+    }
+    .dialog {
+        /* display: none; */
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .dialog button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
 </style>
 <body>
+    <div class="dialog-overlay" id="dialog">
+        <div class="dialog">
+            <h3>Error</h3>
+            <p>Not all required files available. Please try again.</p>
+            <button onclick="closeDialog()">OK</button>
+        </div>
+    </div>
+
     <span class="loader" id="loader"></span>
     <img id="eudi-icon" src="../assets/ic-logo.svg">
     <div id="qr-container">
@@ -109,6 +149,10 @@
     </div>
 
     <script type="text/javascript">
+        function closeDialog() {
+            document.getElementById('dialog').style.display = 'none';
+        }
+
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("qr-container").style.display = "block";
