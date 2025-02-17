@@ -12,6 +12,53 @@
 <script type="module" src="./script.js"></script>
 <script type="module" src="./modules/ui.mjs"></script>
 <style>
+    .loader {
+        width: 48px;
+        height: 48px;
+        display: block;
+        margin:15px auto;
+        position: absolute;
+        top: 40%;
+        left: 74%;
+        color: #FFF;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+        z-index: 2;
+    }
+    .loader::after,
+    .loader::before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        left: 50%;
+        transform: scale(0.5) translate(0, 0);
+        background-color: #e9f66a;
+        border-radius: 50%;
+        animation: animloader 1s infinite ease-in-out;
+    }
+
+    .loader::before {
+        background-color: #1238ea;
+        transform: scale(0.5) translate(-48px, -48px);
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes animloader {
+        50% {
+            transform: scale(1) translate(-50%, -50%);
+        }
+    }
+
     #confirm-to-share-data {
         display: flex;
         flex-direction: column;
@@ -38,8 +85,9 @@
     }
 
     #documents {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
+        width: 500px;
     }
 
     .document-box {
@@ -60,6 +108,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        padding: 18px 10px 18px 10px;
+        margin: 1.5%;
     }
 
     .buttons {
@@ -112,7 +162,8 @@
     }
 </style>
 <body>
-    <img id="eudi-icon" src="./assets/ic-logo.svg">
+    <span class="loader" id="loader"></span>
+    <a href="https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home" target="blank"><img id="eudi-icon" src="./assets/ic-logo.svg"></a>
     <div id="confirm-to-share-data">
         <span id="indicator">
             <h2>By continuing, you accept to share the following data</h2>
