@@ -39,6 +39,8 @@ function EUDILogin(config, target = window.location.origin) {
     }, { once: true });
 
 
+
+
     const authWindow = window.open(
         AUTH_URL,
         "EUDI Login",
@@ -66,6 +68,12 @@ function EUDILogin(config, target = window.location.origin) {
 
     // Stop retrying after 1 seconds
     setTimeout(() => clearInterval(interval), 1000);
+
+    window.addEventListener("beforeunload", (event) => {
+        event.preventDefault(); // This is required for older browsers
+        authWindow.close()
+    });
+
 }
 
 function _transformData(input) {
@@ -105,4 +113,7 @@ function _transformData(input) {
 function EUDILoadData(){
     return _transformData(JSON.parse(sessionStorage.getItem("user_data"))[0].attestations)
 }
+
+
+
 
