@@ -248,11 +248,13 @@
 
             #confirm-to-share-data {
                 display: none;
-                left: 28.5%;
-                transform: translateX(-50%);
+                left: 50%;
+                transform: translate(-50%, -50%);
                 width: 80%;
-                height: auto;
+                height: 62%;
+                margin: 0;
                 padding: 15px;
+                top: 50%;
             }
 
             #indicator {
@@ -260,7 +262,7 @@
             }
 
             #documents {
-                display: flex;
+                display: none;
                 flex-wrap: wrap;
                 justify-content: center;
                 width: auto;
@@ -276,8 +278,10 @@
             .buttons {
                 flex-direction: row; 
                 justify-content: center; 
-                position: relative; 
-                bottom: auto; 
+                position: absolute; 
+                top: 82%; 
+                left: 50%;
+                transform: translate(-50%, -50%);
                 margin-top: 20px; 
                 width: 100%;
                 gap: 10px;
@@ -301,7 +305,7 @@
             #eudi-icon {
                 width: 80%;
                 height: auto;
-                top: 5%;
+                top: 3%;
                 left: 50%;
                 transform: translateX(-50%);
             }
@@ -343,6 +347,8 @@
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("indicator").style.display = "block";
+            document.getElementById("documents").style.display = "flex";
+            document.getElementById("continue").style.display = "block";
             document.getElementById("confirm-to-share-data").style.display = "block";
         }, 1100);
 
