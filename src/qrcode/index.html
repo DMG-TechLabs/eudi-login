@@ -35,12 +35,12 @@
             border-radius: 50%;
             animation: animloader 1s infinite ease-in-out;
         }
-    
+
         .loader::before {
             background-color: #1238ea;
             transform: scale(0.5) translate(-48px, -48px);
         }
-    
+
         @keyframes rotation {
             0% {
                 transform: rotate(0deg);
@@ -54,7 +54,7 @@
                 transform: scale(1) translate(-50%, -50%);
             }
         }
-    
+
         #qr-container {
             display: none;
             flex-direction: column;
@@ -68,13 +68,13 @@
             margin-top: 50px;
             align-items: center;
         }
-    
+
         #qr-container h2 {
             font-size: 20px;
             margin-bottom: 15px;
             color: #333;
         }
-    
+
         #eudi-icon {
             position: absolute;
             top: 3%;
@@ -85,7 +85,7 @@
         .spaced-line {
             margin: 1em 0;
         }
-    
+
         .dialog-overlay {
             display: none;
           position: fixed;
@@ -118,13 +118,13 @@
         }
 
         @media (max-width: 768px) {
-            
+
             #eudi-icon {
                 top: 3%;
                 aspect-ratio: 4/3;
             }
         }
-    
+
     </style>
 </head>
 <script src="../extern/qrcode.js"></script>
@@ -151,8 +151,13 @@
 
     <script type="text/javascript">
         function closeDialog() {
-            document.getElementById('dialog').style.display = 'none';
+            window.close();
         }
+
+        window.addEventListener("beforeunload", (event) => {
+            cleanLocalStorage();
+        });
+
 
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";

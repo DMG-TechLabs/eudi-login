@@ -1,0 +1,5 @@
+---
+icon: pulse
+---
+
+# Impact

@@ -1,6 +1,6 @@
 {
   "version": "3.6.0",
-  "created": "2025-02-17T11:36:49Z",
+  "created": "2025-02-17T14:24:52Z",
   "files": [
     {
       "path": ".nojekyll"
@@ -9,17 +9,43 @@
       "path": "404.html"
     },
     {
-      "path": "authentication/index.html"
+      "path": "authentication/index.html",
+      "old": true
+    },
+    {
+      "path": "documentation/authentication/index.html"
+    },
+    {
+      "path": "documentation/proxy/index.html"
+    },
+    {
+      "path": "documentation/scalability/index.html"
+    },
+    {
+      "path": "documentation/ui/index.html"
+    },
+    {
+      "path": "future-updates/index.html"
+    },
+    {
+      "path": "guides/getting-started/index.html"
+    },
+    {
+      "path": "guides/setup/index.html"
     },
     {
       "path": "how-we-authenticate/index.html",
       "old": true
     },
     {
+      "path": "impact/index.html"
+    },
+    {
       "path": "index.html"
     },
     {
-      "path": "proxy/index.html"
+      "path": "proxy/index.html",
+      "old": true
     },
     {
       "path": "references/index.html"
@@ -68,16 +94,22 @@
       "path": "robots.txt"
     },
     {
-      "path": "setup/index.html"
+      "path": "setup/index.html",
+      "old": true
     },
     {
       "path": "sitemap.xml.gz"
     },
     {
-      "path": "ui/index.html"
+      "path": "todo/index.html"
     },
     {
-      "path": "usage/index.html"
+      "path": "ui/index.html",
+      "old": true
+    },
+    {
+      "path": "usage/index.html",
+      "old": true
     }
   ]
 }
