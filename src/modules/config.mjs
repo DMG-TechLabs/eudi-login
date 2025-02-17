@@ -1,10 +1,5 @@
 import { Request } from "./request.mjs";
-
-/**
- * Endpoint for fetching attestations.
- * @constant {string}
- */
-const ATTESTATIONS_ENDPOINT = "http://192.168.1.8/php/redirect.php/issuers"
+import { ATTESTATIONS_ENDPOINT } from './settings.mjs';
 
 /**
  * Represents an attestation.

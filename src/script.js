@@ -2,20 +2,7 @@ import { Config } from './modules/config.mjs';
 import { MdocDecoder } from './modules/decoder.mjs';
 import { poll } from './modules/polling.mjs';
 import { Request } from './modules/request.mjs';
-
-const HOST = "http://192.168.1.8";
-
-/**
- * Backend proxy endpoint URL.
- * @constant {string}
- */
-const PROXY = HOST + "/php/redirect.php";
-
-/**
- * Presentations API endpoint.
- * @constant {string}
- */
-const PRESENTATIONS_ENDPOINT = "ui/presentations";
+import { PRESENTATIONS_ENDPOINT, PROXY } from './modules/settings.mjs'
 
 /**
  * Decodes HTML Entities like `&amp;`
