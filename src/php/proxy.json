@@ -1,0 +1,23 @@
+{
+    "/ui": {
+        "target": "https://verifier-backend.eudiw.dev",
+        "allowChildren": true,
+        "includeLocal": true
+    },
+    "/wallet": {
+        "target": "https://verifier-backend.eudiw.dev",
+        "allowChildren": true,
+        "includeLocal": true
+    },
+    "/utilities": {
+        "target": "https://verifier-backend.eudiw.dev",
+        "allowChildren": true,
+        "includeLocal": true
+    },
+    "/issuers": {
+        "target": "https://issuer.eudiw.dev/.well-known/openid-credential-issuer",
+        "allowChildren": false,
+        "includeLocal": false
+    }
+}
+
