@@ -205,7 +205,9 @@
         }, 1500);
 
         function cancel() {
-            <!----TODO---->
+            console.log("Cancelled")
+            window.opener.postMessage("Cancelled", localStorage.getItem('site'));
+            window.close();
         }
 
         function generateQRCode() {

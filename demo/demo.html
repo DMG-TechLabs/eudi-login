@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Dashboard</title>
+    <style>
+        :root {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .dashboard {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            width: min(90%, 30rem);
+        }
+
+        .info {
+            margin-bottom: 1rem;
+        }
+
+        .label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="info"><span class="label">Name:</span> <span id="name">John</span></div>
+        <div class="info"><span class="label">Surname:</span> <span id="surname">Doe</span></div>
+        <div class="info"><span class="label">Over 18:</span> <span id="over18">Yes</span></div>
+        <div class="info"><span class="label">Birthday:</span> <span id="birthday">2000-01-01</span></div>
+    </div>
+
+    <script>
+        const user = {
+            name: "Alice",
+            surname: "Smith",
+            birthday: "2005-06-15"
+        };
+
+        const calculateAge = (birthday) => {
+            const birthDate = new Date(birthday);
+            const age = new Date().getFullYear() - birthDate.getFullYear();
+            return age >= 18 ? "Yes" : "No";
+        };
+
+        document.getElementById("name").textContent = user.name;
+        document.getElementById("surname").textContent = user.surname;
+        document.getElementById("birthday").textContent = user.birthday;
+        document.getElementById("over18").textContent = calculateAge(user.birthday);
+    </script>
+</body>
+</html>
