@@ -1,0 +1,25 @@
+.accent-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: #cfd3dc;
+    background: linear-gradient(45deg, #032e8a, #3c70df);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+}
+
+.accent-button:hover {
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Active (clicked) effect */
+.accent-button:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
