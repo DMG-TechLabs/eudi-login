@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-:q
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -231,5 +229,19 @@
     <footer>
         <p>&copy; 2024 Minimal Bank</p>
     </footer>
+
+    <script type="text/javascript">
+
+        // FIXME: This is a temporary solution to load the SDK from the same host as the login page.
+        // The SDK should be loaded from a CDN.
+        const host = window.location.hostname;
+        document.write(`<script src="http://${host}/eudi-sdk.js"><\/script>`);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userData = EUDILoadData();
+            console.log(userData);
+        });
+
+    </script>
 </body>
 </html>
