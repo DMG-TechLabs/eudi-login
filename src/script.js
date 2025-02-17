@@ -2,18 +2,7 @@ import { Config } from './modules/config.mjs';
 import { MdocDecoder } from './modules/decoder.mjs';
 import { poll } from './modules/polling.mjs';
 import { Request } from './modules/request.mjs';
-
-/**
- * Backend proxy endpoint URL.
- * @constant {string}
- */
-const PROXY = "http://localhost/php/redirect.php";
-
-/**
- * Presentations API endpoint.
- * @constant {string}
- */
-const PRESENTATIONS_ENDPOINT = "ui/presentations";
+import { PRESENTATIONS_ENDPOINT, PROXY } from './modules/settings.mjs'
 
 /**
  * Decodes HTML Entities like `&amp;`
@@ -189,8 +178,11 @@ export async function start(){
         window.close();
     }
     else{
+        console.log("Missing attestations")
         window.opener.postMessage("Missing attestations", site);
-        window.alert("Not all requied files available. Please try again.")
+        document.getElementById('dialog').style.display = 'flex';
+
+        // window.alert("Not all requied files available. Please try again.")
     }
 }
 

@@ -1,10 +1,5 @@
 import { Request } from "./request.mjs";
-
-/**
- * Endpoint for fetching attestations.
- * @constant {string}
- */
-const ATTESTATIONS_ENDPOINT = "http://localhost/php/redirect.php/issuers"
+import { ATTESTATIONS_ENDPOINT } from './settings.mjs';
 
 /**
  * Represents an attestation.
@@ -25,6 +20,21 @@ class Attestation {
         this.data = data
     }
 }
+
+export const EMPTY_CONFIG = {
+    AgeOver18: false,
+    HealthID: false,
+    IBAN: false,
+    Loyalty: false,
+    mDL: false,
+    MSISDN: false,
+    PhotoId: false,
+    PID: false,
+    PowerOfRepresentation: false,
+    PseudonymDeferred: false,
+    Reservation: false,
+    TaxNumber: false
+};
 
 /**
  * Represents the configuration of the requested attestations.
@@ -192,9 +202,21 @@ export class Config {
                 ]
             }
         }
+        function generateUUID() {
+            const array = new Uint8Array(16);
+            crypto.getRandomValues(array);
 
-        request.presentation_definition.id = crypto.randomUUID()
-        request.nonce = crypto.randomUUID()
+            array[6] = (array[6] & 0x0f) | 0x40; // UUID version 4
+            array[8] = (array[8] & 0x3f) | 0x80; // Variant 1
+
+            return [...array]
+                .map((b, i) => b.toString(16).padStart(2, "0"))
+                .join("")
+                .replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, "$1-$2-$3-$4-$5");
+        }
+
+        request.presentation_definition.id = generateUUID();
+        request.nonce = generateUUID();
         let i = 0
         for (const attestation of this.scopes) {
             const fields = []
