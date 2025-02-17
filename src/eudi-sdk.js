@@ -33,7 +33,7 @@ function EUDILogin(config, target = window.location.origin) {
         if (event.origin !== AUTH_URL) return; // Security check
         console.log("User Data:", event.data);
         this.sessionStorage.setItem("user_data", JSON.stringify(event.data));
-        if (target == window.location.origin || event.data == "Missing attestations") return;
+        if (target == window.location.origin || event.data == "Missing attestations" || event.data == "Cancelled") return;
         window.location.href = target;
 
     }, { once: true });
