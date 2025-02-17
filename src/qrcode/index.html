@@ -161,6 +161,11 @@
             window.close();
         }
 
+        window.addEventListener("beforeunload", (event) => {
+            cleanLocalStorage();
+        });
+
+
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("qr-container").style.display = "block";

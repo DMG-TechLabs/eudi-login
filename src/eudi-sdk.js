@@ -37,7 +37,7 @@ function EUDILogin(config, target = window.location.origin) {
         if (target == window.location.origin || event.data == "Missing attestations" || event.data == "Cancelled") return;
         window.location.href = target;
 
-    }, { once: true });
+    });
 
 
 
@@ -68,10 +68,10 @@ function EUDILogin(config, target = window.location.origin) {
     }, 500);
 
     // Stop retrying after 1 seconds
-    setTimeout(() => clearInterval(interval), 1000);
+    setTimeout(() => clearInterval(interval), 1500);
 
     window.addEventListener("beforeunload", (event) => {
-        event.preventDefault(); // This is required for older browsers
+        // event.preventDefault(); // This is required for older browsers
         authWindow.close()
     });
 
