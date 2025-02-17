@@ -105,7 +105,7 @@
         <div class="spaced-line">
             <span>OR</span>
         </div>
-        <button class="accent-button">Open Wallet</button>
+        <button onclick="openWallet()" class="accent-button">Open Wallet</button>
     </div>
 
     <script type="text/javascript">
@@ -117,7 +117,10 @@
             start()
         });
 
-        </script>
+        function openWallet(){
+            window.location.href = localStorage.getItem("app_uri");
+        }
+    </script>
 
 </body>
 </html>
