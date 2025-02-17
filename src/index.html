@@ -6,178 +6,271 @@
     <title>EUDI Login</title>
     <link rel="stylesheet" href="./style.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
+    <style>
+        .loader {
+            width: 48px;
+            height: 48px;
+            display: block;
+            margin:15px auto;
+            position: absolute;
+            top: 40%;
+            left: 74%;
+            color: #FFF;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            z-index: 2;
+        }
+        .loader::after,
+        .loader::before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            transform: scale(0.5) translate(0, 0);
+            background-color: #e9f66a;
+            border-radius: 50%;
+            animation: animloader 1s infinite ease-in-out;
+        }
+    
+        .loader::before {
+            background-color: #1238ea;
+            transform: scale(0.5) translate(-48px, -48px);
+        }
+    
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes animloader {
+            50% {
+                transform: scale(1) translate(-50%, -50%);
+            }
+        }
+    
+        #confirm-to-share-data {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            left: 55%;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-left: 100px;
+            width: 500px;
+            height: 650px;
+        }
+    
+        #indicator {
+            margin-bottom: 30px;
+            color: #2f2f2f;
+        }
+    
+        #documents {
+            display: none;
+            flex-wrap: wrap;
+            width: 500px;
+        }
+    
+        .document-box {
+            font-size: 20px;
+            border: 3px solid;
+            border-radius: 10px;
+            padding: 18px 10px 18px 10px;
+            margin: 1.5%;
+        }
+    
+        .buttons {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 10%;
+        }
+    
+        .button {
+            margin-left: 20px;
+        }
+    
+        #cancel {
+            display: block;
+        }
+    
+        #cancel {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            background: #cfd3dc;
+            /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+            transition: all 0.3s ease-in-out;
+            letter-spacing: 1px;
+        }
+    
+        #cancel:hover {
+            box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+        }
+    
+        /* Active (clicked) effect */
+        #cancel:active, #cancel:focus {
+            transform: scale(0.95);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        #continue {
+            display: none;
+        }
+    
+        #continue {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #cfd3dc;
+            background: linear-gradient(45deg, #032e8a, #3c70df);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+            transition: all 0.3s ease-in-out;
+            letter-spacing: 1px;
+        }
+    
+        #continue:hover {
+            box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+        }
+    
+        /* Active (clicked) effect */
+        #continue:active, #continue:focus {
+            transform: scale(0.95);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    
+        #eudi-icon {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            align-items: center;
+            width: 800px;
+            height: 280px;
+        }
+
+        /* Mobile & Tablet specific styles */
+        @media (max-width: 768px) {
+            /*body {
+                overflow-y: auto;
+                height: 150%;
+            }*/
+            
+            /* Loader adjustments */
+            .loader {
+                width: 40px;
+                height: 40px;
+                top: 45%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            #confirm-to-share-data {
+                top: 20%;
+                left: 25%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: auto;
+                padding: 15px;
+            }
+
+            #documents {
+                display: none;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: auto; 
+            }
+
+            .document-box {
+                font-size: 10px;
+                width: max-content; 
+                margin: 5px;
+                align-content: center;
+            }
+
+            .buttons {
+                flex-direction: row;
+                gap: 10px;
+                position: absolute;
+                top: 102%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .button {
+                margin: 10px 0;
+            }
+
+            #cancel {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            #continue {
+                display: none;
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            #eudi-icon {
+                width: 80%;
+                height: auto;
+                top: 5%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            #loader {
+                top: 40%;
+                left: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #indicator {
+                font-size: 14px;
+            }
+
+            .document-box {
+                font-size: 14px;
+                
+            }
+
+            #cancel, #continue {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
 </head>
 <script src="./extern/qrcode.js"></script>
 <script type="module" src="./script.js"></script>
 <script type="module" src="./modules/ui.mjs"></script>
-<style>
-    .loader {
-        width: 48px;
-        height: 48px;
-        display: block;
-        margin:15px auto;
-        position: absolute;
-        top: 40%;
-        left: 74%;
-        color: #FFF;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-        z-index: 2;
-    }
-    .loader::after,
-    .loader::before {
-        content: '';
-        box-sizing: border-box;
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        top: 50%;
-        left: 50%;
-        transform: scale(0.5) translate(0, 0);
-        background-color: #e9f66a;
-        border-radius: 50%;
-        animation: animloader 1s infinite ease-in-out;
-    }
-
-    .loader::before {
-        background-color: #1238ea;
-        transform: scale(0.5) translate(-48px, -48px);
-    }
-
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    @keyframes animloader {
-        50% {
-            transform: scale(1) translate(-50%, -50%);
-        }
-    }
-
-    #confirm-to-share-data {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: absolute;
-        left: 55%;
-        background: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        margin-left: 100px;
-        width: 500px;
-        height: 650px;
-    }
-
-    #indicator {
-        margin-bottom: 30px;
-        color: #2f2f2f;
-    }
-
-    #documents {
-        display: none;
-        flex-wrap: wrap;
-        width: 500px;
-    }
-
-    .document-box {
-        font-size: 20px;
-        border: 3px solid;
-        border-radius: 10px;
-        padding: 18px 10px 18px 10px;
-        margin: 1.5%;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        bottom: 10%;
-    }
-
-    .button {
-        margin-left: 20px;
-    }
-
-    #cancel {
-        display: block;
-    }
-
-    #cancel {
-        padding: 12px 24px;
-        font-size: 18px;
-        font-weight: bold;
-        color: black;
-        background: #cfd3dc;
-        /*background: linear-gradient(45deg, #032e8a, #3c70df);*/
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
-        transition: all 0.3s ease-in-out;
-        letter-spacing: 1px;
-    }
-
-    #cancel:hover {
-        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Active (clicked) effect */
-    #cancel:active, #cancel:focus {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    #continue {
-        display: block;
-    }
-
-    #continue {
-        padding: 12px 24px;
-        font-size: 18px;
-        font-weight: bold;
-        color: white;
-        background: #cfd3dc;
-        background: linear-gradient(45deg, #032e8a, #3c70df);
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
-        transition: all 0.3s ease-in-out;
-        letter-spacing: 1px;
-    }
-
-    #continue:hover {
-        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Active (clicked) effect */
-    #continue:active, #continue:focus {
-        transform: scale(0.95);
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    #eudi-icon {
-        position: absolute;
-        top: 50%;
-        left: 30%;
-        transform: translate(-50%, -50%);
-        align-items: center;
-        width: 800px;
-        height: 280px;
-    }
-</style>
 <body>
     <span class="loader" id="loader"></span>
     <a href="https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home" target="blank"><img id="eudi-icon" src="./assets/ic-logo.svg"></a>
     <div id="confirm-to-share-data">
         <span id="indicator">
-            <h2>By continuing, you accept to share the following data</h2>
+            <h3>By continuing, you accept to share the following data</h3>
         </span>
 
         <div id="documents"></div>
@@ -197,7 +290,8 @@
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
             document.getElementById("documents").style.display = "flex";
-        }, 1500);
+            document.getElementById("continue").style.display = "block"
+        }, 1100);
 
         function cancel() {
             console.log("Cancelled")
