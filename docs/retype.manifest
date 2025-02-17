@@ -1,12 +1,19 @@
 {
   "version": "3.6.0",
-  "created": "2025-02-16T23:52:16Z",
+  "created": "2025-02-17T11:36:49Z",
   "files": [
     {
       "path": ".nojekyll"
     },
     {
       "path": "404.html"
+    },
+    {
+      "path": "authentication/index.html"
+    },
+    {
+      "path": "how-we-authenticate/index.html",
+      "old": true
     },
     {
       "path": "index.html"
@@ -33,7 +40,8 @@
       "path": "resources/js/lunr.js"
     },
     {
-      "path": "resources/js/prism.js"
+      "path": "resources/js/prism.js",
+      "old": true
     },
     {
       "path": "resources/js/retype.js"
@@ -60,7 +68,16 @@
       "path": "robots.txt"
     },
     {
+      "path": "setup/index.html"
+    },
+    {
       "path": "sitemap.xml.gz"
+    },
+    {
+      "path": "ui/index.html"
+    },
+    {
+      "path": "usage/index.html"
     }
   ]
 }

@@ -39,7 +39,11 @@ function EUDILogin(config, target = window.location.origin) {
     }, { once: true });
 
 
-    const authWindow = window.open(AUTH_URL, "_blank");
+    const authWindow = window.open(
+        AUTH_URL,
+        "EUDI Login",
+        "width=500,height=600"
+    );
 
     const messageData = {
         site: window.location.origin,
@@ -64,7 +68,7 @@ function EUDILogin(config, target = window.location.origin) {
     setTimeout(() => clearInterval(interval), 1000);
 }
 
-function transformData(input) {
+function _transformData(input) {
     const scopeConfig = {
         "eu.europa.ec.eudi.pid.1": "PID",
         "org.iso.18013.5.1.mDL": "mDL",
@@ -95,9 +99,10 @@ function transformData(input) {
         });
     });
 
-    return result;}
+    return result;
+}
 
 function EUDILoadData(){
-    return transformData(JSON.parse(sessionStorage.getItem("user_data"))[0].attestations)
+    return _transformData(JSON.parse(sessionStorage.getItem("user_data"))[0].attestations)
 }
 

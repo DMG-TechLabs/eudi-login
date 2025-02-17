@@ -34,6 +34,29 @@ class Proxy {
         $this->table[$local . '/'] = $record; // Ensure both versions are stored
     }
 
+    public function load(string $file): void
+    {
+        $jsonData = file_get_contents($file);
+        $data = json_decode($jsonData, true);
+
+        // Handle JSON errors
+        if ($data === null) {
+            throw new RuntimeException("Failed to decode JSON: " . json_last_error_msg());
+        }
+
+        foreach ($data as $key => $record) {
+            if (!isset($record['target'], $record['allowChildren'], $record['includeLocal'])) {
+                throw new InvalidArgumentException("Missing required fields in record: " . $key);
+            }
+
+            $target = $record['target'];
+            $allowChildren = $record['allowChildren'];
+            $includeLocal = $record['includeLocal'];
+
+            $this->set(new Record($key, $target, $allowChildren, $includeLocal));
+        }
+    }
+
     public function get(string $local): ?string
     {
         $originalPath = $local;

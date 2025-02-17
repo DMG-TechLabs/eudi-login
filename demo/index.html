@@ -88,7 +88,7 @@
         const loginButton = document.getElementById("eudi-login");
         const googleButton = document.getElementById("google-login");
         let isTouch = false;
-        
+
         // Listeners for touching login button
         loginButton.addEventListener("touchstart", (event) => {
             if (event.pointerType === "touch" || event.touches.length > 0) {
@@ -164,7 +164,7 @@
                 mDL: false,
                 MSISDN: false,
                 PhotoId: false,
-                PID: false,
+                PID: true,
                 PowerOfRepresentation: false,
                 PseudonymDeferred: false,
                 Reservation: false,
