@@ -77,6 +77,12 @@ function EUDILogin(config, target = window.location.origin) {
 
 }
 
+/**
+ * Transforms input attestation data into a structured Map format.
+ * @function _transformData
+ * @param {Array<Object>} input - The input attestation data array.
+ * @returns {Map<string, Map<string, any>>} A map where keys are scope names and values are maps of attribute keys to values.
+ */
 function _transformData(input) {
     const scopeConfig = {
         "eu.europa.ec.eudi.pid.1": "PID",
@@ -111,6 +117,11 @@ function _transformData(input) {
     return result;
 }
 
+/**
+ * Loads and transforms attestation data from session storage.
+ * @function EUDILoadData
+ * @returns {Map<string, Map<string, any>>} A structured map of attestation data.
+ */
 function EUDILoadData(){
     return _transformData(JSON.parse(sessionStorage.getItem("user_data"))[0].attestations)
 }

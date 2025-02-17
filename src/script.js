@@ -82,6 +82,11 @@ async function transactionInit(transactionBody) {
     }
 }
 
+/**
+ * Checks if the current device is a mobile device based on the user agent.
+ * @function isMobileDevice
+ * @returns {boolean} True if the device is mobile, otherwise false.
+ */
 function isMobileDevice() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -101,6 +106,11 @@ function isMobileDevice() {
     return false;
 }
 
+
+/**
+ * Clears specific items from local storage.
+ * @function cleanLocalStorage
+ */
 export function cleanLocalStorage(){
     localStorage.removeItem("config")
     localStorage.removeItem("site")
