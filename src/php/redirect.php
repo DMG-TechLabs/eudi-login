@@ -8,9 +8,7 @@ $BACKEND_URL = "https://verifier-backend.eudiw.dev";
 
 // Define the Proxy
 $proxy = new Proxy();
-$proxy->set(new Record("/ui", $BACKEND_URL, true, true));
-$proxy->set(new Record("/issuers", "https://issuer.eudiw.dev/.well-known/openid-credential-issuer", false));
-$proxy->set(new Record("/utilities", $BACKEND_URL, true, true));
+$proxy->load("./proxy.json");
 
 // Allow CORS
 $allowed_origins = [
