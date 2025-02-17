@@ -101,6 +101,11 @@ function isMobileDevice() {
     return false;
 }
 
+function cleanLocalStorage(){
+    localStorage.removeItem("config")
+    localStorage.removeItem("site")
+}
+
 /**
  * Main function to initialize and validate the authentication process (ONLY FOR DEVELOPMENT).
  * @async
@@ -175,11 +180,13 @@ export async function start(){
     if(validData){
         console.log(site)
         window.opener.postMessage(result.data, site);
+        cleanLocalStorage();
         window.close();
     }
     else{
         console.log("Missing attestations")
         window.opener.postMessage("Missing attestations", site);
+        cleanLocalStorage();
         document.getElementById('dialog').style.display = 'flex';
     }
 }
@@ -199,6 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Invalid site:", site);
             return;
         }
+        console.log("get", data)
         localStorage.setItem('site', site);
         localStorage.setItem('config', JSON.stringify(data));
 
@@ -208,9 +216,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("beforeunload", (event) => {
         window.opener.postMessage("Cancelled", localStorage.getItem('site'));
 
+        cleanLocalStorage();
     });
 
 });
+
 
 window.main = main;
 window.run = run;

@@ -23,6 +23,7 @@ const AUTH_URL = "http://"+window.location.hostname;
  * @param {string} [target=window.location.origin] - The target URL to redirect to after authentication.
  */
 function EUDILogin(config, target = window.location.origin) {
+    console.log(config)
     if(Object.values(config).filter(value => value === true).length == 0){
         window.alert("Please set at least one value to true");
         return;
