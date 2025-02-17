@@ -1,2 +1,5 @@
+---
+icon: rocket
+---
 # Getting Started
 
