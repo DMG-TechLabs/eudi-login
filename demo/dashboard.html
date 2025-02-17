@@ -65,7 +65,7 @@
         <div class="card">
             <h3>Overview</h3>
             <p>This is a simple dashboard layout.</p>
-        </div>
+                    </div>
         <div class="card">
             <h3>Statistics</h3>
             <p>Data and insights go here.</p>
@@ -76,5 +76,9 @@
 <script type="text/javascript">
     const userData = EUDILoadData();
     console.log(userData);
+
+    const name = userData.get("PID").get("given_name")
+    const surname = userData.get("PID").get("family_name")
+    document.getElementById("name").innerText = name + " " + surname;
 </script>
 </html>
