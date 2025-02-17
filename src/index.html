@@ -71,6 +71,7 @@
         }
     
         #indicator {
+            display: none;
             margin-bottom: 30px;
             color: #2f2f2f;
         }
@@ -180,6 +181,10 @@
                 margin: 0; /* Remove default margins */
             }
 
+            #indicator {
+                display: none;
+            }
+
             #eudi-icon {
                 width: 50%; /* Adjust icon width */
                 height: auto;
@@ -189,7 +194,7 @@
             }
 
             #documents {
-                display: flex;
+                display: none;
                 flex-wrap: wrap;
                 justify-content: center; /* Center documents */
                 width: 100%;
@@ -249,6 +254,10 @@
                 width: 80%;
                 height: auto;
                 padding: 15px;
+            }
+
+            #indicator {
+                display: none;
             }
 
             #documents {
@@ -333,6 +342,7 @@
     <script type="text/javascript">
         setTimeout(() => {
             document.getElementById("loader").style.display = "none";
+            document.getElementById("indicator").style.display = "block";
             document.getElementById("documents").style.display = "flex";
             document.getElementById("continue").style.display = "block"
         }, 1100);
