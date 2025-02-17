@@ -4,6 +4,8 @@ label: Home
 ---
 # eudi-login
 
+Login service and SDK that leverages the [EUDI Wallet](https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home) functionality
+
 ## Get Started
 
 ```bash
@@ -15,8 +17,12 @@ $ make start
 
 ## Endpoints
 
-- localhost:80: Demo App using the `eudi-login`
-- localhost:8080: The `eudi-login` service
+- **localhost:80**: Demo App using the `eudi-login` service including just the SDK
+- **localhost:8080**: The `eudi-login` service
+
+## Documentation
+
+Documentation for this project can be found in the `docs/` directory or in the documentation site hosted [here](https://dmg-techlabs.github.io/eudi-login/)
 
 ## Authors
 
