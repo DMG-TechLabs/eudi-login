@@ -1,3 +1,7 @@
+---
+icon: info
+---
+
 # References
 
 - [cbor-x](https://github.com/kriszyp/cbor-x)

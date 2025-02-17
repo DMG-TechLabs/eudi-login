@@ -1,1 +1,5 @@
+---
+icon: server
+---
+
 # Proxy
