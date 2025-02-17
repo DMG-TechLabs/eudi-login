@@ -8,126 +8,126 @@
     <link rel="stylesheet" href="../styles/buttons.css">
     <link rel="stylesheet" href="../styles/spaced-line.css">
     <script src="https://kit.fontawesome.com/3027224a98.js" crossorigin="anonymous"></script>
+    <style>
+        .loader {
+            width: 48px;
+            height: 48px;
+            display: block;
+            margin:15px auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFF;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        .loader::after,
+        .loader::before {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            transform: scale(0.5) translate(0, 0);
+            background-color: #e9f66a;
+            border-radius: 50%;
+            animation: animloader 1s infinite ease-in-out;
+        }
+    
+        .loader::before {
+            background-color: #1238ea;
+            transform: scale(0.5) translate(-48px, -48px);
+        }
+    
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes animloader {
+            50% {
+                transform: scale(1) translate(-50%, -50%);
+            }
+        }
+    
+        #qr-container {
+            display: none;
+            flex-direction: column;
+            justify-content: space-evenly;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-top: 50px;
+            align-items: center;
+        }
+    
+        #qr-container h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+    
+        #eudi-icon {
+            position: absolute;
+            top: 17%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            align-items: center;
+    
+            aspect-ratio: 7/3;
+            height: 250px;
+        }
+        .spaced-line {
+            margin: 1em 0;
+        }
+    
+        .dialog-overlay {
+            display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          /* display: flex; */
+          justify-content: center;
+          align-items: center;
+            z-index: 10;
+        }
+        .dialog {
+            /* display: none; */
+          background: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        }
+        .dialog button {
+          margin-top: 10px;
+          padding: 8px 16px;
+          background: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    
+    </style>
 </head>
 <script src="../extern/qrcode.js"></script>
 <script type="module" src="../script.js"></script>
-<style>
-    .loader {
-        width: 48px;
-        height: 48px;
-        display: block;
-        margin:15px auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #FFF;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-    }
-    .loader::after,
-    .loader::before {
-        content: '';
-        box-sizing: border-box;
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        top: 50%;
-        left: 50%;
-        transform: scale(0.5) translate(0, 0);
-        background-color: #e9f66a;
-        border-radius: 50%;
-        animation: animloader 1s infinite ease-in-out;
-    }
-
-    .loader::before {
-        background-color: #1238ea;
-        transform: scale(0.5) translate(-48px, -48px);
-    }
-
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    @keyframes animloader {
-        50% {
-            transform: scale(1) translate(-50%, -50%);
-        }
-    }
-
-    #qr-container {
-        display: none;
-        flex-direction: column;
-        justify-content: space-evenly;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        margin-top: 50px;
-        align-items: center;
-    }
-
-    #qr-container h2 {
-        font-size: 20px;
-        margin-bottom: 15px;
-        color: #333;
-    }
-
-    #eudi-icon {
-        position: absolute;
-        top: 17%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        align-items: center;
-
-        aspect-ratio: 7/3;
-        height: 250px;
-    }
-    .spaced-line {
-        margin: 1em 0;
-    }
-
-    .dialog-overlay {
-        display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      /* display: flex; */
-      justify-content: center;
-      align-items: center;
-        z-index: 10;
-    }
-    .dialog {
-        /* display: none; */
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    .dialog button {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-</style>
 <body>
     <div class="dialog-overlay" id="dialog">
         <div class="dialog">
