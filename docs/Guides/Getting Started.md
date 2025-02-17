@@ -8,6 +8,9 @@ icon: rocket
 The EUDI SDK is a JavaScript library that allows you to integrate the EUDI Wallet into your application.
 To use the SDK, you need to include the `eudi-sdk.js` file in your HTML file.
 
+>[!NOTE]
+> The SDK is temporarily hosted on GitHub. It will be moved to a CDN in the future.
+
 ```html
 <script src="https://raw.githubusercontent.com/DMG-TechLabs/eudi-login/refs/heads/main/src/eudi-sdk.js"></script>
 ```
