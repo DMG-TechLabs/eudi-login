@@ -50,22 +50,22 @@ export const EMPTY_CONFIG = {
  */
 export class Config {
 
-    // TODO: Change to reflect the recent config changes
     /**
     * @typedef {Object} ConfigOptions
-    * @property {boolean} [AgeOver18=false] - Whether the user is over 18.
-    * @property {boolean} [HealthID=false] - Whether to include Health ID attestation.
-    * @property {boolean} [IBAN=false] - Whether to include IBAN attestation.
-    * @property {boolean} [Loyalty=false] - Whether to include Loyalty attestation.
-    * @property {boolean} [mDL=false] - Whether to include mobile Driver’s License (mDL) attestation.
-    * @property {boolean} [MSISDN=false] - Whether to include MSISDN (phone number) attestation.
-    * @property {boolean} [PhotoId=false] - Whether to include Photo ID attestation.
-    * @property {boolean} [PID=false] - Whether to include Personal ID (PID) attestation.
-    * @property {boolean} [PowerOfRepresentation=false] - Whether to include Power of Representation attestation.
-    * @property {boolean} [PseudonymDeferred=false] - Whether to include Pseudonym Deferred attestation.
-    * @property {boolean} [Reservation=false] - Whether to include Reservation attestation.
-    * @property {boolean} [TaxNumber=false] - Whether to include Tax Number attestation.
-    * @property {integer} [visibility=Visibility.PUBLIC] - The level of visibility for the attestation data
+    * @property {Object} required - Required attestations.
+    * @property {boolean} [required.AgeOver18] - Whether the user is over 18.
+    * @property {boolean} [required.HealthID] - Whether to include Health ID attestation.
+    * @property {boolean} [required.IBAN] - Whether to include IBAN attestation.
+    * @property {boolean} [required.Loyalty] - Whether to include Loyalty attestation.
+    * @property {boolean} [required.mDL] - Whether to include mobile Driver’s License (mDL) attestation.
+    * @property {boolean} [required.MSISDN] - Whether to include MSISDN (phone number) attestation.
+    * @property {boolean} [required.PhotoId] - Whether to include Photo ID attestation.
+    * @property {boolean} [required.PID] - Whether to include Personal ID (PID) attestation.
+    * @property {boolean} [required.PowerOfRepresentation] - Whether to include Power of Representation attestation.
+    * @property {boolean} [required.PseudonymDeferred] - Whether to include Pseudonym Deferred attestation.
+    * @property {boolean} [required.Reservation] - Whether to include Reservation attestation.
+    * @property {boolean} [required.TaxNumber] - Whether to include Tax Number attestation.
+    * @property {Visibility} visibility - The visibility setting for the configuration.
     */
 
     /**
