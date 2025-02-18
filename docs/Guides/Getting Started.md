@@ -23,6 +23,9 @@ To use the SDK, you need to pass into the `EUDILogin` function (that is used to 
 EUDILogin(config, target);
 ```
 
+>[!NOTE]
+> The anonymous compatibility is only available for the `AgeOver18`, `PseudonymDeferred`, `PowerOfRepresentation` and `Reservation` attestations.
+
 - `config`: An object containing the configuration options for the authentication process. The available options are:
   - `required`:
     - `AgeOver18`: Whether the user is over 18 years old.
@@ -37,7 +40,10 @@ EUDILogin(config, target);
     - `PseudonymDeferred`: Whether to include Pseudonym Deferred attestation.
     - `Reservation`: Whether to include Reservation attestation.
     - `TaxNumber`: Whether to include Tax Number attestation.
-  - `visibility`: Enum to define the level of visibility in the returned data after the authentication process.
+  - `visibility`: Enum to define the level of visibility in the returned data after the authentication process. Available values are:
+    - `Visibility.PUBLIC`: The returned data will include all available fields from the requested attestations.
+    - `Visibility.ANONYMOUS_OPT`: The user can choose to not share their personal identifiable information.
+    - `Visibility.ANONYMOUS`: The returned data will not include any personal identifiable information.
 - `target`: (optional) The URL to redirect to after the authentication process. If not provided there will be no redirect.
 
 ## Handling the authentication result
