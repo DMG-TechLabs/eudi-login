@@ -37,7 +37,7 @@ EUDILogin(config, target);
     - `PseudonymDeferred`: Whether to include Pseudonym Deferred attestation.
     - `Reservation`: Whether to include Reservation attestation.
     - `TaxNumber`: Whether to include Tax Number attestation.
-  - `visibility`: Enum to define the level of visibility returned after the authentication process.
+  - `visibility`: Enum to define the level of visibility in the returned data after the authentication process.
 - `target`: (optional) The URL to redirect to after the authentication process. If not provided there will be no redirect.
 
 ## Handling the authentication result
