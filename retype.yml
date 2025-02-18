@@ -3,7 +3,7 @@ output: .retype
 url: https://dmg-techlabs.github.io/eudi-login
 branding:
   title: eudi-login
-  label: 0.2.0
+  label: 0.2.1
 links:
   - text: Source code
     link: https://github.com/DMG-TechLabs/eudi-login

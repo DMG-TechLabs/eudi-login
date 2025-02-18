@@ -250,6 +250,7 @@ export class Config {
             })
 
             request.presentation_definition.input_descriptors[i].constraints.fields = fields
+            // TODO: Filter fields based on anonymity
             i++
         }
 
