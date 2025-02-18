@@ -84,6 +84,8 @@ export class Config {
         return Object.values(this.required).filter(value => value === true).length;
     }
 
+    // FIXME: Better way to check the number of attestations returned
+    // We don't handle the case of multiple enveloped attestations
     /**
      * Validates whether the response contains all the necessary attestations
      * @function validate
@@ -92,7 +94,12 @@ export class Config {
      */
     validate(decoded) {
         const count = this.countActive();
-        const expected = decoded[0].attestations.length
+        let expected;
+        const kind = decoded[0].kind;
+        if(kind == "enveloped")
+            expected = decoded[0].attestations.length
+        else if(kind == "single")
+            expected = decoded.length
 
         return count == expected;
     }

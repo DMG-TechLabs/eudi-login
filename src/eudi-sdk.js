@@ -6,6 +6,32 @@ const Visibility = {
     ANONYMOUS: 2
 };
 
+function anonymousCompatibility(config) {
+        if (config.visibility == Visibility.PUBLIC) return true;
+
+        // Block PII-heavy attestations
+        if (
+            config.required.HealthID ||
+            config.required.IBAN ||
+            config.required.Loyalty ||
+            config.required.mDL ||
+            config.required.MSISDN ||
+            config.required.PhotoId ||
+            config.required.PID ||
+            config.required.TaxNumber
+        ) {
+            return false;
+        }
+
+        // Allow attestations that can be anonymized
+        return (
+            config.required.AgeOver18 ||
+            config.required.PseudonymDeferred ||
+            config.required.PowerOfRepresentation ||
+            config.required.Reservation
+        );
+    }
+
 // TODO: Change to reflect the recent config changes
 /**
 * @typedef {Object} ConfigOptions
@@ -32,7 +58,11 @@ const Visibility = {
 function EUDILogin(config, target = window.location.origin) {
     console.log(config);
     if(Object.values(config.required).filter(value => value === true).length == 0){
-        window.alert("Please set at least one value to true");
+        console.error("Please set at least one value to true");
+        return;
+    }
+    if(!anonymousCompatibility(config)){
+        console.error("Only AgeOver18, PseydonymDeferred, PowerOfRepresentation and Reservation are compatible with anonymous visibility");
         return;
     }
 
