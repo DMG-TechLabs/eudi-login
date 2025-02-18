@@ -217,18 +217,18 @@
                 required: {
                     AgeOver18: true,
                     HealthID: false,
-                    IBAN: true,
+                    IBAN: false,
                     Loyalty: false,
                     mDL: false,
                     MSISDN: false,
                     PhotoId: false,
-                    PID: true,
-                    PowerOfRepresentation: false,
+                    PID: false,
+                    PowerOfRepresentation: true,
                     PseudonymDeferred: false,
                     Reservation: false,
                     TaxNumber: false
                 },
-                visibility: Visibility.PUBLIC,
+                visibility: Visibility.ANONYMOUS,
             };
             EUDILogin(config, "./dashboard.html");
         }

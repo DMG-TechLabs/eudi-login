@@ -171,7 +171,7 @@ export async function run(conf) {
  */
 export async function start(){
     const site = localStorage.getItem('site');
-    const data = JSON.parse(localStorage.getItem('config'));
+    const data = JSON.parse(localStorage.getItem('response'));
     const result = await run(data);
     console.log(result)
 
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         localStorage.setItem('site', site);
-        localStorage.setItem('config', JSON.stringify(data));
+        localStorage.setItem('response', JSON.stringify(data));
 
         showDivs(data);
     }, false);

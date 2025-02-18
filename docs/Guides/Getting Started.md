@@ -24,18 +24,20 @@ EUDILogin(config, target);
 ```
 
 - `config`: An object containing the configuration options for the authentication process. The available options are:
-  - `AgeOver18`: Whether the user is over 18 years old.
-  - `HealthID`: Whether to include Health ID attestation.
-  - `IBAN`: Whether to include IBAN attestation.
-  - `Loyalty`: Whether to include Loyalty attestation.
-  - `mDL`: Whether to include mobile Driver’s License (mDL) attestation.
-  - `MSISDN`: Whether to include MSISDN (phone number) attestation.
-  - `PhotoId`: Whether to include Photo ID attestation.
-  - `PID`: Whether to include Personal ID (PID) attestation.
-  - `PowerOfRepresentation`: Whether to include Power of Representation attestation.
-  - `PseudonymDeferred`: Whether to include Pseudonym Deferred attestation.
-  - `Reservation`: Whether to include Reservation attestation.
-  - `TaxNumber`: Whether to include Tax Number attestation.
+  - `required`:
+    - `AgeOver18`: Whether the user is over 18 years old.
+    - `HealthID`: Whether to include Health ID attestation.
+    - `IBAN`: Whether to include IBAN attestation.
+    - `Loyalty`: Whether to include Loyalty attestation.
+    - `mDL`: Whether to include mobile Driver’s License (mDL) attestation.
+    - `MSISDN`: Whether to include MSISDN (phone number) attestation.
+    - `PhotoId`: Whether to include Photo ID attestation.
+    - `PID`: Whether to include Personal ID (PID) attestation.
+    - `PowerOfRepresentation`: Whether to include Power of Representation attestation.
+    - `PseudonymDeferred`: Whether to include Pseudonym Deferred attestation.
+    - `Reservation`: Whether to include Reservation attestation.
+    - `TaxNumber`: Whether to include Tax Number attestation.
+  - `visibility`: Enum to define the level of visibility returned after the authentication process.
 - `target`: (optional) The URL to redirect to after the authentication process. If not provided there will be no redirect.
 
 ## Handling the authentication result
@@ -94,18 +96,21 @@ Here's an example of how to use the SDK in a simple HTML file:
     <script>
         function login() {
             const config = {
-                AgeOver18: true,
-                HealthID: true,
-                IBAN: true,
-                Loyalty: true,
-                mDL: true,
-                MSISDN: true,
-                PhotoId: true,
-                PID: true,
-                PowerOfRepresentation: true,
-                PseudonymDeferred: true,
-                Reservation: true,
-                TaxNumber: true
+                required: {
+                    AgeOver18: true,
+                    HealthID: false,
+                    IBAN: false,
+                    Loyalty: false,
+                    mDL: false,
+                    MSISDN: true,
+                    PhotoId: true,
+                    PID: true,
+                    PowerOfRepresentation: true,
+                    PseudonymDeferred: false,
+                    Reservation: false,
+                    TaxNumber: false
+                },
+                visibility: Visibility.PUBLIC
             };
             EUDILogin(config, "./homepage");
         }
