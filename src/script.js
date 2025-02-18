@@ -207,10 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showDivs(data);
     }, false);
 
-    // window.addEventListener("beforeunload", (event) => {
-    //     window.opener.postMessage("Cancelled", sessionStorage.getItem('site'));
-    // });
-
 });
 
 
