@@ -88,7 +88,7 @@ function isMobileDevice() {
     // List of common mobile devices and user agents
     const mobileAgents = [
         'Android', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Opera Mini', 'Windows Phone', 'webOS',
-        'Mobile', 'Silk', 'Kindle', 'Samsung', 'SonyEricsson', 'Mobi'
+        'Mobile', 'Silk', 'Samsung', 'SonyEricsson'
     ];
 
     // Check if the user agent contains any of the mobile device strings
