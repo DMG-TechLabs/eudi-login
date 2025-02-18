@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [0.2.1] - 2025-02-18 
 
 ### Added
 
@@ -13,9 +13,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Serving docs site through Github Pages
 - Removing sensitive information when anonymous
 
+### Changed
+
+- Change localStorage to sessionStorage
+
 ### Fixed
 
+- Disable open with Wallet in PC
 - Fixed missing attestations bug
+
+### Security
+
+- Access the dashboard only if the user is verified
 
 
 ## [0.2.0] - 2025-02-17 
@@ -89,4 +98,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 [0.1.0]: https://github.com/DMG-TechLabs/eudi-login/releases/tag/v0.1.0
 [0.1.1]: https://github.com/DMG-TechLabs/eudi-login/releases/tag/v0.1.1
 [0.2.0]: https://github.com/DMG-TechLabs/eudi-login/releases/tag/v0.2.0
+[0.2.1]: https://github.com/DMG-TechLabs/eudi-login/releases/tag/v0.2.1
 
