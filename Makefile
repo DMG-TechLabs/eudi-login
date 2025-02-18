@@ -24,16 +24,18 @@ clean: ## Clean docker environment
 .PHONY: dist
 dist: ## Create a distribution directory
 	mkdir -p $(DIST)
-	# TODO
+	cp -r src $(DIST)
+	cp -r demo $(DIST)
+	cp -r README.md $(DIST)
+	cp -r Dockerfile $(DIST)
+	cp -r docker-compose.yml $(DIST)
+	cp -r docker-entrypoint.sh $(DIST)
+	cp -r Makefile $(DIST)
+	cp -r CHANGELOG.md $(DIST)
 
 .PHONY: distclean
 distclean: ## Clean the distribution
 	rm -rf $(DIST)
-
-.PHONY: docs
-docs: ## Generate the documentation site
-	./scripts/readme.sh
-	retype build docs
 
 .PHONY: help
 help: ## Show this help message
