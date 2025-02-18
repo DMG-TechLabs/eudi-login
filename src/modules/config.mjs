@@ -223,35 +223,37 @@ export class Config {
 
         request.presentation_definition.id = generateUUID();
         request.nonce = generateUUID();
-        let i = 0
-        for (const attestation of this.scopes) {
-            const fields = []
-            for (const claim of attestation.claims) {
-                fields.push({
-                    "path": ["$['"+attestation.scope+"']['"+claim+"']"],
-                    "intent_to_retain": false
-                })
-            }
+
+        const removalMap = {
+            "eu.europa.ec.eudi.por.1": ["legal_name", "legal_person_identifier"],
+            "eu.europa.ec.eudi.pseudonym.age_over_18.1": ["issuing_country", "user_pseudonym"]
+        };
+
+        for (const [index, attestation] of this.scopes.entries()) {
+            const fields = attestation.claims
+                .filter(claim =>
+                    !(this.visibility === Visibility.ANONYMOUS &&
+                        removalMap[attestation.scope]?.includes(claim))
+                )
+                .map(claim => ({
+                    path: [`$['${attestation.scope}']['${claim}']`],
+                    intent_to_retain: false
+                }));
 
             request.presentation_definition.input_descriptors.push({
-                "id": attestation.scope,
-                "name": "",
-                "purpose": "",
-                "format": {
-                    "mso_mdoc": {
-                        "alg": [
-                            "ES256"
-                        ]
+                id: attestation.scope,
+                name: "",
+                purpose: "",
+                format: {
+                    mso_mdoc: {
+                        alg: ["ES256"]
                     }
                 },
-                "constraints": {
-                    "fields": []
-                }
-            })
+                constraints: { fields: [] }
+            });
 
-            request.presentation_definition.input_descriptors[i].constraints.fields = fields
-            // TODO: Filter fields based on anonymity
-            i++
+            console.log(fields);
+            request.presentation_definition.input_descriptors[index].constraints.fields = fields;
         }
 
         return request

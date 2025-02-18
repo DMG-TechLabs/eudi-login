@@ -7,30 +7,21 @@ const Visibility = {
 };
 
 function anonymousCompatibility(config) {
-        if (config.visibility == Visibility.PUBLIC) return true;
+    if (config.visibility == Visibility.PUBLIC) return true;
+    const disallowed = [
+        config.required.HealthID,
+        config.required.IBAN,
+        config.required.Loyalty,
+        config.required.mDL,
+        config.required.MSISDN,
+        config.required.PhotoId,
+        config.required.PID,
+        config.required.TaxNumber
+    ]
 
-        // Block PII-heavy attestations
-        if (
-            config.required.HealthID ||
-            config.required.IBAN ||
-            config.required.Loyalty ||
-            config.required.mDL ||
-            config.required.MSISDN ||
-            config.required.PhotoId ||
-            config.required.PID ||
-            config.required.TaxNumber
-        ) {
-            return false;
-        }
-
-        // Allow attestations that can be anonymized
-        return (
-            config.required.AgeOver18 ||
-            config.required.PseudonymDeferred ||
-            config.required.PowerOfRepresentation ||
-            config.required.Reservation
-        );
-    }
+    // Block PII-heavy attestations
+    return (disallowed.filter(req => req == true).length == 0);
+}
 
 // TODO: Change to reflect the recent config changes
 /**

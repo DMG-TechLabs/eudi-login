@@ -421,7 +421,7 @@
         function cancel() {
             console.log("Cancelled")
             window.opener.postMessage("Cancelled", localStorage.getItem('site'));
-            cleanLocalStorage();
+            // cleanLocalStorage();
             window.close();
         }
 
