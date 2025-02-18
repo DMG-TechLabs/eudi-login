@@ -82,7 +82,7 @@ async function transactionInit(transactionBody) {
     }
 }
 
-export function isMobileDevice() {
+function isMobileDevice() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
     // List of common mobile devices and user agents
@@ -99,11 +99,6 @@ export function isMobileDevice() {
     }
 
     return false;
-}
-
-function cleanLocalStorage(){
-    this.localStorage.removeItem("config");
-    this.localStorage.removeItem("site");
 }
 
 /**
@@ -218,4 +213,3 @@ document.addEventListener("DOMContentLoaded", () => {
 window.main = main;
 window.run = run;
 window.start = start;
-window.isMobileDevice = isMobileDevice;
