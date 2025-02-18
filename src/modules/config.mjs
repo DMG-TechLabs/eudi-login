@@ -1,6 +1,12 @@
 import { Request } from "./request.mjs";
 import { ATTESTATIONS_ENDPOINT } from './settings.mjs';
 
+const Visibility = {
+    PUBLIC: 0,
+    ANONYMOUS_OPT: 1,
+    ANONYMOUS: 2
+};
+
 /**
  * Represents an attestation.
  */
@@ -22,24 +28,29 @@ class Attestation {
 }
 
 export const EMPTY_CONFIG = {
-    AgeOver18: false,
-    HealthID: false,
-    IBAN: false,
-    Loyalty: false,
-    mDL: false,
-    MSISDN: false,
-    PhotoId: false,
-    PID: false,
-    PowerOfRepresentation: false,
-    PseudonymDeferred: false,
-    Reservation: false,
-    TaxNumber: false
+    required: {
+        AgeOver18: false,
+        HealthID: false,
+        IBAN: false,
+        Loyalty: false,
+        mDL: false,
+        MSISDN: false,
+        PhotoId: false,
+        PID: false,
+        PowerOfRepresentation: false,
+        PseudonymDeferred: false,
+        Reservation: false,
+        TaxNumber: false
+    },
+    visibility: Visibility.PUBLIC
 };
 
 /**
  * Represents the configuration of the requested attestations.
  */
 export class Config {
+
+    // TODO: Change to reflect the recent config changes
     /**
     * @typedef {Object} ConfigOptions
     * @property {boolean} [AgeOver18=false] - Whether the user is over 18.
@@ -54,6 +65,7 @@ export class Config {
     * @property {boolean} [PseudonymDeferred=false] - Whether to include Pseudonym Deferred attestation.
     * @property {boolean} [Reservation=false] - Whether to include Reservation attestation.
     * @property {boolean} [TaxNumber=false] - Whether to include Tax Number attestation.
+    * @property {integer} [visibility=Visibility.PUBLIC] - The level of visibility for the attestation data
     */
 
     /**
@@ -61,28 +73,15 @@ export class Config {
      * @constructor
      * @param {Object} [config] - Configuration settings.
      */
-    constructor(config = {
-        AgeOver18: false,
-        HealthID: false,
-        IBAN: false,
-        Loyalty: false,
-        mDL: false,
-        MSISDN: false,
-        PhotoId: false,
-        PID: false,
-        PowerOfRepresentation: false,
-        PseudonymDeferred: false,
-        Reservation: false,
-        TaxNumber: false
-        }
-    ){
-        this.settings = config;
+    constructor(config = EMPTY_CONFIG){
+        this.required = config.required;
+        this.visibility = config.visibility
         this.scopes = [];
         this.request = null;
     }
 
     countActive() {
-        return Object.values(this.settings).filter(value => value === true).length;
+        return Object.values(this.required).filter(value => value === true).length;
     }
 
     /**
@@ -161,27 +160,27 @@ export class Config {
         }
 
         for (const attestation of attestationsFinal) {
-            if ((attestation.scope == "eu.europa.ec.eudi.pid.1") && this.settings.PID) {
+            if ((attestation.scope == "eu.europa.ec.eudi.pid.1") && this.required.PID) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "org.iso.18013.5.1.mDL" && this.settings.mDL) {
+            }else if (attestation.scope == "org.iso.18013.5.1.mDL" && this.required.mDL) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.iban.1" && this.settings.IBAN) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.iban.1" && this.required.IBAN) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.loyalty.1" && this.settings.Loyalty) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.loyalty.1" && this.required.Loyalty) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "org.iso.23220.photoid.1" && this.settings.PhotoId) {
+            }else if (attestation.scope == "org.iso.23220.photoid.1" && this.required.PhotoId) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.1" && this.settings.AgeOver18) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.1" && this.required.AgeOver18) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.hiid.1" && this.settings.HealthID) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.hiid.1" && this.required.HealthID) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "org.iso.18013.5.1.reservation" && this.settings.Reservation) {
+            }else if (attestation.scope == "org.iso.18013.5.1.reservation" && this.required.Reservation) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.tax.1" && this.settings.TaxNumber) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.tax.1" && this.required.TaxNumber) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.por.1" && this.settings.PowerOfRepresentation) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.por.1" && this.required.PowerOfRepresentation) {
                 this.scopes.push(attestation)
-            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint" && this.settings.PseudonymDeferred) {
+            }else if (attestation.scope == "eu.europa.ec.eudi.pseudonym.age_over_18.deferred_endpoint" && this.required.PseudonymDeferred) {
                 this.scopes.push(attestation)
             }
         }

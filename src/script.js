@@ -82,11 +82,6 @@ async function transactionInit(transactionBody) {
     }
 }
 
-/**
- * Checks if the current device is a mobile device based on the user agent.
- * @function isMobileDevice
- * @returns {boolean} True if the device is mobile, otherwise false.
- */
 function isMobileDevice() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -106,14 +101,9 @@ function isMobileDevice() {
     return false;
 }
 
-
-/**
- * Clears specific items from local storage.
- * @function cleanLocalStorage
- */
-export function cleanLocalStorage(){
-    localStorage.removeItem("config")
-    localStorage.removeItem("site")
+function cleanLocalStorage(){
+    localStorage.removeItem("config");
+    localStorage.removeItem("site");
 }
 
 /**
@@ -124,22 +114,24 @@ export function cleanLocalStorage(){
  */
 export async function main() {
     const config = {
-        AgeOver18: true,
-        HealthID: true,
-        IBAN: true,
-        Loyalty: true,
-        mDL: true,
-        MSISDN: false,
-        PhotoId: true,
-        PID: true,
-        PowerOfRepresentation: true,
-        PseudonymDeferred: true,
-        Reservation: true,
-        TaxNumber: true
+        required: {
+            AgeOver18: true,
+            HealthID: true,
+            IBAN: true,
+            Loyalty: true,
+            mDL: true,
+            MSISDN: false,
+            PhotoId: true,
+            PID: true,
+            PowerOfRepresentation: true,
+            PseudonymDeferred: true,
+            Reservation: true,
+            TaxNumber: true
+        },
+        visibility: 0
     }
 
     const decoded = await run(config);
-    console.log(decoded)
 
     const success = config.validate(decoded);
     console.log(success);
@@ -156,9 +148,7 @@ export async function run(conf) {
     const config = new Config(conf)
     if(config.countActive() == 0) return null;
     await config.init();
-    localStorage.setItem('config', JSON.stringify(config.settings));
-
-    console.log("Is Mobile: ", isMobileDevice())
+    localStorage.setItem('config', JSON.stringify(conf));
 
     const transaction = await transactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
@@ -169,7 +159,6 @@ export async function run(conf) {
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
     const response = await poll(pollingUrl)
     const decoded = await new MdocDecoder().run(response)
-    console.log(decoded)
 
     return {data: decoded, conf: config}
 }
@@ -188,15 +177,14 @@ export async function start(){
 
     const validData = result.conf.validate(result.data);
     if(validData){
-        console.log(site)
         window.opener.postMessage(result.data, site);
-        cleanLocalStorage();
+        // cleanLocalStorage();
         window.close();
     }
     else{
-        console.log("Missing attestations")
+        console.error("Missing attestations")
         window.opener.postMessage("Missing attestations", site);
-        cleanLocalStorage();
+        // cleanLocalStorage();
         document.getElementById('dialog').style.display = 'flex';
     }
 }
@@ -205,24 +193,23 @@ export async function start(){
 document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("message", async function(event) {
-        console.log("Received message from:", event.origin);
 
         // Extract the received data
         const { site, data } = event.data;
-        console.log("User's Site:", site);
-        console.log("Received Data:", data);
 
         if (site !== event.origin) {
             console.error("Invalid site:", site);
             return;
         }
-        console.log("get", data)
         localStorage.setItem('site', site);
         localStorage.setItem('config', JSON.stringify(data));
 
         showDivs(data);
     }, false);
 
+    window.addEventListener("beforeunload", (event) => {
+        window.opener.postMessage("Cancelled", sessionStorage.getItem('site'));
+    });
 
 });
 
@@ -230,4 +217,3 @@ document.addEventListener("DOMContentLoaded", () => {
 window.main = main;
 window.run = run;
 window.start = start;
-window.cleanLocalStorage = cleanLocalStorage;

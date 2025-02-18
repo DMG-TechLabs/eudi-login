@@ -1,5 +1,12 @@
 const AUTH_URL = "http://"+window.location.hostname+":8080";
 
+const Visibility = {
+    PUBLIC: 0,
+    ANONYMOUS_OPT: 1,
+    ANONYMOUS: 2
+};
+
+// TODO: Change to reflect the recent config changes
 /**
 * @typedef {Object} ConfigOptions
 * @property {boolean} [AgeOver18] - Whether the user is over 18.
@@ -23,8 +30,8 @@ const AUTH_URL = "http://"+window.location.hostname+":8080";
  * @param {string} [target=window.location.origin] - The target URL to redirect to after authentication.
  */
 function EUDILogin(config, target = window.location.origin) {
-    console.log(config)
-    if(Object.values(config).filter(value => value === true).length == 0){
+    console.log(config);
+    if(Object.values(config.required).filter(value => value === true).length == 0){
         window.alert("Please set at least one value to true");
         return;
     }
@@ -38,9 +45,6 @@ function EUDILogin(config, target = window.location.origin) {
 window.location.href = target;
 
     });
-
-
-
 
     const authWindow = window.open(
         AUTH_URL,

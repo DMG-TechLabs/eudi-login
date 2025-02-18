@@ -214,18 +214,21 @@
 
         function login() {
             const config = {
-                AgeOver18: true,
-                HealthID: false,
-                IBAN: true,
-                Loyalty: false,
-                mDL: false,
-                MSISDN: false,
-                PhotoId: false,
-                PID: true,
-                PowerOfRepresentation: false,
-                PseudonymDeferred: false,
-                Reservation: false,
-                TaxNumber: false
+                required: {
+                    AgeOver18: true,
+                    HealthID: false,
+                    IBAN: true,
+                    Loyalty: false,
+                    mDL: false,
+                    MSISDN: false,
+                    PhotoId: false,
+                    PID: true,
+                    PowerOfRepresentation: false,
+                    PseudonymDeferred: false,
+                    Reservation: false,
+                    TaxNumber: false
+                },
+                visibility: Visibility.PUBLIC,
             };
             EUDILogin(config, "./dashboard.html");
         }

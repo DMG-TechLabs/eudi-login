@@ -55,7 +55,7 @@ export function showDivs(config) {
         };
 
 
-        Object.entries(config).forEach(([key, value]) => {
+        Object.entries(config.required).forEach(([key, value]) => {
             if (value == true) {
                 let div = document.createElement("div");
                 div.className = "document-box";

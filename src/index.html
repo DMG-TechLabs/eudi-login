@@ -174,11 +174,11 @@
             #confirm-to-share-data {
                 display: none;
                 top: 51%;
-                left: 50%; 
-                transform: translate(-50%, -50%); 
-                width: 70%; 
-                height: 65%; 
-                max-width: 700px; 
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 70%;
+                height: 65%;
+                max-width: 700px;
                 padding: 20px;
                 margin: 0;
             }
@@ -203,24 +203,24 @@
             }
 
             .document-box {
-                font-size: 16px; 
-                margin: 1%; 
-                box-sizing: border-box; 
+                font-size: 16px;
+                margin: 1%;
+                box-sizing: border-box;
             }
 
             .buttons {
                 flex-direction: row;
-                justify-content: center; 
+                justify-content: center;
                 position: absolute;
-                top: 90%; 
+                top: 90%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                margin-top: 20px; 
+                margin-top: 20px;
                 width: 100%;
             }
 
             .button {
-                margin: 0 10px; 
+                margin: 0 10px;
             }
 
             #cancel, #continue {
@@ -238,11 +238,11 @@
             #confirm-to-share-data {
                 display: none;
                 top: 60%;
-                left: 50%; 
-                transform: translate(-50%, -50%); 
-                width: 70%; 
-                height: 50%; 
-                max-width: 700px; 
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 70%;
+                height: 50%;
+                max-width: 700px;
                 padding: 20px;
                 margin: 0;
             }
@@ -267,24 +267,24 @@
             }
 
             .document-box {
-                font-size: 16px; 
-                margin: 1%; 
-                box-sizing: border-box; 
+                font-size: 16px;
+                margin: 1%;
+                box-sizing: border-box;
             }
 
             .buttons {
                 flex-direction: row;
-                justify-content: center; 
+                justify-content: center;
                 position: absolute;
-                top: 85%; 
+                top: 85%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                margin-top: 20px; 
+                margin-top: 20px;
                 width: 100%;
             }
 
             .button {
-                margin: 0 10px; 
+                margin: 0 10px;
             }
 
             #cancel, #continue {
@@ -342,13 +342,13 @@
             }
 
             .buttons {
-                flex-direction: row; 
-                justify-content: center; 
-                position: absolute; 
-                top: 86%; 
+                flex-direction: row;
+                justify-content: center;
+                position: absolute;
+                top: 86%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                margin-top: 20px; 
+                margin-top: 20px;
                 width: 100%;
                 gap: 10px;
             }
@@ -431,25 +431,26 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             const config = JSON.parse(localStorage.getItem('config'));
-            console.log(config)
             if (config != null) {
-                console.log("config is not null")
                 showDivs(config);
-            }else{
+            } else {
                 console.log("config is null")
                 const startConfig = {
-                    AgeOver18: false,
-                    HealthID: false,
-                    IBAN: false,
-                    Loyalty: false,
-                    mDL: false,
-                    MSISDN: false,
-                    PhotoId: false,
-                    PID: false,
-                    PowerOfRepresentation: false,
-                    PseudonymDeferred: false,
-                    Reservation: false,
-                    TaxNumber: false
+                    required: {
+                        AgeOver18: false,
+                        HealthID: false,
+                        IBAN: false,
+                        Loyalty: false,
+                        mDL: false,
+                        MSISDN: false,
+                        PhotoId: false,
+                        PID: false,
+                        PowerOfRepresentation: false,
+                        PseudonymDeferred: false,
+                        Reservation: false,
+                        TaxNumber: false
+                    },
+                    visibility: 0
                 }
 
                 localStorage.setItem('config', JSON.stringify(startConfig));
