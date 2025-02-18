@@ -439,7 +439,7 @@
 
         function cancel() {
             console.log("Cancelled")
-            window.opener.postMessage("Cancelled", localStorage.getItem('site'));
+            window.opener.postMessage("Cancelled", this.sessionStorage.getItem('site'));
             // cleanLocalStorage();
             window.close();
         }
@@ -449,7 +449,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            const config = JSON.parse(localStorage.getItem('config'));
+            const config = JSON.parse(this.sessionStorage.getItem('config'));
             if (config != null) {
                 showDivs(config);
             } else {
@@ -472,13 +472,13 @@
                     visibility: 0
                 }
 
-                localStorage.setItem('config', JSON.stringify(startConfig));
+                this.sessionStorage.setItem('config', JSON.stringify(startConfig));
                 showDivs(startConfig);
             }
 
         });
 
-        
+
     </script>
 </body>
 </html>

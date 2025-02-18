@@ -238,8 +238,9 @@
         document.write(`<script src="http://${host}:8080/eudi-sdk.js"><\/script>`);
 
         document.addEventListener("DOMContentLoaded", () => {
+            let userData = null;
             try {
-                const userData = EUDILoadData();
+                userData = EUDILoadData();
             } catch (error) {
                 if (this.sessionStorage.getItem("user_data") == null) window.location.href = "/";
                 console.error(error);

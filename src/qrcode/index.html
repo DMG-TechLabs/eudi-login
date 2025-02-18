@@ -157,12 +157,13 @@
 
     <script type="text/javascript">
         function closeDialog() {
+            window.opener.postMessage("Cancelled", sessionStorage.getItem('site'));
             window.close();
         }
 
-        window.addEventListener("beforeunload", (event) => {
-            cleanLocalStorage();
-        });
+        // window.addEventListener("beforeunload", (event) => {
+        //     cleanLocalStorage();
+        // });
 
 
         setTimeout(() => {
@@ -174,7 +175,7 @@
         });
 
         function openWallet(){
-            window.location.href = localStorage.getItem("app_uri");
+            window.location.href = this.sessionStorage.getItem("app_uri");
         }
     </script>
 

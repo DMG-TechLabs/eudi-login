@@ -102,8 +102,8 @@ function isMobileDevice() {
 }
 
 function cleanLocalStorage(){
-    localStorage.removeItem("config");
-    localStorage.removeItem("site");
+    this.localStorage.removeItem("config");
+    this.localStorage.removeItem("site");
 }
 
 /**
@@ -148,12 +148,12 @@ export async function run(conf) {
     const config = new Config(conf)
     if(config.countActive() == 0) return null;
     await config.init();
-    localStorage.setItem('config', JSON.stringify(conf));
+    sessionStorage.setItem('config', JSON.stringify(conf));
 
     const transaction = await transactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
     if(isMobileDevice())
-        localStorage.setItem("app_uri", uri);
+        sessionStorage.setItem("app_uri", uri);
     paintQR(uri);
 
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
@@ -170,8 +170,8 @@ export async function run(conf) {
  * @returns {Promise<void>}
  */
 export async function start(){
-    const site = localStorage.getItem('site');
-    const data = JSON.parse(localStorage.getItem('response'));
+    const site = sessionStorage.getItem('site');
+    const data = JSON.parse(sessionStorage.getItem('response'));
     const result = await run(data);
     console.log(result)
 
@@ -201,15 +201,15 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Invalid site:", site);
             return;
         }
-        localStorage.setItem('site', site);
-        localStorage.setItem('response', JSON.stringify(data));
+        this.sessionStorage.setItem('site', site);
+        this.sessionStorage.setItem('response', JSON.stringify(data));
 
         showDivs(data);
     }, false);
 
-    window.addEventListener("beforeunload", (event) => {
-        window.opener.postMessage("Cancelled", sessionStorage.getItem('site'));
-    });
+    // window.addEventListener("beforeunload", (event) => {
+    //     window.opener.postMessage("Cancelled", sessionStorage.getItem('site'));
+    // });
 
 });
 
