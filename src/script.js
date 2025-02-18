@@ -82,7 +82,7 @@ async function transactionInit(transactionBody) {
     }
 }
 
-function isMobileDevice() {
+export function isMobileDevice() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
     // List of common mobile devices and user agents
@@ -152,8 +152,13 @@ export async function run(conf) {
 
     const transaction = await transactionInit(config.request);
     const uri = buildQRUri(transaction.client_id, transaction.request_uri);
-    if(isMobileDevice())
+    if(isMobileDevice()) {
         sessionStorage.setItem("app_uri", uri);
+    } else {
+        document.getElementById("open-wallet-button").disabled = true;
+        document.getElementById("open-wallet-button").style.background = "#ccc";
+    }
+
     paintQR(uri);
 
     const pollingUrl = buildPollingUrl(transaction.transaction_id);
@@ -213,3 +218,4 @@ document.addEventListener("DOMContentLoaded", () => {
 window.main = main;
 window.run = run;
 window.start = start;
+window.isMobileDevice = isMobileDevice;
