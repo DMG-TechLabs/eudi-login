@@ -13,10 +13,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Serving docs site through Github Pages
 - Removing sensitive information when anonymous
 
-### Changed
-
-- Added visibility enum in config
-
 ### Fixed
 
 - Fixed missing attestations bug
