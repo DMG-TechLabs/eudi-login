@@ -1,7 +1,9 @@
 export function showDivs(config) {
-    const container = document.getElementById("documents");
-    if (container) {
-        container.innerHTML = "";
+    const documents = document.getElementById("documents");
+    const anonymous = document.getElementById("anonymous");
+    if (documents && anonymous) {
+        documents.innerHTML = "";
+        anonymous.innerHTML = "";
 
         const fieldNames = {
             AgeOver18: {
@@ -53,14 +55,28 @@ export function showDivs(config) {
                 icon: "fa-solid fa-file-invoice"
             }
         };
+        
+        console.log(config.visibility);
+        if (config.visibility == 1) {
+            let checkBox = document.createElement("input");
+            let label = document.createElement("label");
+            checkBox.id = "anonymous-checkbox";
+            checkBox.type = "checkbox";
 
+            label.htmlFor = "anonymous-checkbox";
+            label.textContent = "Prefer to continue anonymously";
+            
+            anonymous.appendChild(checkBox);
+            anonymous.appendChild(label);
+        }
 
         Object.entries(config.required).forEach(([key, value]) => {
+            console.log(value);
             if (value == true) {
                 let div = document.createElement("div");
                 div.className = "document-box";
                 div.innerHTML = `<i class="${fieldNames[key].icon}"></i> ${fieldNames[key].label}`;
-                container.appendChild(div);
+                documents.appendChild(div);
             }
         });
     }
