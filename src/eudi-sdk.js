@@ -70,7 +70,7 @@ window.location.href = target;
     const authWindow = window.open(
         AUTH_URL,
         "EUDI Login",
-        "width=500,height=600"
+        "width=1024,height=720"
     );
 
     const messageData = {
