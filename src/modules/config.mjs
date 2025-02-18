@@ -216,7 +216,7 @@ export class Config {
             array[8] = (array[8] & 0x3f) | 0x80; // Variant 1
 
             return [...array]
-                .map((b, i) => b.toString(16).padStart(2, "0"))
+                .map((b, _i) => b.toString(16).padStart(2, "0"))
                 .join("")
                 .replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, "$1-$2-$3-$4-$5");
         }
@@ -252,7 +252,6 @@ export class Config {
                 constraints: { fields: [] }
             });
 
-            console.log(fields);
             request.presentation_definition.input_descriptors[index].constraints.fields = fields;
         }
 
