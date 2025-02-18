@@ -96,6 +96,13 @@ export function showDivs(config) {
                     console.log("Is public");
                 }
             });
+        } else if (config.visibility == 2) {
+            let anonymousButton = document.getElementById("continue");
+            anonymousButton.innerHTML = `<i class="fa solid fa-user-secret"></i>Continue anonymously`;
+            anonymousButton.style.display = "flex";
+            anonymousButton.style.width = "max-content";
+            anonymousButton.style.alignItems = "center";
+            anonymousButton.style.gap = "5px";
         }
     }
 }
