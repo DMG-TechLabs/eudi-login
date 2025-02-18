@@ -90,7 +90,10 @@
         }
 
         #anonymous {
-            margin-top: 20px;
+            display: none;
+            justify-content: start;
+            gap: 5px;
+            margin-top: 10px;
         }
 
         #anonymous-checkbox {
@@ -215,8 +218,6 @@
                 margin: 1%;
                 box-sizing: border-box;
             }
-
-
 
             .buttons {
                 flex-direction: row;
@@ -426,6 +427,7 @@
             document.getElementById("loader").style.display = "none";
             document.getElementById("indicator").style.display = "block";
             document.getElementById("documents").style.display = "flex";
+            document.getElementById("anonymous").style.display = "flex";
             document.getElementById("continue").style.display = "block";
             document.getElementById("confirm-to-share-data").style.display = "block";
         }, 1100);
@@ -471,8 +473,7 @@
 
         });
 
-
-
+        
     </script>
 </body>
 </html>

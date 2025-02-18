@@ -56,22 +56,7 @@ export function showDivs(config) {
             }
         };
         
-        console.log(config.visibility);
-        if (config.visibility == 1) {
-            let checkBox = document.createElement("input");
-            let label = document.createElement("label");
-            checkBox.id = "anonymous-checkbox";
-            checkBox.type = "checkbox";
-
-            label.htmlFor = "anonymous-checkbox";
-            label.textContent = "Prefer to continue anonymously";
-            
-            anonymous.appendChild(checkBox);
-            anonymous.appendChild(label);
-        }
-
         Object.entries(config.required).forEach(([key, value]) => {
-            console.log(value);
             if (value == true) {
                 let div = document.createElement("div");
                 div.className = "document-box";
@@ -79,6 +64,39 @@ export function showDivs(config) {
                 documents.appendChild(div);
             }
         });
+
+        if (config.visibility == 1) {
+            let anonymousButton = document.getElementById("continue");
+            let checkBox = document.createElement("input");
+            let label = document.createElement("label");
+            checkBox.id = "anonymous-checkbox";
+            checkBox.type = "checkbox";
+    
+            label.htmlFor = "anonymous-checkbox";
+            label.innerHTML = '<h4>I prefer to continue anonymously</h4>';
+            
+            config.visibility = 0;
+            console.log("Is public");
+    
+            anonymous.appendChild(checkBox);
+            anonymous.appendChild(label);
+    
+            checkBox.addEventListener("change", function () {
+                if (checkBox.checked) {
+                    config.visibility = 2;
+                    anonymousButton.innerHTML = `<i class="fa solid fa-user-secret"></i>Continue anonymously`;
+                    anonymousButton.style.display = "flex";
+                    anonymousButton.style.width = "max-content";
+                    anonymousButton.style.alignItems = "center";
+                    anonymousButton.style.gap = "5px";
+                    console.log("Is anonymous");
+                } else {
+                    config.visibility = 0;
+                    anonymousButton.textContent = "Continue";
+                    console.log("Is public");
+                }
+            });
+        }
     }
 }
 
