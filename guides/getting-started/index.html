@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/eudi-login">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793203823225">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.6.0.793209284030">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.6.0">
@@ -31,12 +31,12 @@
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../../resources/css/retype.css?v=3.6.0.793203823225" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.6.0.793209284030" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793203823225" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.6.0.793209284030" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793203823225" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.793203823225" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.6.0.793209284030" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.6.0.793209284030" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -230,6 +230,24 @@ To use the SDK, you need to include the <code v-pre>eudi-sdk.js</code> file in y
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-javascript"><code v-pre class="language-javascript">EUDILogin(config, target);</code></pre>
 </doc-codeblock></div>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+            <h5>Note</h5>
+<p>The anonymous compatibility is only available for the <code v-pre>AgeOver18</code>, <code v-pre>PseudonymDeferred</code>, <code v-pre>PowerOfRepresentation</code> and <code v-pre>Reservation</code> attestations.</p>
+        </div>
+    </div>
+</div>
 <ul>
 <li><code v-pre>config</code>: An object containing the configuration options for the authentication process. The available options are:
 <ul>
@@ -249,7 +267,13 @@ To use the SDK, you need to include the <code v-pre>eudi-sdk.js</code> file in y
 <li><code v-pre>TaxNumber</code>: Whether to include Tax Number attestation.</li>
 </ul>
 </li>
-<li><code v-pre>visibility</code>: Enum to define the level of visibility in the returned data after the authentication process.</li>
+<li><code v-pre>visibility</code>: Enum to define the level of visibility in the returned data after the authentication process. Available values are:
+<ul>
+<li><code v-pre>Visibility.PUBLIC</code>: The returned data will include all available fields from the requested attestations.</li>
+<li><code v-pre>Visibility.ANONYMOUS_OPT</code>: The user can choose to not share their personal identifiable information.</li>
+<li><code v-pre>Visibility.ANONYMOUS</code>: The returned data will not include any personal identifiable information.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code v-pre>target</code>: (optional) The URL to redirect to after the authentication process. If not provided there will be no redirect.</li>
