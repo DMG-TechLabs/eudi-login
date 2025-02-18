@@ -23,21 +23,22 @@ function anonymousCompatibility(config) {
     return (disallowed.filter(req => req == true).length == 0);
 }
 
-// TODO: Change to reflect the recent config changes
 /**
 * @typedef {Object} ConfigOptions
-* @property {boolean} [AgeOver18] - Whether the user is over 18.
-* @property {boolean} [HealthID] - Whether to include Health ID attestation.
-* @property {boolean} [IBAN] - Whether to include IBAN attestation.
-* @property {boolean} [Loyalty] - Whether to include Loyalty attestation.
-* @property {boolean} [mDL] - Whether to include mobile Driver’s License (mDL) attestation.
-* @property {boolean} [MSISDN] - Whether to include MSISDN (phone number) attestation.
-* @property {boolean} [PhotoId] - Whether to include Photo ID attestation.
-* @property {boolean} [PID] - Whether to include Personal ID (PID) attestation.
-* @property {boolean} [PowerOfRepresentation] - Whether to include Power of Representation attestation.
-* @property {boolean} [PseudonymDeferred] - Whether to include Pseudonym Deferred attestation.
-* @property {boolean} [Reservation] - Whether to include Reservation attestation.
-* @property {boolean} [TaxNumber] - Whether to include Tax Number attestation.
+* @property {Object} required - Required attestations.
+* @property {boolean} [required.AgeOver18] - Whether the user is over 18.
+* @property {boolean} [required.HealthID] - Whether to include Health ID attestation.
+* @property {boolean} [required.IBAN] - Whether to include IBAN attestation.
+* @property {boolean} [required.Loyalty] - Whether to include Loyalty attestation.
+* @property {boolean} [required.mDL] - Whether to include mobile Driver’s License (mDL) attestation.
+* @property {boolean} [required.MSISDN] - Whether to include MSISDN (phone number) attestation.
+* @property {boolean} [required.PhotoId] - Whether to include Photo ID attestation.
+* @property {boolean} [required.PID] - Whether to include Personal ID (PID) attestation.
+* @property {boolean} [required.PowerOfRepresentation] - Whether to include Power of Representation attestation.
+* @property {boolean} [required.PseudonymDeferred] - Whether to include Pseudonym Deferred attestation.
+* @property {boolean} [required.Reservation] - Whether to include Reservation attestation.
+* @property {boolean} [required.TaxNumber] - Whether to include Tax Number attestation.
+* @property {Visibility} visibility - The visibility setting for the configuration.
 */
 
 /**
