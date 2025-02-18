@@ -8,7 +8,9 @@ label: Home
 EOF
 )
 
-echo "$header" > docs/README.md
+FILE="docs/Welcome.md"
 
-cat ./README.md >> docs/README.md
+echo "$header" > $FILE
+
+cat ./README.md >> $FILE
 
