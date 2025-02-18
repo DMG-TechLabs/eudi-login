@@ -238,8 +238,14 @@
         document.write(`<script src="http://${host}:8080/eudi-sdk.js"><\/script>`);
 
         document.addEventListener("DOMContentLoaded", () => {
-            const userData = EUDILoadData();
-            console.log(userData);
+            try {
+                const userData = EUDILoadData();
+            } catch (error) {
+                if (this.sessionStorage.getItem("user_data") == null) window.location.href = "/";
+                console.error(error);
+            }
+
+
 
             const name = document.getElementById("name");
             name.innerHTML = `<strong>Name:</strong> ${userData.get("PID").get("given_name")}`;
