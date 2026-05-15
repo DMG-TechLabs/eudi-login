@@ -147,7 +147,7 @@ export class Config {
                 })
                 at.scope = supportedAt[key].scope
 
-                at.localName = supportedAt[key].display[0].name
+                at.localName = supportedAt[key].credential_metadata.display[0].name
                 const atClaims = []
                 const claims = supportedAt[key].claims;
                 for (const claimsKey in claims) {
