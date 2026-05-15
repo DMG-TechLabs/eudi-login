@@ -1,4 +1,4 @@
-FROM alpine:3.21
+FROM alpine:3.23.2
 
 # Setup apache and php
 RUN apk --no-cache --update \
