@@ -1,0 +1,21 @@
+﻿# eudi-login
+
+> Login service and SDK that leverages the EUDI Wallet functionality
+
+- [eudi-login](https://dmg-techlabs.github.io/eudi-login/welcome.md): eudi-login
+- [Future Updates](https://dmg-techlabs.github.io/eudi-login/future-updates.md): We are constantly working on improving the EUDI Authentication SDK and adding new features. Here are some of the upcoming updates:
+- [Impact](https://dmg-techlabs.github.io/eudi-login/impact.md): The EUDI SDK facilitates seamless integration of the European Digital Identity (EUDI) Wallet into applications, allowing users to verify their identity securely and efficiently.
+- [References](https://dmg-techlabs.github.io/eudi-login/references.md): cbor-x
+
+## Guides
+
+- [Getting Started](https://dmg-techlabs.github.io/eudi-login/guides/getting-started.md): The EUDI SDK is a JavaScript library that allows you to integrate the EUDI Wallet into your application. To use the SDK, you need to include the eudi-sdk.js file in your HTML file.
+- [Install EUDI Wallet](https://dmg-techlabs.github.io/eudi-login/guides/install-eudi-wallet.md): You can find detailed installation instructions in the official EUDI Wallet repository
+- [Setup](https://dmg-techlabs.github.io/eudi-login/guides/setup.md): The following steps will help you get started.
+
+## Documentation
+
+- [Authorization Process](https://dmg-techlabs.github.io/eudi-login/documentation/authentication.md): This document describes the authorization process facilitated through the EUDI Wallet. The process ensures secure identity verification by interacting with the /ui/presentations endpoint and handling user authentication via QR codes.
+- [Proxy](https://dmg-techlabs.github.io/eudi-login/documentation/proxy.md): This document explains the functionality of two PHP files that implement a proxy system. The proxy is designed to securely forward HTTP requests while enforcing access control policies and preventing security vulnerabilities such as SSRF (Server-Side Request Forgery).
+- [Scalability](https://dmg-techlabs.github.io/eudi-login/documentation/scalability.md): This section will provide the possible ways to scale this application.
+- [UI](https://dmg-techlabs.github.io/eudi-login/documentation/ui.md): The EU Digital Identity Wallet (EUDI Wallet) is a digital authentication and verification system that allows users to securely store and share their identity credentials.
